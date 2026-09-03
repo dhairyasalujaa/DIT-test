@@ -13,8 +13,8 @@ export function Statement() {
     <Scene tone="paper" aria-labelledby="statement-title">
       <div className="shell">
         <Reveal variant="clip">
-          <h2 id="statement-title" className="display max-w-[19ch]">
-            One agreement. Every layer. A named account manager.
+          <h2 id="statement-title" className="display max-w-[22ch]">
+            When something breaks, there is no argument about whose layer it is.
           </h2>
         </Reveal>
 
@@ -24,10 +24,10 @@ export function Statement() {
           </Reveal>
           <Reveal className="md:col-span-5" delay={140}>
             <p className="text-[1.0625rem] leading-relaxed">
-              decodingIT is a Muscat-based IT solutions company. We provide IT
-              services, solutions and products to corporate, SME and government
-              organisations across a range of verticals — working on the ground
-              in Oman, and for clients in the UAE and India.
+              Full-stack IT infrastructure, cloud, cybersecurity and managed
+              services — provided to corporate, SME and government
+              organisations across a range of verticals, on the ground in Oman
+              and for clients in the UAE and India.
             </p>
           </Reveal>
           <Reveal className="md:col-span-4" delay={200}>

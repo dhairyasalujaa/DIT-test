@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+// The site's own three faces, self-hosted. Google Fonts is unreachable from
+// the build environment, and self-hosting removes a third-party round trip
+// from first paint anyway.
+import "@fontsource-variable/exo-2";
+import "@fontsource-variable/roboto-condensed";
+import "@fontsource-variable/open-sans";
 import "./globals.css";
 
 import { SiteHeader } from "@/components/layout/site-header";
@@ -42,8 +46,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f2ed" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0d0c" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1a2b" },
   ],
   colorScheme: "light",
 };
@@ -55,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       // `js` is set server-side so the scroll-entrance styles apply before
       // first paint — no flash of content appearing and then hiding. The
       // <noscript> block below hands everything straight back if JS never runs.
-      className={`js h-full ${GeistSans.variable} ${GeistMono.variable}`}
+      className="js h-full"
       suppressHydrationWarning
     >
       <head>
@@ -66,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="sr-only rounded-full px-4 py-2 focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-ink focus:text-paper"
+          className="sr-only rounded-full px-4 py-2 focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-brand focus:text-white"
         >
           Skip to content
         </a>

@@ -127,8 +127,8 @@ export function SiteHeader() {
         className={
           "absolute inset-0 -z-10 border-b transition-opacity duration-500 ease-[var(--ease-out-expo)] " +
           (chromeTone === "ink"
-            ? "border-white/10 bg-ink/80 backdrop-blur-xl"
-            : "border-black/10 bg-paper/80 backdrop-blur-xl") +
+            ? "border-white/12 bg-navy/90 backdrop-blur-xl"
+            : "border-hairline bg-surface/90 backdrop-blur-xl") +
           (scrolled && !open ? " opacity-100" : " opacity-0")
         }
       />
@@ -166,7 +166,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             href="/contact"
-            className="group/cta hidden h-9 items-center gap-2 rounded-full border border-[var(--scene-line)] px-4 text-sm text-[var(--scene-fg)] transition-colors duration-500 hover:border-[var(--scene-fg)] md:inline-flex"
+            className="group/cta hidden h-9 items-center gap-2 rounded-[4px] bg-[var(--scene-cta-bg)] px-4 text-sm font-bold text-[var(--scene-cta-fg)] transition-colors duration-300 hover:bg-[var(--scene-cta-bg-hover)] md:inline-flex"
           >
             Start a conversation
             <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/cta:translate-x-0.5" />
@@ -257,7 +257,7 @@ export function SiteHeader() {
           <Link
             href="/contact"
             onClick={close}
-            className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[var(--scene-fg)] px-6 text-sm font-medium text-[var(--scene-bg)]"
+            className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-[4px] bg-[var(--scene-accent)] px-6 text-sm font-bold text-white"
           >
             Start a conversation
             <ArrowRight className="size-4" />

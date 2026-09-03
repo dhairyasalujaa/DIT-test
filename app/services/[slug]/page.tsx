@@ -141,7 +141,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <ul className="mt-14 flex flex-wrap gap-3">
             {service.stack.map((item, i) => (
               <Reveal as="li" key={item} delay={i * 45} shift="0.75rem">
-                <span className="inline-block rounded-full border border-[var(--scene-line)] px-4 py-2 font-mono text-[0.75rem] tracking-[0.03em] text-[var(--scene-fg-muted)]">
+                <span className="inline-block rounded-[4px] border border-[var(--scene-line)] px-4 py-2 font-heading text-[0.8125rem] font-semibold tracking-[0.04em] text-[var(--scene-fg-muted)]">
                   {item}
                 </span>
               </Reveal>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { footerNav } from "@/content/navigation";
-import { locations, site, socials } from "@/content/site";
+import { certifications, locations, markets, site, socials } from "@/content/site";
 import { Wordmark } from "@/components/layout/wordmark";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -18,10 +18,10 @@ export function SiteFooter() {
     <footer data-header-tone="ink" className="scene-ink relative">
       <div className="shell pt-(--spacing-scene) pb-12">
         <Reveal variant="clip">
-          <p className="display max-w-[18ch] text-balance">
-            Six areas.
+          <p className="display max-w-[20ch] text-balance">
+            One contract.
             <br />
-            <span className="text-[var(--scene-accent)]">One</span> team.
+            <span className="text-[var(--scene-accent)]">One</span> owner.
           </p>
         </Reveal>
 
@@ -58,6 +58,14 @@ export function SiteFooter() {
                     >
                       {location.phone}
                     </a>
+                    {location.email && (
+                      <a
+                        href={`mailto:${location.email}`}
+                        className="link-underline mt-1 block hover:text-[var(--scene-fg)]"
+                      >
+                        {location.email}
+                      </a>
+                    )}
                   </address>
                 </li>
               ))}
@@ -98,7 +106,17 @@ export function SiteFooter() {
               </li>
               <li className="pt-1">{site.responsePromise}</li>
             </ul>
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            <p className="eyebrow mt-10">Certified</p>
+            <p className="mt-3 text-sm text-[var(--scene-fg-muted)]">
+              {certifications.join(" · ")}
+            </p>
+
+            <p className="eyebrow mt-10">We serve</p>
+            <p className="mt-3 text-sm text-[var(--scene-fg-muted)]">
+              {markets.map((m) => (m === "United Arab Emirates" ? "UAE" : m)).join(" · ")}
+            </p>
+
+            <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
               {socials.map((social) => (
                 <li key={social.href}>
                   <a
@@ -121,7 +139,7 @@ export function SiteFooter() {
           <Link href="/" aria-label="decodingIT — home" className="-m-2 p-2">
             <Wordmark />
           </Link>
-          <p className="font-mono text-[0.6875rem] tracking-[0.08em] text-[var(--scene-fg-muted)] uppercase">
+          <p className="font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase">
             © {year} {site.legalName} — Oman · United Arab Emirates · India
           </p>
         </div>

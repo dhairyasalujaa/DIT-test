@@ -14,7 +14,7 @@ export const manifesto = {
   eyebrow: "About",
   title: "One team, since 2013.",
   standfirst:
-    "decodingIT is a Muscat-based IT solutions company. We make IT E.A.S.Y. — Effective and Success Yielding.",
+    "Full-stack IT infrastructure, cloud, cybersecurity and managed services. One team, end-to-end — for businesses across Oman, the UAE and India.",
   body: [
     "We provide IT services, solutions and products to corporate, SME and government organisations across a range of verticals, working on the ground in Oman and serving clients in the UAE and India.",
     "As a value-added reseller we work in partnership with globally recognised IT hardware and software vendors, and our focus is the management, access and monitoring of IT infrastructure and IT operations — the part that has to keep working after the project ends.",

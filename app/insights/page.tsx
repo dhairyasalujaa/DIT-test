@@ -55,7 +55,7 @@ export default function InsightsPage() {
                       <p className="eyebrow">{article.topic}</p>
                       <time
                         dateTime={article.published}
-                        className="mt-3 block font-mono text-[0.6875rem] tracking-[0.08em] text-[var(--scene-fg-muted)] uppercase"
+                        className="mt-3 block font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase"
                       >
                         {formatDate(article.published)} · {article.readingMinutes} min
                       </time>

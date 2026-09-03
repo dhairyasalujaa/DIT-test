@@ -29,7 +29,7 @@ export function ProcessPreview() {
               className="border-b border-[var(--scene-line)] py-8 md:border-t md:border-b-0 md:pr-6"
             >
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[0.6875rem] tracking-[0.16em] text-[var(--scene-accent)]">
+                <span className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
                   {stage.index}
                 </span>
                 <h3 className="text-[1.125rem] tracking-[-0.02em]">{stage.name}</h3>

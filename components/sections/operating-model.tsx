@@ -61,11 +61,11 @@ export function OperatingModel() {
 
         <div className="mt-5 grid gap-x-10 gap-y-6 md:grid-cols-12">
           <Reveal className="md:col-span-3" delay={60}>
-            <p className="eyebrow">The operating model</p>
+            <p className="eyebrow">How we engage</p>
           </Reveal>
           <Reveal className="md:col-span-9 lg:col-span-7" delay={120}>
             <h2 id="proof-title" className="display-sm">
-              Six areas, answered by one team.
+              One contract, one owner.
             </h2>
           </Reveal>
         </div>
@@ -113,7 +113,7 @@ export function OperatingModel() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 font-mono text-[0.6875rem] tracking-[0.08em] text-[var(--scene-fg-muted)] uppercase">
+            <p className="mt-6 font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase">
               Delivered in {markets.join(" · ")}
             </p>
           </Reveal>

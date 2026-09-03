@@ -1,87 +1,89 @@
 import Link from "next/link";
-import { DecodePanel } from "@/components/hero/decode-panel";
+import { Facets } from "@/components/hero/facets";
 import { ArrowRight } from "@/components/icons";
-import { locations, marketsShort, site } from "@/content/site";
+import { heroTagRow, site } from "@/content/site";
 
 /**
- * Scene 01 — Arrival.
+ * The opening frame.
  *
- * One idea, given room. The headline resolves out of focus on the word that
- * carries the brand; everything else settles around it in under a second.
- * The H1 is real text in the initial HTML, so nothing about the entrance
- * affects what a crawler or a screen reader receives.
+ * Copy is decodingIT's own hero, captured from the live site. That hero
+ * rotates between variants; this uses the primary one. The alternate reads
+ * "Build a foundation that scales. / Technology Foundation, Enterprise
+ * Networking, and Microsoft Cloud Workspace — the infrastructure layer your
+ * business runs on."
+ *
+ * White ground with the faceted triangle motif behind it, matching the live
+ * site, which is blue-on-white rather than dark.
  */
 export function Hero() {
   return (
     <section
-      data-header-tone="ink"
-      className="scene-ink relative flex min-h-[calc(100svh-68px)] flex-col justify-center pt-28 pb-28 sm:min-h-svh sm:pt-32 sm:pb-32"
+      data-header-tone="paper"
+      className="scene-paper relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28"
       aria-labelledby="hero-title"
     >
-      <div className="shell grid w-full items-center gap-x-12 gap-y-16 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <p className="enter eyebrow" style={{ "--enter-delay": "80ms" } as React.CSSProperties}>
-            IT services · {marketsShort.join(" · ")}
-          </p>
+      {/* Decorative facets, bleeding off the right edge. */}
+      <Facets className="pointer-events-none absolute -top-16 -right-24 hidden w-[38rem] opacity-[0.13] lg:block" />
 
-          <h1 id="hero-title" className="display mt-7">
-            <span className="enter block" style={{ "--enter-delay": "160ms" } as React.CSSProperties}>
-              We make IT
-            </span>
-            <span
-              className="enter-resolve block text-[var(--scene-accent)]"
-              style={{ "--enter-delay": "420ms" } as React.CSSProperties}
-            >
-              E.A.S.Y.
-            </span>
-          </h1>
+      <div className="shell relative">
+        <p className="enter eyebrow" style={{ "--enter-delay": "80ms" } as React.CSSProperties}>
+          {site.tagline}
+        </p>
 
-          <p
-            className="enter lede mt-8 max-w-[46ch]"
-            style={{ "--enter-delay": "620ms" } as React.CSSProperties}
+        <h1 id="hero-title" className="display mt-6 max-w-[17ch]">
+          <span className="enter block" style={{ "--enter-delay": "160ms" } as React.CSSProperties}>
+            Extend your team,
+          </span>
+          <span
+            className="enter-resolve block text-[var(--scene-accent)]"
+            style={{ "--enter-delay": "400ms" } as React.CSSProperties}
           >
-            Effective and Success Yielding. Foundation, network, cloud,
-            continuity, workplace and security — answered by one team, for
-            organisations across Oman, the UAE and India.
-          </p>
+            on demand.
+          </span>
+        </h1>
 
-          <div
-            className="enter mt-10 flex flex-wrap items-center gap-x-6 gap-y-4"
-            style={{ "--enter-delay": "740ms" } as React.CSSProperties}
+        <p
+          className="enter lede mt-7 max-w-[54ch]"
+          style={{ "--enter-delay": "560ms" } as React.CSSProperties}
+        >
+          MegaAssist, GigaExtend and TeraConsult — augment your team exactly
+          where you need it.
+        </p>
+
+        {/* The tag row, with the triangle separator the live site uses. */}
+        <ul
+          className="enter mt-10 flex flex-wrap items-center gap-x-4 gap-y-3"
+          style={{ "--enter-delay": "660ms" } as React.CSSProperties}
+        >
+          {heroTagRow.map((tag, i) => (
+            <li key={tag} className="flex items-center gap-4">
+              {i > 0 && (
+                <span aria-hidden className="text-[0.5rem] text-[var(--color-brand-light)]">
+                  ▲
+                </span>
+              )}
+              <span className="eyebrow">{tag}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div
+          className="enter mt-11 flex flex-wrap items-center gap-4"
+          style={{ "--enter-delay": "740ms" } as React.CSSProperties}
+        >
+          <Link
+            href="/contact"
+            className="group/h inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-bold text-[var(--scene-cta-fg)] transition-colors duration-300 hover:bg-[var(--scene-cta-bg-hover)]"
           >
-            <Link
-              href="/contact"
-              className="group/h inline-flex h-12 items-center gap-2.5 rounded-full bg-[var(--scene-fg)] px-6 text-sm font-medium text-[var(--scene-bg)] transition-colors duration-500 hover:bg-[var(--scene-accent)]"
-            >
-              Start a conversation
-              <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
-            </Link>
-            <Link
-              href="/services"
-              className="link-underline text-sm text-[var(--scene-fg-muted)] transition-colors duration-300 hover:text-[var(--scene-fg)]"
-            >
-              See what we do
-            </Link>
-          </div>
-        </div>
-
-        <div className="enter lg:col-span-5" style={{ "--enter-delay": "560ms" } as React.CSSProperties}>
-          <DecodePanel />
-        </div>
-      </div>
-
-      {/* The base of the opening frame. Small, precise, and factual — the
-          details someone checks before they decide whether to keep reading. */}
-      <div
-        className="enter shell absolute inset-x-0 bottom-0"
-        style={{ "--enter-delay": "1000ms" } as React.CSSProperties}
-      >
-        <hr className="rule border-t" />
-        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-5">
-          <p className="eyebrow">
-            {locations.map((l) => l.city).join(" · ")}
-          </p>
-          <p className="eyebrow">On the ground in Muscat since {site.since}</p>
+            Talk to Our Experts
+            <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
+          </Link>
+          <Link
+            href="/services"
+            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-bold text-[var(--scene-accent)] transition-colors duration-300 hover:bg-[var(--scene-accent)] hover:text-white"
+          >
+            Browse Solutions
+          </Link>
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group/s inline-flex h-12 items-center gap-2.5 rounded-full bg-[var(--scene-fg)] px-6 text-sm font-medium text-[var(--scene-bg)] transition-colors duration-500 hover:bg-[var(--scene-accent)] disabled:opacity-60"
+      className="group/s inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-bold text-[var(--scene-cta-fg)] transition-colors duration-300 hover:bg-[var(--scene-cta-bg-hover)] disabled:opacity-60"
     >
       {pending ? "Sending…" : "Send it over"}
       <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/s:translate-x-1" />

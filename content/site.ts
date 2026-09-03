@@ -19,11 +19,10 @@ export const site = {
   name: "decodingIT",
   legalName: "Decoding IT Solutions",
   shortName: "decodingIT",
-  /** The company's own line. E.A.S.Y. = Effective and Success Yielding. */
-  tagline: "We make IT E.A.S.Y.",
-  taglineExpanded: "Effective and Success Yielding",
+  /** The line that sits under the wordmark on the live site. */
+  tagline: "Your IT. One Team.",
   description:
-    "decodingIT is a Muscat-based IT solutions company covering foundation, network, cloud, continuity, workplace and security — answered by one team. Serving Oman, the UAE and India.",
+    "Full-stack IT infrastructure, cloud, cybersecurity, and managed services. One team, end-to-end — serving businesses across Oman, UAE, and India.",
   email: "sales@decodingit.com",
   /** Operating in Muscat since 2013. */
   since: "2013",
@@ -51,9 +50,14 @@ export const locations: Location[] = [
     city: "Gurugram",
     country: "India",
     role: "Delhi NCR operations",
-    addressLines: ["Spaze Edge Tower", "Sohna Road", "Gurugram, Haryana, India"],
+    addressLines: [
+      "258, Tower B, SpaceEdge Tower",
+      "Sector 47, Sohna Road",
+      "Gurugram, Haryana, India",
+    ],
     phone: "+91 87555 07444",
     phoneHref: "+918755507444",
+    email: "sales@decodingit.in",
   },
 ];
 
@@ -62,6 +66,18 @@ export const markets = ["Oman", "United Arab Emirates", "India"] as const;
 
 /** The same markets, abbreviated for tight typographic settings. */
 export const marketsShort = ["Oman", "UAE", "India"] as const;
+
+/** The hero tag row, as it runs on the live site. */
+export const heroTagRow = [
+  "Infrastructure",
+  "Cloud",
+  "Networking",
+  "Cybersecurity",
+  "Managed Services",
+] as const;
+
+/** Certifications decodingIT states in its footer. */
+export const certifications = ["ISO 27001", "ISO 9001"] as const;
 
 export const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/decodingit" },

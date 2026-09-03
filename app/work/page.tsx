@@ -142,7 +142,7 @@ export default function WorkPage() {
                 className="grid gap-x-10 gap-y-5 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-[var(--scene-accent)]">
+                  <p className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
                     {shape.index}
                   </p>
                   <h3 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.03em]">

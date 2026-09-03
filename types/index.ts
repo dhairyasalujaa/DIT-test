@@ -111,4 +111,6 @@ export interface Location {
   addressLines: string[];
   phone: string;
   phoneHref: string;
+  /** Where this office publishes a different address to the primary one. */
+  email?: string;
 }

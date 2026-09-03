@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 className="grid gap-x-10 gap-y-4 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-[var(--scene-accent)]">
+                  <p className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <h2 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.03em]">
@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <ul className="mt-14 flex flex-wrap gap-3">
             {project.stack.map((item, i) => (
               <Reveal as="li" key={item} delay={i * 45} shift="0.75rem">
-                <span className="inline-block rounded-full border border-[var(--scene-line)] px-4 py-2 font-mono text-[0.75rem] tracking-[0.03em] text-[var(--scene-fg-muted)]">
+                <span className="inline-block rounded-[4px] border border-[var(--scene-line)] px-4 py-2 font-heading text-[0.8125rem] font-semibold tracking-[0.04em] text-[var(--scene-fg-muted)]">
                   {item}
                 </span>
               </Reveal>

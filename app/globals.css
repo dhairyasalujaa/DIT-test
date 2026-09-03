@@ -9,44 +9,49 @@
    ========================================================================== */
 
 @theme {
-  /* Ink — the dark scenes: arrival and resolution */
-  --color-ink: #0d0d0c;
-  --color-ink-raised: #171715;
-  --color-ink-sunken: #080807;
+  /* ---- Brand blues -------------------------------------------------------
+     Taken from the live decodingIT site. #005598 is the primary; #42afea is
+     the light accent, which is legible on navy but NOT on white (2.5:1), so
+     the two are kept as separate tokens and never swapped. */
+  --color-brand: #005598;
+  --color-brand-link: #007acd;
+  --color-brand-light: #42afea;
 
-  /* Paper — the light scenes: everything the visitor needs to understand */
-  --color-paper: #f4f2ed;
-  --color-paper-raised: #faf9f6;
-  --color-paper-sunken: #ebe8e1;
+  /* ---- Navy: the dark counterpart band and the footer -------------------- */
+  --color-navy: #0b1a2b;
+  --color-navy-raised: #0d1f3c;
+  --color-navy-deep: #05080e;
 
-  /* Type */
-  --color-graphite: #141412;
-  --color-graphite-muted: #6b6a63;
-  --color-bone: #f4f2ed;
-  --color-bone-muted: #8f8d85;
+  /* ---- Neutrals: blue-tinted, never pure grey --------------------------- */
+  --color-surface: #ffffff;
+  --color-surface-tint: #f8fafc;
+  --color-surface-wash: #f3f8fc;
+  --color-hairline: #dbe6f0;
 
-  /* Signal — one accent, used sparingly.
-     `signal` is calibrated for ink backgrounds and for graphics;
-     `signal-ink` is the darker cut that stays AA-legible on paper. */
-  --color-signal: #da4a22;
-  --color-signal-ink: #b23617;
+  /* ---- Type ------------------------------------------------------------- */
+  --color-heading: #161c26;
+  --color-body: #5b6f81;
+  --color-body-strong: #475569;
+  --color-on-navy: #ffffff;
+  --color-on-navy-muted: #9fb4c6;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  /* ---- Typefaces --------------------------------------------------------
+     Exo 2 for display, Roboto Condensed for section headings and labels,
+     Open Sans for body — the pairing the live site uses. */
+  --font-display: "Exo 2 Variable", "Exo 2", "Segoe UI", system-ui, sans-serif;
+  --font-heading: "Roboto Condensed Variable", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Open Sans Variable", "Open Sans", system-ui, sans-serif;
+  /* Aliases so `font-display` and `font-heading` exist as utilities. */
+  --font-heading--font-family: var(--font-heading);
 
-  /* Motion: one easing family, so everything feels like one hand made it. */
+  /* Flat, 4px corners — the site uses no shadows and no pills. */
+  --radius-brand: 4px;
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
 
-  --spacing-scene: clamp(5.5rem, 11vw, 11rem);
-}
-
-@supports not (color: color-mix(in oklab, white 50%, transparent)) {
-  :root { --scene-line: rgba(20, 20, 18, 0.12); }
-  .scene-ink { --scene-line: rgba(244, 242, 237, 0.14); }
-  .scene-paper,
-  .scene-paper-raised { --scene-line: rgba(20, 20, 18, 0.12); }
+  --spacing-scene: clamp(4.5rem, 9vw, 8.5rem);
 }
 
 @layer base {
@@ -54,11 +59,14 @@
     --page-gutter: clamp(1.25rem, 5vw, 4.5rem);
     --measure: 34rem;
     /* Set by each scene so the header, rules and text can recolour with it. */
-    --scene-fg: var(--color-graphite);
-    --scene-fg-muted: var(--color-graphite-muted);
-    --scene-line: color-mix(in oklab, var(--color-graphite) 12%, transparent);
-    --scene-accent: var(--color-signal-ink);
-    --scene-bg: var(--color-paper);
+    --scene-fg: var(--color-heading);
+    --scene-fg-muted: var(--color-body);
+    --scene-line: var(--color-hairline);
+    --scene-accent: var(--color-brand);
+    --scene-bg: var(--color-surface);
+    --scene-cta-bg: var(--color-brand);
+    --scene-cta-fg: #ffffff;
+    --scene-cta-bg-hover: #00447a;
     color-scheme: light;
   }
 
@@ -68,8 +76,8 @@
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-graphite);
+    background-color: var(--color-surface);
+    color: var(--color-body);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
@@ -81,15 +89,16 @@
   /* Optical defaults. Display sizes need tighter tracking than body copy;
      setting it here means every heading inherits the right rhythm. */
   h1, h2, h3, h4 {
-    font-weight: 500;
-    letter-spacing: -0.022em;
+    color: var(--scene-fg);
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
   p { text-wrap: pretty; }
 
   ::selection {
-    background-color: var(--color-signal);
+    background-color: var(--color-brand);
     color: #fff;
   }
 
@@ -117,34 +126,47 @@
    Scenes — a section declares its own ground, and everything inside adapts.
    ========================================================================== */
 @layer components {
+  /* The one dark band: the trust statement and the footer. */
   .scene-ink {
-    --scene-bg: var(--color-ink);
-    --scene-fg: var(--color-bone);
-    --scene-fg-muted: var(--color-bone-muted);
-    --scene-line: color-mix(in oklab, var(--color-bone) 14%, transparent);
-    --scene-accent: var(--color-signal);
-    background-color: var(--color-ink);
-    color: var(--color-bone);
+    --scene-bg: var(--color-navy);
+    --scene-fg: var(--color-on-navy);
+    --scene-fg-muted: var(--color-on-navy-muted);
+    --scene-line: color-mix(in oklab, var(--color-on-navy) 18%, transparent);
+    --scene-accent: var(--color-brand-light);
+    /* White fill with navy text: the light accent behind white text is only
+       2.5:1, so on navy the button inverts rather than tinting. */
+    --scene-cta-bg: #ffffff;
+    --scene-cta-fg: var(--color-navy);
+    --scene-cta-bg-hover: var(--color-brand-light);
+    background-color: var(--color-navy);
+    color: var(--color-on-navy);
   }
 
   .scene-paper {
-    --scene-bg: var(--color-paper);
-    --scene-fg: var(--color-graphite);
-    --scene-fg-muted: var(--color-graphite-muted);
-    --scene-line: color-mix(in oklab, var(--color-graphite) 12%, transparent);
-    --scene-accent: var(--color-signal-ink);
-    background-color: var(--color-paper);
-    color: var(--color-graphite);
+    --scene-bg: var(--color-surface);
+    --scene-fg: var(--color-heading);
+    --scene-fg-muted: var(--color-body);
+    --scene-line: var(--color-hairline);
+    --scene-accent: var(--color-brand);
+    --scene-cta-bg: var(--color-brand);
+    --scene-cta-fg: #ffffff;
+    --scene-cta-bg-hover: #00447a;
+    background-color: var(--color-surface);
+    color: var(--color-heading);
   }
 
+  /* The light blue-tinted wash that separates sections without hard lines. */
   .scene-paper-raised {
-    --scene-bg: var(--color-paper-raised);
-    --scene-fg: var(--color-graphite);
-    --scene-fg-muted: var(--color-graphite-muted);
-    --scene-line: color-mix(in oklab, var(--color-graphite) 12%, transparent);
-    --scene-accent: var(--color-signal-ink);
-    background-color: var(--color-paper-raised);
-    color: var(--color-graphite);
+    --scene-bg: var(--color-surface-tint);
+    --scene-fg: var(--color-heading);
+    --scene-fg-muted: var(--color-body);
+    --scene-line: var(--color-hairline);
+    --scene-accent: var(--color-brand);
+    --scene-cta-bg: var(--color-brand);
+    --scene-cta-fg: #ffffff;
+    --scene-cta-bg-hover: #00447a;
+    background-color: var(--color-surface-tint);
+    color: var(--color-heading);
   }
 
   /* The page's hidden architecture: a 12-column measure with consistent
@@ -162,33 +184,36 @@
 
   /* Small precise metadata — the labels that make the site feel engineered. */
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
     line-height: 1;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--scene-fg-muted);
-    font-weight: 500;
+    font-weight: 700;
   }
 
+  /* Exo 2, bold, tight — the hero face. */
   .display {
-    font-size: clamp(2.5rem, 7.2vw, 6rem);
-    line-height: 0.96;
-    letter-spacing: -0.035em;
-    font-weight: 450;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5.4vw, 4.375rem);
+    line-height: 1.02;
+    letter-spacing: -0.027em;
+    font-weight: 700;
   }
 
+  /* Roboto Condensed for the big section statements. */
   .display-sm {
-    font-size: clamp(2rem, 4.6vw, 3.5rem);
-    line-height: 1.03;
-    letter-spacing: -0.03em;
-    font-weight: 450;
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 600;
   }
 
   .lede {
-    font-size: clamp(1.0625rem, 1.4vw, 1.3125rem);
-    line-height: 1.55;
-    letter-spacing: -0.011em;
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.65;
     color: var(--scene-fg-muted);
   }
 

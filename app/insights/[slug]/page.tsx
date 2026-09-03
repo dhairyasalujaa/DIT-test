@@ -114,7 +114,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     <li key={service.slug}>
                       <Link
                         href={`/services/${service.slug}`}
-                        className="group/rs inline-flex items-center gap-2 rounded-full border border-[var(--scene-line)] px-4 py-2 text-sm transition-colors duration-500 hover:border-[var(--scene-fg)]"
+                        className="group/rs inline-flex items-center gap-2 rounded-[4px] border border-[var(--scene-line)] px-4 py-2 text-sm transition-colors duration-500 hover:border-[var(--scene-fg)]"
                       >
                         {service.name}
                         <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/rs:translate-x-0.5" />

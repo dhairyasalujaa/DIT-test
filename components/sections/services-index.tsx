@@ -18,10 +18,10 @@ export function ServicesIndex() {
     <Scene tone="paper-raised" aria-labelledby="services-title">
       <div className="shell">
         <SceneIntro
-          eyebrow="Services / 01 — 06"
+          eyebrow="Solutions"
           id="services-title"
-          title="Everything under one agreement."
-          lede="Foundation, network, cloud, continuity, workplace and security — taken separately, or all six as a single technology strategy."
+          title="Every layer of your IT, designed together."
+          lede="Most problems live between layers — a network built for one thing, a backup that never met the workload. We design and run the whole stack, so the seams are ours to answer for."
           aside={
             <Action href="/services" variant="secondary">
               All services
@@ -59,7 +59,7 @@ export function ServicesIndex() {
                     {service.stack.slice(0, 3).map((item) => (
                       <li
                         key={item}
-                        className="rounded-full border border-[var(--scene-line)] px-3 py-1 font-mono text-[0.6875rem] tracking-[0.04em] text-[var(--scene-fg-muted)]"
+                        className="rounded-[4px] border border-[var(--scene-line)] px-3 py-1 font-heading text-[0.75rem] font-semibold tracking-[0.05em] text-[var(--scene-fg-muted)]"
                       >
                         {item}
                       </li>

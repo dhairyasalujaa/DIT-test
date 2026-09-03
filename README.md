@@ -128,42 +128,48 @@ scene sits beneath it and recolour as the visitor scrolls.
 
 ## How this content was sourced — read before launch
 
-**The build environment cannot reach decodingit.com.** The network gateway
-refuses it, so no page of the live site was ever read directly. Everything in
-`content/` was reconstructed from search-index records of those pages: the
-E.A.S.Y. tagline, the six areas, the four phases of the Decoding IT Way, the
-one-team position, the office details and the four-hour response commitment.
+**The build environment cannot reach decodingit.com** — the gateway refuses it.
+The brand, palette, typography and copy in this repo come from a design
+extraction of the live homepage supplied by decodingIT, plus search-index
+records for the pages the extraction did not cover.
 
-That is second-hand. It is accurate enough to build on and specific enough to
-be checkable, but **every fact below should be verified against the live site
-before this goes anywhere near production**:
+The design system is therefore first-hand: `#005598` brand blue, `#42afea`
+accent, `#0b1a2b` navy, Exo 2 / Roboto Condensed / Open Sans, 4px corners and
+the faceted-triangle motif all come from the live site. The solution names and
+their one-line summaries are the site's own words, as are the Mega/Giga/Tera
+service tiers, "one contract, one owner", the ISO certifications and the hero.
+
+**Still second-hand and worth verifying:**
 
 | Check | Where |
 | --- | --- |
-| Muscat address, both phone numbers | `content/site.ts` |
-| That `sales@decodingit.com` is the right public address | `content/site.ts` |
-| LinkedIn, X and Facebook URLs (they feed `sameAs` structured data) | `content/site.ts` |
+| The Muscat address (the extraction only carried the Gurugram one) | `content/site.ts` |
 | "On the ground in Muscat since 2013" | `content/site.ts` |
-| The six area names and what sits under each | `content/services.ts` |
-| The four phases of the Decoding IT Way | `content/approach.ts` |
-| GigaManaged IT and Co-managed IT descriptions | `content/approach.ts` |
-| The other four of the "six ways to work with us", which could not be sourced | `content/approach.ts` |
+| LinkedIn, X and Facebook URLs (they feed `sameAs` structured data) | `content/site.ts` |
 | The four-business-hour response commitment | `content/site.ts` |
+| The four phases of the Decoding IT Way | `content/approach.ts` |
+| Capability bullets on each solution page — written from the summaries, not yet the site's own solution-page copy | `content/services.ts` |
 
-An earlier version of this site invented its own tagline, its own five-stage
-process, its own set of company principles and four full articles. All of that
-has been removed and replaced with sourced material. If you find anything left
+Earlier versions of this site invented a tagline, a palette, a typeface
+pairing, a five-stage process, a set of company principles and four full
+articles. All of that has been removed and replaced with sourced material. If you find anything left
 that decodingIT did not say, it is a bug — report it rather than working
 around it.
 
 ## Still needs real company input
 
 1. **`CONTACT_WEBHOOK_URL`** — until this is set the contact form cannot deliver.
-2. **Real articles** — port decodingIT's existing technical writing into
-   `content/insights.ts` and put Insights back in the primary navigation.
+2. **Real articles** — port decodingIT's existing writing into
+   `content/insights.ts` and put Insights back in the primary navigation. Two
+   are named in the extraction: "Memory and hardware prices are surging" and
+   "The Real Cost of a Ransomware Attack on a Small Business".
 3. **Leadership profiles** — verified names, roles and credentials.
 4. **Case studies** — any client willing to be named and to stand behind a
    described outcome.
-5. **Vendor partnerships and certifications** — no partner tier or accreditation
-   is claimed anywhere, because none could be confirmed. Add them once the
-   current status is known.
+5. **Partner tiers** — the site names Microsoft, HPE, Dell, Cisco, Fortinet,
+   Nutanix, Sangfor, Veeam, Acronis and ExaGrid as technologies worked with.
+   No partner *tier* is claimed; add those once confirmed. ISO 27001 and ISO
+   9001 are stated in the footer, per the extraction.
+6. **Free tools** — the live site publishes six calculators (CCTV NVR storage,
+   backup storage, M365 licence cost, downtime cost, IP subnet, Windows Server
+   licensing). They are not in this build.

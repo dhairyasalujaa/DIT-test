@@ -9,10 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: `${site.name} — ${site.tagline}`,
+  title: "Decoding IT — Managed IT, Cloud, Cybersecurity & Consultancy",
   exactTitle: true,
-  description:
-    "Managed IT, cyber security, cloud, networking and Microsoft 365 for organisations in Oman, the UAE and India. Technology designed, built and run properly.",
+  description: site.description,
   path: "/",
 });
 

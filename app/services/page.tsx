@@ -28,10 +28,10 @@ export default function ServicesPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Services"
-        title="Six areas, answered by one team."
+        eyebrow="Solutions"
+        title="Every layer of your IT, designed together."
         crumbs={crumbs}
-        lede="Foundation, network, cloud, continuity, workplace and security. Each can be taken on its own, or all six under a single agreement with response times written into it and a named account manager who owns whether they are met."
+        lede="Most problems live between layers — a network built for one thing, a backup that never met the workload. We design and run the whole stack, so the seams are ours to answer for."
       />
 
       <Scene tone="paper">

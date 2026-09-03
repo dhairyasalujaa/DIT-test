@@ -1,20 +1,21 @@
 /**
  * The wordmark.
  *
- * "decoding" is set in the sans face and "IT" in the mono face — the two
- * halves of what the company does, in two typefaces: the human reading and the
- * machine underneath. The signal dot is the only place the accent colour
- * appears in the chrome.
+ * decodingIT's lockup sets "decoding" in near-black and "it" in the brand
+ * blue, in a bold geometric sans, with "SOLUTIONS" in small letter-spaced
+ * caps beneath. On the navy scenes the near-black half inverts to white so
+ * the mark stays legible.
  */
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-baseline gap-px text-[0.9375rem] leading-none ${className}`}>
-      <span className="font-medium tracking-[-0.03em]">decoding</span>
-      <span className="font-mono font-medium tracking-[-0.02em]">IT</span>
-      <span
-        aria-hidden
-        className="ml-0.5 size-1 shrink-0 self-center rounded-full bg-[var(--scene-accent)]"
-      />
+    <span className={`inline-flex flex-col leading-none ${className}`}>
+      <span className="font-display text-[1.0625rem] font-bold tracking-[-0.02em]">
+        <span className="text-[var(--scene-fg)]">decoding</span>
+        <span className="text-[var(--scene-accent)]">it</span>
+      </span>
+      <span className="mt-[3px] self-end font-heading text-[0.5rem] font-bold tracking-[0.22em] text-[var(--scene-fg-muted)] uppercase">
+        Solutions
+      </span>
     </span>
   );
 }

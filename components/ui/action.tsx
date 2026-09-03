@@ -14,18 +14,18 @@ interface ActionProps {
 }
 
 const shared =
-  "group/action inline-flex items-center gap-2.5 rounded-full text-sm font-medium " +
+  "group/action inline-flex items-center gap-2.5 rounded-[4px] text-sm font-bold " +
   "transition-[background-color,color,border-color] duration-500 ease-[var(--ease-out-expo)]";
 
 const variants: Record<Variant, string> = {
   // Fills with the scene's own foreground, so the button inverts correctly on
   // ink and on paper without either being special-cased.
   primary:
-    "h-11 px-5 bg-[var(--scene-fg)] text-[var(--scene-bg)] hover:bg-[var(--scene-accent)] " +
+    "h-11 px-6 bg-[var(--scene-cta-bg)] text-[var(--scene-cta-fg)] hover:bg-[var(--scene-cta-bg-hover)] " +
     "focus-visible:bg-[var(--scene-accent)]",
   secondary:
-    "h-11 px-5 border border-[var(--scene-line)] text-[var(--scene-fg)] " +
-    "hover:border-[var(--scene-fg)]",
+    "h-11 px-6 border border-[var(--scene-accent)] text-[var(--scene-accent)] " +
+    "hover:bg-[var(--scene-accent)] hover:text-white",
   quiet: "text-[var(--scene-fg)] hover:text-[var(--scene-accent)]",
 };
 

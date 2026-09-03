@@ -46,11 +46,11 @@ export const processStages: ProcessStage[] = [
 export const principles = [
   {
     title: "One team, no handoff",
-    body: "The same team that designs the solution deploys it and supports it long-term. There is no handoff between a project team and a support desk — one point of accountability throughout.",
+    body: "The same team designs, deploys and supports every layer. When something breaks, there is no argument about whose layer it is.",
   },
   {
-    title: "One agreement across every layer",
-    body: "Foundation, network, cloud, continuity, workplace and security sit under a single agreement, with response times written into it and a named account manager who owns whether they are met.",
+    title: "One contract, one owner",
+    body: "One agreement covers every layer, with response times written into it — and a named account manager who owns whether they are met.",
   },
   {
     title: "Engineers on the ground",
@@ -63,12 +63,92 @@ export const principles = [
 ];
 
 /**
- * Engagement models.
+ * The service tiers.
  *
- * decodingIT offers six ways to work together, from fixing what is in front of
- * you today to running the whole estate or extending a team you already have.
- * Only the two named models below could be sourced; the remaining four need
- * confirming from the company before they are published.
+ * decodingIT's product line, named on the live site: Mega / Giga / Tera
+ * prefixes with Fix / Assist / Managed / Extend / Secure / Consult suffixes,
+ * grouped by how much of the estate the client hands over.
+ */
+export interface ServiceTier {
+  group: string;
+  products: {
+    name: string;
+    description: string;
+    /** Who the tier is for, where the site states it. */
+    audience?: string;
+  }[];
+}
+
+export const serviceTiers: ServiceTier[] = [
+  {
+    group: "Reactive",
+    products: [
+      {
+        name: "MegaFix SME",
+        description:
+          "Flexible IT support bundled as fixed hours that scales with your business.",
+        audience: "Businesses with occasional IT support needs",
+      },
+    ],
+  },
+  {
+    group: "Co-managed",
+    products: [
+      {
+        name: "MegaAssist",
+        description:
+          "Co-managed L2/L3 support for your datacentre, bundled as fixed hours.",
+        audience: "IT teams needing on-demand L3 support",
+      },
+    ],
+  },
+  {
+    group: "Fully managed",
+    products: [
+      {
+        name: "MegaFix",
+        description:
+          "Flexible IT support bundled as fixed hours that scales with your business.",
+      },
+      {
+        name: "GigaManaged IT",
+        description:
+          "Your outsourced IT department: proactive managed IT service with unlimited support.",
+      },
+      {
+        name: "TeraSecure",
+        description:
+          "Always-on threat detection and protection, delivered as managed security services.",
+      },
+    ],
+  },
+  {
+    group: "Extend your team",
+    products: [
+      {
+        name: "MegaAssist",
+        description:
+          "Co-managed L2/L3 support for your datacentre, bundled as fixed hours.",
+        audience: "IT teams needing on-demand L3 support",
+      },
+      {
+        name: "GigaExtend",
+        description:
+          "Co-managed IT service for organisations with complex environments, managed by an L2/L3 specialist team.",
+        audience: "Existing infrastructure needing an operator",
+      },
+      {
+        name: "TeraConsult",
+        description:
+          "Gap assessment and consultancy for infrastructure, security and risk.",
+      },
+    ],
+  },
+];
+
+/**
+ * Kept for the pages that present engagement as a narrative rather than a
+ * price list. Drawn from the tiers above.
  */
 export const engagementShapes = [
   {
@@ -76,15 +156,31 @@ export const engagementShapes = [
     title: "GigaManaged IT",
     trigger: "There is no internal IT team, or the one that exists is stretched.",
     involves:
-      "An outsourced IT department: proactive managed IT service with unlimited support, covering every layer under one agreement with response times written in and a named account manager.",
-    disciplines: ["Foundation", "Network", "Security"],
+      "Your outsourced IT department — proactive managed IT service with unlimited support, covering every layer under one agreement with response times written in and a named account manager.",
+    disciplines: ["Fully managed"],
   },
   {
     index: "B",
-    title: "Co-managed IT",
+    title: "GigaExtend",
     trigger: "There is an internal team, and a complex environment that needs an operator alongside it.",
     involves:
-      "An L2/L3 specialist team working with your own people rather than replacing them — taking the escalations, the monitoring and the deep technical work while your team keeps the business relationships.",
-    disciplines: ["Network", "Cloud", "Continuity"],
+      "Co-managed IT service run by an L2/L3 specialist team working with your own people rather than replacing them — taking the escalations, the monitoring and the deep technical work.",
+    disciplines: ["Extend your team"],
+  },
+  {
+    index: "C",
+    title: "TeraSecure",
+    trigger: "Security controls exist, but nobody is watching them outside office hours.",
+    involves:
+      "Always-on threat detection and protection as a managed security service, so an alert reaches somebody who acts on it.",
+    disciplines: ["Fully managed"],
+  },
+  {
+    index: "D",
+    title: "TeraConsult",
+    trigger: "A decision needs making, and the current state is not documented well enough to make it.",
+    involves:
+      "Gap assessment and consultancy across infrastructure, security and risk — a written picture of where you are before anything is proposed.",
+    disciplines: ["Extend your team"],
   },
 ];
