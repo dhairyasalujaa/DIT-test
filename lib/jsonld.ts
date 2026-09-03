@@ -1,6 +1,6 @@
 import { locations, markets, site, siteUrl, socials } from "@/content/site";
 import { leadership } from "@/content/about";
-import type { Article, Service } from "@/types";
+import type { Article, Project, Service } from "@/types";
 import { canonical } from "@/lib/seo";
 
 /**
@@ -117,6 +117,25 @@ export function articleSchema(article: Article) {
     publisher: { "@id": organisationId },
     inLanguage: "en",
     articleSection: article.topic,
+  };
+}
+
+/**
+ * A delivered project. Described as a CreativeWork rather than a Review or
+ * anything carrying a rating — the page states outcomes the client confirmed,
+ * and nothing that would amount to unverifiable review markup.
+ */
+export function projectSchema(project: Project) {
+  return {
+    "@type": "CreativeWork",
+    name: project.title,
+    headline: project.title,
+    description: project.problem,
+    url: canonical(`/work/${project.slug}`),
+    creator: { "@id": organisationId },
+    about: project.disciplines.join(", "),
+    keywords: project.stack.join(", "),
+    dateCreated: project.year,
   };
 }
 

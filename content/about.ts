@@ -11,7 +11,11 @@
 
 export const manifesto = {
   eyebrow: "About",
-  title: "Complexity in. Clarity out.",
+  // Not "Complexity in. Clarity out." — that line is the footer's, and it
+  // appears on every page. Printing it again as this page's H1 would spend the
+  // company's best sentence twice in one screen. This states the same argument
+  // in a way that only works here.
+  title: "The gap is rarely technical.",
   standfirst:
     "decodingIT exists because most organisations are not badly served by technology — they are badly served by explanation.",
   body: [

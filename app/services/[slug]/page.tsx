@@ -135,7 +135,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             eyebrow="Technology"
             id="stack-title"
             title="What we work with."
-            lede="The disciplines and platforms involved in delivering this practice. Specific products are chosen against your requirement — we write the requirement down before we quote anything."
+            lede={service.stackNote}
           />
 
           <ul className="mt-14 flex flex-wrap gap-3">

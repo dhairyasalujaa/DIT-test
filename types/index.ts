@@ -32,6 +32,8 @@ export interface Service {
   capabilities: Capability[];
   /** Named platforms and disciplines involved in delivering this service. */
   stack: string[];
+  /** A line specific to this practice, shown above the stack. */
+  stackNote: string;
   /** Questions this service exists to answer, in the customer's own words. */
   answers: string[];
   /** Slugs of the services most often bought alongside this one. */

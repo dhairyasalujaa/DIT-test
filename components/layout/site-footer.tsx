@@ -3,7 +3,6 @@ import { footerNav } from "@/content/navigation";
 import { locations, site, socials } from "@/content/site";
 import { Wordmark } from "@/components/layout/wordmark";
 import { Reveal } from "@/components/motion/reveal";
-import { ArrowUpRight } from "@/components/icons";
 
 /**
  * End credits.
@@ -26,25 +25,15 @@ export function SiteFooter() {
           </p>
         </Reveal>
 
-        <Reveal delay={120}>
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Link
-              href="/contact"
-              className="group/f inline-flex h-12 items-center gap-2.5 rounded-full bg-[var(--scene-fg)] px-6 text-sm font-medium text-[var(--scene-bg)] transition-colors duration-500 hover:bg-[var(--scene-accent)]"
-            >
-              Start a conversation
-              <ArrowUpRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/f:-translate-y-0.5 group-hover/f:translate-x-0.5" />
-            </Link>
-            <a
-              href={`mailto:${site.email}`}
-              className="link-underline text-sm text-[var(--scene-fg-muted)] hover:text-[var(--scene-fg)]"
-            >
-              {site.email}
-            </a>
-          </div>
-        </Reveal>
+        {/*
+          No call to action here. The closing scene immediately above already
+          makes the invitation, with a reason attached — repeating the same
+          button and address a few hundred pixels later spends the ask twice
+          and makes the ending feel like a sales page rather than credits.
+          The address and both office numbers are in the columns below.
+        */}
 
-        <hr className="rule mt-16 border-t" />
+        <hr className="rule mt-20 border-t" />
 
         <div className="grid gap-x-10 gap-y-12 pt-12 md:grid-cols-12">
           {/* Offices */}

@@ -36,8 +36,11 @@ export function Connection() {
           </p>
         </Reveal>
 
+        {/* Beliefs 01 and 03 specifically. Belief 02 ("Boring is the goal")
+            restates this scene's own headline almost word for word, and
+            printing the same sentence twice in one viewport reads as padding. */}
         <div className="mt-20 grid gap-x-10 gap-y-10 md:grid-cols-12">
-          {beliefs.slice(0, 2).map((belief, i) => (
+          {[beliefs[0], beliefs[2]].map((belief, i) => (
             <Reveal key={belief.index} delay={i * 90} className="md:col-span-5 md:even:col-start-8">
               <p className="eyebrow">{belief.index}</p>
               <h3 className="mt-4 text-[1.25rem] leading-snug tracking-[-0.025em]">

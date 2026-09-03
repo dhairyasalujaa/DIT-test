@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { engagementShapes, principles, processStages } from "@/content/approach";
+import { principles, processStages } from "@/content/approach";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
+import { Action } from "@/components/ui/action";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
@@ -102,42 +103,25 @@ export default function ApproachPage() {
         </div>
       </Scene>
 
-      {/* What an engagement typically looks like in practice. */}
+      {/*
+        The four engagement shapes used to be repeated here in full. They are
+        /work's entire subject — that page exists to describe them, since there
+        are no case studies to show — so printing them twice made two pages of
+        substantially the same copy. This points there instead.
+      */}
       <Scene tone="paper-raised" aria-labelledby="shapes-title">
         <div className="shell">
           <SceneIntro
             eyebrow="Engagement types"
             id="shapes-title"
             title="Four shapes most work takes."
-            lede="Not every project fits one of these, but most start as one of them."
+            lede="Not every project fits one of these, but most start as one of them — a managed service transition, an infrastructure build, a security programme, or a move to cloud and Microsoft 365."
+            aside={
+              <Action href="/work" variant="secondary">
+                What each one involves
+              </Action>
+            }
           />
-
-          <div className="mt-16 grid gap-x-12 gap-y-12 md:grid-cols-2">
-            {engagementShapes.map((shape, i) => (
-              <Reveal key={shape.index} delay={(i % 2) * 80}>
-                <div className="flex items-baseline gap-4 border-t border-[var(--scene-line)] pt-6">
-                  <span className="font-mono text-[0.6875rem] tracking-[0.16em] text-[var(--scene-accent)]">
-                    {shape.index}
-                  </span>
-                  <h3 className="text-[1.25rem] tracking-[-0.025em]">{shape.title}</h3>
-                </div>
-                <dl className="mt-6 space-y-5">
-                  <div>
-                    <dt className="eyebrow">Usually triggered by</dt>
-                    <dd className="mt-2 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                      {shape.trigger}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="eyebrow">What it involves</dt>
-                    <dd className="mt-2 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                      {shape.involves}
-                    </dd>
-                  </div>
-                </dl>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </Scene>
 

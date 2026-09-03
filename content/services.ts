@@ -53,6 +53,8 @@ export const services: Service[] = [
           "A live inventory of what you own, what it runs, when it was patched and when it needs replacing — so budgets stop being guesswork.",
       },
     ],
+    stackNote:
+      "The tooling matters less than who is watching it. These are the systems we run on your behalf; the monitoring thresholds and patch windows are agreed with you, not inherited from a default profile.",
     stack: [
       "Remote monitoring & management",
       "Endpoint protection",
@@ -113,6 +115,8 @@ export const services: Service[] = [
           "Gap analysis against where you are now, prioritised by what would actually hurt — not by what a vendor happens to sell.",
       },
     ],
+    stackNote:
+      "Controls are selected against your actual exposure, not a vendor's bundle. Where an existing product already does the job well, we will say so rather than replace it.",
     stack: [
       "EDR / XDR",
       "Next-generation firewall",
@@ -173,6 +177,8 @@ export const services: Service[] = [
           "Capacity, patching, cost and performance managed after go-live, which is where most cloud programmes quietly come apart.",
       },
     ],
+    stackNote:
+      "Platform choices follow the workload. We size against real utilisation data from your estate, which is usually the difference between a cloud bill that behaves and one that does not.",
     stack: [
       "Hypervisor & virtualisation",
       "Microsoft Azure",
@@ -233,6 +239,8 @@ export const services: Service[] = [
           "Diagrams, addressing, configurations and change history you actually own — including if you ever leave us.",
       },
     ],
+    stackNote:
+      "Hardware is chosen for the traffic you actually carry and the sites you actually have. Everything we install is labelled, documented and handed over.",
     stack: [
       "Managed switching",
       "Routing & SD-WAN",
@@ -293,6 +301,8 @@ export const services: Service[] = [
           "An honest replacement schedule so hardware is refreshed on a plan instead of after a failure.",
       },
     ],
+    stackNote:
+      "Specified against workload and runtime, with warranty and support terms matched to how critical the system is — not to whichever SKU had stock.",
     stack: [
       "Rack & tower servers",
       "Shared storage",
@@ -353,6 +363,8 @@ export const services: Service[] = [
           "Hosted desktops for roles where the data should never leave the platform, or where the device should not matter.",
       },
     ],
+    stackNote:
+      "Most of this you already own. The work is usually configuration and identity rather than new licences, and we will tell you when you are paying for something nobody uses.",
     stack: [
       "Microsoft 365",
       "Exchange Online",

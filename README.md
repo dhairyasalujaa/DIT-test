@@ -58,8 +58,9 @@ source rather than rewriting components.
 clients, logos or percentages would be the fastest way to make a real company
 look fraudulent. While the array is empty, `/work` explains why and offers
 client references instead. Add real, client-approved entries and the page
-becomes a project gallery, with `/work/[slug]` detail pages and sitemap entries
-generated from the same data.
+becomes a project gallery, with `/work/[slug]` detail pages (problem, approach,
+result, technology, next project) and sitemap entries generated from the same
+data. That route was verified against fixture projects and then emptied again.
 
 **`leadership` in `content/about.ts`** — naming and describing real people is a
 claim about individuals. Supply verified names, roles and credentials and the
