@@ -28,7 +28,7 @@ export const defaultSocialImage = {
   url: "/opengraph-image.png",
   width: 1200,
   height: 630,
-  alt: "decodingIT — Technology, decoded.",
+  alt: "decodingIT — We make IT E.A.S.Y.",
 } as const;
 
 export function canonical(path: string): string {

@@ -26,13 +26,13 @@ export function Hero() {
 
           <h1 id="hero-title" className="display mt-7">
             <span className="enter block" style={{ "--enter-delay": "160ms" } as React.CSSProperties}>
-              Technology,
+              We make IT
             </span>
             <span
               className="enter-resolve block text-[var(--scene-accent)]"
               style={{ "--enter-delay": "420ms" } as React.CSSProperties}
             >
-              decoded.
+              E.A.S.Y.
             </span>
           </h1>
 
@@ -40,8 +40,8 @@ export function Hero() {
             className="enter lede mt-8 max-w-[46ch]"
             style={{ "--enter-delay": "620ms" } as React.CSSProperties}
           >
-            decodingIT designs, builds and runs the technology businesses depend
-            on — infrastructure, networking, cloud, workplace and security — for
+            Effective and Success Yielding. Foundation, network, cloud,
+            continuity, workplace and security — answered by one team, for
             organisations across Oman, the UAE and India.
           </p>
 
@@ -81,7 +81,7 @@ export function Hero() {
           <p className="eyebrow">
             {locations.map((l) => l.city).join(" · ")}
           </p>
-          <p className="eyebrow">{site.hours.label}</p>
+          <p className="eyebrow">On the ground in Muscat since {site.since}</p>
         </div>
       </div>
     </section>

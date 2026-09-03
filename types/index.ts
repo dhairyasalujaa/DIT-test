@@ -45,8 +45,12 @@ export interface ProcessStage {
   name: string;
   summary: string;
   detail: string;
-  /** What the client physically receives at the end of the stage. */
-  output: string;
+  /**
+   * What the client receives at the end of the stage.
+   * Optional: only stated where decodingIT states it, rather than inventing
+   * a deliverable to fill the column.
+   */
+  output?: string;
 }
 
 export interface Article {

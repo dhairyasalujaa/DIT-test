@@ -1,11 +1,14 @@
 import type { Location } from "@/types";
 
 /**
- * Single source of truth for identity, contact details and canonical URLs.
+ * Identity, contact details and canonical URLs.
  *
- * Every fact here is drawn from decodingIT's own published company
- * information. Nothing is estimated or invented — if a value is unknown it is
- * absent rather than guessed.
+ * SOURCING: everything here is drawn from decodingIT's own published company
+ * information. The network in the build environment cannot reach
+ * decodingit.com directly, so these came via search indexes of those pages —
+ * second-hand, and worth one pass of verification against the live site before
+ * launch. Values that could not be confirmed have been removed rather than
+ * guessed; see README for the remaining checklist.
  */
 
 export const siteUrl = (
@@ -15,26 +18,18 @@ export const siteUrl = (
 export const site = {
   name: "decodingIT",
   legalName: "Decoding IT Solutions",
-  /** Used as the site-wide title suffix and in WebSite structured data. */
   shortName: "decodingIT",
-  tagline: "Technology, decoded.",
+  /** The company's own line. E.A.S.Y. = Effective and Success Yielding. */
+  tagline: "We make IT E.A.S.Y.",
+  taglineExpanded: "Effective and Success Yielding",
   description:
-    "decodingIT designs, builds and runs the IT that businesses depend on — infrastructure, networking, cloud, workplace and security — across Oman, the UAE and India.",
+    "decodingIT is a Muscat-based IT solutions company covering foundation, network, cloud, continuity, workplace and security — answered by one team. Serving Oman, the UAE and India.",
   email: "sales@decodingit.com",
-  supportEmail: "support@decodingit.com",
+  /** Operating in Muscat since 2013. */
+  since: "2013",
   locale: "en",
-  hours: {
-    label: "Sunday – Thursday, 08:00 – 17:00 (GST)",
-    opens: "08:00",
-    closes: "17:00",
-    days: [
-      "https://schema.org/Sunday",
-      "https://schema.org/Monday",
-      "https://schema.org/Tuesday",
-      "https://schema.org/Wednesday",
-      "https://schema.org/Thursday",
-    ],
-  },
+  /** The company's own commitment on the contact page. */
+  responsePromise: "A real engineer will get back to you within 4 business hours.",
 } as const;
 
 export const locations: Location[] = [
@@ -44,8 +39,8 @@ export const locations: Location[] = [
     country: "Oman",
     role: "Headquarters",
     addressLines: [
-      "M Floor, Mosaic Tower",
-      "Dohat Al Adab Street, Al Khuwair",
+      "Building 301, Way 4405, Al Udhaiba",
+      "PB 1811, PC 133",
       "Muscat, Sultanate of Oman",
     ],
     phone: "+968 2284 4777",
@@ -56,13 +51,9 @@ export const locations: Location[] = [
     city: "Gurugram",
     country: "India",
     role: "Delhi NCR operations",
-    addressLines: [
-      "256, Spaze Edge Tower",
-      "Sector 47, Sohna Road",
-      "Gurugram, Haryana, India",
-    ],
-    phone: "+91 82854 26454",
-    phoneHref: "+918285426454",
+    addressLines: ["Spaze Edge Tower", "Sohna Road", "Gurugram, Haryana, India"],
+    phone: "+91 87555 07444",
+    phoneHref: "+918755507444",
   },
 ];
 
@@ -73,6 +64,7 @@ export const markets = ["Oman", "United Arab Emirates", "India"] as const;
 export const marketsShort = ["Oman", "UAE", "India"] as const;
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/decoding-it-solutions" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/decodingit" },
+  { label: "X", href: "https://x.com/DecodingIT" },
   { label: "Facebook", href: "https://www.facebook.com/decodingit/" },
 ] as const;

@@ -13,9 +13,8 @@ export function Statement() {
     <Scene tone="paper" aria-labelledby="statement-title">
       <div className="shell">
         <Reveal variant="clip">
-          <h2 id="statement-title" className="display max-w-[18ch]">
-            You should not need to be an engineer to make good decisions about
-            your own systems.
+          <h2 id="statement-title" className="display max-w-[19ch]">
+            One agreement. Every layer. A named account manager.
           </h2>
         </Reveal>
 
@@ -25,18 +24,18 @@ export function Statement() {
           </Reveal>
           <Reveal className="md:col-span-5" delay={140}>
             <p className="text-[1.0625rem] leading-relaxed">
-              We are an IT services company. We design and install the
-              infrastructure, networks and cloud platforms an organisation runs
-              on, secure them, and then take responsibility for keeping them
-              working — as a managed service, to a standard we write down.
+              decodingIT is a Muscat-based IT solutions company. We provide IT
+              services, solutions and products to corporate, SME and government
+              organisations across a range of verticals — working on the ground
+              in Oman, and for clients in the UAE and India.
             </p>
           </Reveal>
           <Reveal className="md:col-span-4" delay={200}>
             <p className="text-[1.0625rem] leading-relaxed text-[var(--scene-fg-muted)]">
-              What separates the good version of this work from the bad version
-              is not the technology. It is whether anyone can explain the estate
-              to the people paying for it — and whether the claims made about it
-              have been tested.
+              As a value-added reseller we work with globally recognised
+              hardware and software vendors, and our focus is the management,
+              access and monitoring of IT infrastructure and operations — the
+              part that has to keep working after the project ends.
             </p>
           </Reveal>
         </div>

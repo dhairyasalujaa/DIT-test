@@ -16,26 +16,30 @@ import { markets } from "@/content/site";
  * confidential.
  */
 
+/**
+ * The four positions decodingIT states about how the service works. Sourced
+ * from the company's own material rather than authored here.
+ */
 const commitments = [
   {
-    label: "Monitoring",
-    title: "Watched around the clock",
-    body: "Servers, network devices and links are monitored continuously, so a failure is detected by us rather than reported to us.",
+    label: "Accountability",
+    title: "One team, no handoff",
+    body: "The same team that designs the solution deploys it and supports it long-term. There is no handoff between a project team and a support desk.",
   },
   {
-    label: "Recovery",
-    title: "Restores tested, not assumed",
-    body: "Backups are verified daily and restores are actually performed. A recovery target we have not proven is a recovery target we will tell you is unproven.",
+    label: "Agreement",
+    title: "One agreement, every layer",
+    body: "Foundation, network, cloud, continuity, workplace and security sit under a single agreement, with response times written into it and a named account manager who owns whether they are met.",
   },
   {
-    label: "Documentation",
-    title: "An estate you own",
-    body: "Diagrams, configurations, licences and credentials are documented and belong to you — including on the day you decide to leave.",
+    label: "Presence",
+    title: "Engineers on the ground",
+    body: "We operate on the ground in Muscat and understand the local business environment and the infrastructure challenges that come with it.",
   },
   {
-    label: "Assessment",
-    title: "A gap analysis before a quote",
-    body: "We survey what you have and put the risks in writing before proposing anything. It is a slower start and a far shorter list of surprises.",
+    label: "Response",
+    title: "Four business hours",
+    body: "Get in touch and a real engineer replies within four business hours — not an auto-responder, and not a salesperson.",
   },
 ];
 
@@ -61,7 +65,7 @@ export function OperatingModel() {
           </Reveal>
           <Reveal className="md:col-span-9 lg:col-span-7" delay={120}>
             <h2 id="proof-title" className="display-sm">
-              Anyone can promise uptime. These are the parts you can check.
+              Six areas, answered by one team.
             </h2>
           </Reveal>
         </div>
@@ -91,9 +95,9 @@ export function OperatingModel() {
               You can see what we are doing, without asking us.
             </h3>
             <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-              Managed clients get a portal. It exists because &ldquo;we are on
-              it&rdquo; is not a status, and because the provider should not be
-              the only party who knows the state of your estate.
+              Monitoring, tickets, project progress and monthly reports are all
+              tracked inside your client portal — so the state of your estate is
+              something you can look at rather than ask about.
             </p>
           </Reveal>
 

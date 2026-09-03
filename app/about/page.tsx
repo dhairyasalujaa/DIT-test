@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { beliefs, leadership, manifesto, whoWeServe } from "@/content/about";
+import { leadership, manifesto, whoWeServe } from "@/content/about";
 import { locations, markets, site } from "@/content/site";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
@@ -52,31 +52,7 @@ export default function AboutPage() {
         </div>
       </Scene>
 
-      {/* Beliefs, at full length. */}
-      <Scene tone="ink" aria-labelledby="beliefs-title">
-        <div className="shell">
-          <SceneIntro eyebrow="What we believe" id="beliefs-title" title="Four positions." />
-
-          <div className="mt-16 border-t border-[var(--scene-line)]">
-            {beliefs.map((belief, i) => (
-              <Reveal
-                key={belief.index}
-                delay={(i % 3) * 60}
-                className="grid gap-x-10 gap-y-4 border-b border-[var(--scene-line)] py-10 md:grid-cols-12"
-              >
-                <p className="eyebrow md:col-span-2">{belief.index}</p>
-                <h3 className="md:col-span-4 text-[1.375rem] leading-snug tracking-[-0.025em]">
-                  {belief.title}
-                </h3>
-                <p className="md:col-span-6 text-[1rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                  {belief.body}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Scene>
-
+      {/* How the company works lives on /approach; this page does not restate it. */}
       {/* Who this is for. */}
       <Scene tone="paper-raised" aria-labelledby="clients-title">
         <div className="shell">
@@ -166,17 +142,11 @@ export default function AboutPage() {
 
           <Reveal delay={80}>
             <p className="mt-10 text-[0.9375rem] text-[var(--scene-fg-muted)]">
-              General enquiries:{" "}
+              Enquiries:{" "}
               <a href={`mailto:${site.email}`} className="link-underline text-[var(--scene-fg)]">
                 {site.email}
               </a>{" "}
-              · Existing clients:{" "}
-              <a
-                href={`mailto:${site.supportEmail}`}
-                className="link-underline text-[var(--scene-fg)]"
-              >
-                {site.supportEmail}
-              </a>
+              · {site.responsePromise}
             </p>
           </Reveal>
         </div>

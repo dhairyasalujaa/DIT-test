@@ -26,15 +26,13 @@ export function ClosingCta() {
           <div className="md:col-span-9 lg:col-span-8">
             <Reveal delay={120}>
               <h2 id="cta-title" className="display-sm max-w-[20ch]">
-                Tell us what is not working, and we will tell you what we would
-                do about it.
+                Tell us what you are running, and what is not working.
               </h2>
             </Reveal>
             <Reveal delay={200}>
               <p className="lede mt-8 max-w-[46ch]">
-                No obligation to buy anything at the end of it. If the honest
-                answer is that you do not need us, that is a useful thing for
-                you to hear too.
+                {site.responsePromise} Not an auto-responder, and not a
+                salesperson.
               </p>
             </Reveal>
             <Reveal delay={260}>

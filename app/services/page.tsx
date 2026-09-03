@@ -29,9 +29,9 @@ export default function ServicesPage() {
 
       <PageHeader
         eyebrow="Services"
-        title="Six practices, one operating model."
+        title="Six areas, answered by one team."
         crumbs={crumbs}
-        lede="Every one of these can be bought on its own. They are designed to work together because most of the failures we are called in to fix happen in the gaps between them — where the network team assumed the security team had it, and nobody owned the join."
+        lede="Foundation, network, cloud, continuity, workplace and security. Each can be taken on its own, or all six under a single agreement with response times written into it and a named account manager who owns whether they are met."
       />
 
       <Scene tone="paper">

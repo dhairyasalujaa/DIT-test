@@ -15,7 +15,6 @@ export const primaryNav: NavItem[] = [
   { label: "Approach", href: "/approach", hint: "How an engagement actually runs" },
   { label: "Work", href: "/work", hint: "The shape of what we deliver" },
   { label: "About", href: "/about", hint: "Who we are and what we refuse to do" },
-  { label: "Insights", href: "/insights", hint: "Practical notes from the field" },
 ];
 
 export const footerNav: { title: string; items: NavItem[] }[] = [

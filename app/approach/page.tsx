@@ -36,7 +36,12 @@ export default function ApproachPage() {
       {/* The five stages, at full detail. */}
       <Scene tone="paper" aria-labelledby="stages-title">
         <div className="shell">
-          <SceneIntro eyebrow="The engagement" id="stages-title" title="Five stages." />
+          <SceneIntro
+            eyebrow="The engagement"
+            id="stages-title"
+            title="Four phases."
+            lede="How an engagement runs, whether we are running your IT day to day or delivering a single project."
+          />
 
           <ol className="mt-16 border-t border-[var(--scene-line)]">
             {processStages.map((stage, i) => (
@@ -58,16 +63,18 @@ export default function ApproachPage() {
                   </p>
                 </div>
 
-                <div className="md:col-span-5">
+                <div className="md:col-span-7">
                   <p className="text-[1.0625rem] leading-relaxed">{stage.detail}</p>
                 </div>
 
-                <div className="md:col-span-3 md:col-start-10">
-                  <p className="eyebrow">You get</p>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                    {stage.output}
-                  </p>
-                </div>
+                {stage.output && (
+                  <div className="md:col-span-3 md:col-start-10">
+                    <p className="eyebrow">You get</p>
+                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                      {stage.output}
+                    </p>
+                  </div>
+                )}
               </Reveal>
             ))}
           </ol>
@@ -78,10 +85,10 @@ export default function ApproachPage() {
       <Scene tone="ink" aria-labelledby="principles-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="Commitments"
+            eyebrow="How we work"
             id="principles-title"
-            title="Four things we will not trade away."
-            lede="Each of these costs us something. That is rather the point — a principle that is free to hold is not a principle."
+            title="What makes the service different."
+            lede="Four things decodingIT does differently, and the reasons clients give for staying."
           />
 
           <div className="mt-16 grid border-t border-[var(--scene-line)] md:grid-cols-2">

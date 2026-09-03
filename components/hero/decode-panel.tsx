@@ -13,12 +13,12 @@ import { Reveal } from "@/components/motion/reveal";
  */
 
 const rows = [
-  { noise: "%#@&*!?~", name: "Infrastructure" },
-  { noise: "&!?%#@*+", name: "Networking" },
+  { noise: "%#@&*!?~", name: "Foundation" },
+  { noise: "&!?%#@*+", name: "Network" },
   { noise: "@*%#&!?=", name: "Cloud" },
-  { noise: "!?@&*%#|", name: "Workplace" },
-  { noise: "#@!?&*%/", name: "Security" },
-  { noise: "*%#@&!?\\", name: "Managed service" },
+  { noise: "!?@&*%#|", name: "Continuity" },
+  { noise: "#@!?&*%/", name: "Workplace" },
+  { noise: "*%#@&!?\\", name: "Security" },
 ];
 
 export function DecodePanel() {
@@ -60,8 +60,8 @@ export function DecodePanel() {
 
       <Reveal delay={200}>
         <p className="mt-5 max-w-[38ch] text-[0.8125rem] leading-relaxed text-[var(--scene-fg-muted)]">
-          Six practices, run as one service — independently, or as a single
-          technology strategy.
+          Six areas, answered by one team — under one agreement, with response
+          times written into it.
         </p>
       </Reveal>
     </div>

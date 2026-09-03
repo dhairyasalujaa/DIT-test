@@ -4,8 +4,6 @@ import { Statement } from "@/components/sections/statement";
 import { ServicesIndex } from "@/components/sections/services-index";
 import { OperatingModel } from "@/components/sections/operating-model";
 import { ProcessPreview } from "@/components/sections/process-preview";
-import { Connection } from "@/components/sections/connection";
-import { InsightsPreview } from "@/components/sections/insights-preview";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/content/site";
@@ -26,7 +24,6 @@ export const metadata: Metadata = pageMetadata({
  *   Services    → relevance      can they do the thing I need?
  *   Proof       → confidence     can they actually do it?
  *   Approach    → trust          what would working with them be like?
- *   Connection  → recognition    who are these people?
  *   Insights    → authority      do they understand this properly?
  *   Resolution  → action         how do I start?
  *
@@ -40,8 +37,6 @@ export default function HomePage() {
       <ServicesIndex />
       <OperatingModel />
       <ProcessPreview />
-      <Connection />
-      <InsightsPreview />
       <ClosingCta />
     </>
   );

@@ -18,10 +18,10 @@ export function SiteFooter() {
     <footer data-header-tone="ink" className="scene-ink relative">
       <div className="shell pt-(--spacing-scene) pb-12">
         <Reveal variant="clip">
-          <p className="display max-w-[16ch] text-balance">
-            Complexity in.
+          <p className="display max-w-[18ch] text-balance">
+            Six areas.
             <br />
-            <span className="text-[var(--scene-accent)]">Clarity</span> out.
+            <span className="text-[var(--scene-accent)]">One</span> team.
           </p>
         </Reveal>
 
@@ -96,15 +96,7 @@ export function SiteFooter() {
                   {site.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`mailto:${site.supportEmail}`}
-                  className="link-underline hover:text-[var(--scene-fg)]"
-                >
-                  {site.supportEmail}
-                </a>
-              </li>
-              <li className="pt-1">{site.hours.label}</li>
+              <li className="pt-1">{site.responsePromise}</li>
             </ul>
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
               {socials.map((social) => (

@@ -45,9 +45,9 @@ export default function WorkPage() {
 
       <PageHeader
         eyebrow="Work"
-        title="Most of what we build, we are not allowed to show you."
+        title="Delivered work, and how we engage."
         crumbs={crumbs}
-        lede="We work for corporate, SME and government organisations, and their infrastructure and security arrangements are not ours to publish. So rather than dress up anonymous logos as evidence, here is what an engagement actually involves — and an offer to put you in touch with clients who will talk."
+        lede="We work for corporate, SME and government organisations across a range of verticals. Their infrastructure and security arrangements are not ours to publish, so this page sets out how we engage instead — and we are happy to put you in touch with clients who will talk."
       />
 
       {hasProjects ? (
@@ -90,32 +90,22 @@ export default function WorkPage() {
           <div className="shell grid gap-x-10 gap-y-8 md:grid-cols-12">
             <Reveal className="md:col-span-3">
               <h2 id="confidential-title" className="eyebrow">
-                Why there are no case studies here
+                On client confidentiality
               </h2>
             </Reveal>
             <div className="md:col-span-8 lg:col-span-7">
               <Reveal>
                 <p className="text-[1.1875rem] leading-relaxed">
-                  A page of unnamed clients, invented percentages and stock
-                  photographs of server rooms is not evidence. It is decoration
-                  that happens to be shaped like evidence, and anyone who has
-                  bought IT services before knows it.
+                  Client environments are covered by confidentiality, so named
+                  case studies appear here only where a client has agreed to be
+                  named and to stand behind the outcome described.
                 </p>
               </Reveal>
               <Reveal delay={90}>
                 <p className="mt-8 text-[1.1875rem] leading-relaxed">
-                  When a client is willing to be named and to stand behind a
-                  described outcome, we will publish it here in full — the
-                  situation, what we did, and what measurably changed. Until
-                  then this page will keep telling you what we can actually
-                  substantiate.
-                </p>
-              </Reveal>
-              <Reveal delay={160}>
-                <p className="mt-8 text-[1.1875rem] leading-relaxed">
-                  In the meantime, the most useful thing we can offer is a
-                  conversation with someone who already works with us. Ask, and
-                  we will arrange it.
+                  Until then, the most useful thing we can offer is a
+                  conversation with an organisation already working with us.
+                  Ask, and we will arrange it.
                 </p>
               </Reveal>
               <Reveal delay={220}>
@@ -140,8 +130,8 @@ export default function WorkPage() {
           <SceneIntro
             eyebrow="The shape of an engagement"
             id="shapes-title"
-            title="Four kinds of project."
-            lede="These describe what such a project involves when we run it. They are not claims about particular clients."
+            title="How we engage."
+            lede="decodingIT offers six ways to work together, from fixing what is in front of you today to running the whole estate or extending a team you already have. These are the two named models."
           />
 
           <div className="mt-16 border-t border-[var(--scene-line)]">

@@ -31,7 +31,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Tell us what is not working."
         crumbs={crumbs}
-        lede="You do not need a specification or a budget to start. A description of the problem in your own words is enough — we will tell you what we would do about it, and whether we are the right people to do it."
+        lede="A description of the problem in your own words is enough to start. A real engineer will get back to you within four business hours — not an auto-responder, and not a salesperson."
       />
 
       <Scene tone="paper">
@@ -50,13 +50,7 @@ export default function ContactPage() {
                     {site.email}
                   </a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
-                  <a href={`mailto:${site.supportEmail}`} className="link-underline">
-                    {site.supportEmail}
-                  </a>
-                  <span className="text-[var(--scene-fg-muted)]">— existing clients</span>
-                </li>
+
               </ul>
             </Reveal>
 
@@ -91,12 +85,9 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <p className="eyebrow mt-12">Hours</p>
+              <p className="eyebrow mt-12">Response</p>
               <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                {site.hours.label}
-                <br />
-                Friday and Saturday closed. Managed clients are monitored
-                continuously, including outside these hours.
+                {site.responsePromise}
               </p>
             </Reveal>
           </aside>

@@ -16,11 +16,11 @@ export function ProcessPreview() {
         <SceneIntro
           eyebrow="Approach"
           id="process-title"
-          title="How the work actually runs."
-          lede="Five stages, and the thing you hold in your hand at the end of each one."
+          title="The Decoding IT Way."
+          lede="Four phases, whether we are running your IT day to day or delivering a single project."
         />
 
-        <ol className="mt-16 grid gap-px border-t border-[var(--scene-line)] md:grid-cols-5 md:border-t-0">
+        <ol className="mt-16 grid gap-px border-t border-[var(--scene-line)] md:grid-cols-4 md:border-t-0">
           {processStages.map((stage, i) => (
             <Reveal
               as="li"
@@ -37,10 +37,12 @@ export function ProcessPreview() {
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                 {stage.summary}
               </p>
-              <p className="mt-5 border-t border-[var(--scene-line)] pt-4 text-[0.8125rem] leading-relaxed">
-                <span className="eyebrow block">You get</span>
-                <span className="mt-2 block text-[var(--scene-fg-muted)]">{stage.output}</span>
-              </p>
+              {stage.output && (
+                <p className="mt-5 border-t border-[var(--scene-line)] pt-4 text-[0.8125rem] leading-relaxed">
+                  <span className="eyebrow block">You get</span>
+                  <span className="mt-2 block text-[var(--scene-fg-muted)]">{stage.output}</span>
+                </p>
+              )}
             </Reveal>
           ))}
         </ol>

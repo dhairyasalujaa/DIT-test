@@ -20,8 +20,8 @@ export function ServicesIndex() {
         <SceneIntro
           eyebrow="Services / 01 — 06"
           id="services-title"
-          title="Six practices, one operating model."
-          lede="Bought individually or as a whole. Most organisations start with one and end up handing us the rest, which is only a good outcome if the first one went well."
+          title="Everything under one agreement."
+          lede="Foundation, network, cloud, continuity, workplace and security — taken separately, or all six as a single technology strategy."
           aside={
             <Action href="/services" variant="secondary">
               All services

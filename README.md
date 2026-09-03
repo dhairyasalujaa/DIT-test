@@ -46,13 +46,13 @@ source rather than rewriting components.
 | --- | --- |
 | `content/site.ts` | Identity, offices, phone numbers, email, opening hours, markets |
 | `content/navigation.ts` | Header and footer navigation |
-| `content/services.ts` | The six practices, their capabilities, stacks and page metadata |
-| `content/approach.ts` | Engagement stages, commitments, engagement shapes |
-| `content/about.ts` | Manifesto, beliefs, who we serve, leadership (empty — see below) |
-| `content/insights.ts` | Articles, as structured blocks |
+| `content/services.ts` | The six areas, their capabilities, stacks and page metadata |
+| `content/approach.ts` | The four phases, how the service works, engagement models |
+| `content/about.ts` | Company description, who we serve, leadership (empty — see below) |
+| `content/insights.ts` | Articles, as structured blocks (empty — see below) |
 | `content/projects.ts` | Delivered work (empty — see below) |
 
-### Two modules are deliberately empty
+### Three modules are deliberately empty
 
 **`content/projects.ts`** — there are no published case studies. Inventing
 clients, logos or percentages would be the fastest way to make a real company
@@ -67,8 +67,15 @@ claim about individuals. Supply verified names, roles and credentials and the
 section renders on `/about` and adds `employee` entries to the Organization
 structured data.
 
-Both are the site's main remaining gaps for E-E-A-T. See "Still needs real
-company input" below.
+**`content/insights.ts`** — this previously held four full-length articles,
+roughly 3,600 words, written by Claude and published under decodingIT's name.
+They presented authored opinions as the company's positions, so they were
+removed. decodingIT does publish real technical writing; porting it here is a
+paste into the `articles` array, and /insights, the sitemap and Article
+structured data all populate from it. "Insights" was taken out of the primary
+navigation while the section is empty — restore it in `content/navigation.ts`.
+
+These are the site's main remaining gaps. See "Still needs real company input".
 
 ## Architecture
 
@@ -119,16 +126,44 @@ scene sits beneath it and recolour as the visitor scrolls.
 - The social card is a static 1200×630 PNG (`app/opengraph-image.png`).
   Regenerate it if the brand changes.
 
+## How this content was sourced — read before launch
+
+**The build environment cannot reach decodingit.com.** The network gateway
+refuses it, so no page of the live site was ever read directly. Everything in
+`content/` was reconstructed from search-index records of those pages: the
+E.A.S.Y. tagline, the six areas, the four phases of the Decoding IT Way, the
+one-team position, the office details and the four-hour response commitment.
+
+That is second-hand. It is accurate enough to build on and specific enough to
+be checkable, but **every fact below should be verified against the live site
+before this goes anywhere near production**:
+
+| Check | Where |
+| --- | --- |
+| Muscat address, both phone numbers | `content/site.ts` |
+| That `sales@decodingit.com` is the right public address | `content/site.ts` |
+| LinkedIn, X and Facebook URLs (they feed `sameAs` structured data) | `content/site.ts` |
+| "On the ground in Muscat since 2013" | `content/site.ts` |
+| The six area names and what sits under each | `content/services.ts` |
+| The four phases of the Decoding IT Way | `content/approach.ts` |
+| GigaManaged IT and Co-managed IT descriptions | `content/approach.ts` |
+| The other four of the "six ways to work with us", which could not be sourced | `content/approach.ts` |
+| The four-business-hour response commitment | `content/site.ts` |
+
+An earlier version of this site invented its own tagline, its own five-stage
+process, its own set of company principles and four full articles. All of that
+has been removed and replaced with sourced material. If you find anything left
+that decodingIT did not say, it is a bug — report it rather than working
+around it.
+
 ## Still needs real company input
 
 1. **`CONTACT_WEBHOOK_URL`** — until this is set the contact form cannot deliver.
-2. **Leadership profiles** — verified names, roles and credentials.
-3. **Case studies** — any client willing to be named and to stand behind a
+2. **Real articles** — port decodingIT's existing technical writing into
+   `content/insights.ts` and put Insights back in the primary navigation.
+3. **Leadership profiles** — verified names, roles and credentials.
+4. **Case studies** — any client willing to be named and to stand behind a
    described outcome.
-4. **Trading history** — published sources disagree on decodingIT's founding
-   year and years in business, so the site asserts neither. Supply the correct
-   figures if they should appear.
 5. **Vendor partnerships and certifications** — no partner tier or accreditation
-   is claimed anywhere. Add them once the current status is confirmed.
-6. **LinkedIn and Facebook URLs** in `content/site.ts` should be checked against
-   the live profiles before launch, as they feed `sameAs` structured data.
+   is claimed anywhere, because none could be confirmed. Add them once the
+   current status is known.
