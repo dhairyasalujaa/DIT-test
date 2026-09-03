@@ -17,6 +17,18 @@ export const primaryNav: NavItem[] = [
   { label: "About", href: "/about", hint: "Who we are and what we refuse to do" },
 ];
 
+/**
+ * The mobile panel is a complete map rather than a copy of the desktop bar:
+ * a phone has no flyout and no room for a persistent secondary link, so
+ * Insights and Contact — which are reachable from the desktop chrome through
+ * the footer and the CTA — get a place of their own here.
+ */
+export const mobileNav: NavItem[] = [
+  ...primaryNav,
+  { label: "Insights", href: "/insights", hint: "What our engineers write" },
+  { label: "Contact", href: "/contact", hint: "A reply within four business hours" },
+];
+
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Solutions",

@@ -54,21 +54,16 @@ export default function WorkPage() {
         <Scene tone="paper" aria-labelledby="projects-title">
           <div className="shell">
             <SceneIntro eyebrow="Selected work" id="projects-title" title="Published with client consent." />
-            <ul className="mt-16 border-t border-[var(--scene-line)]">
+            <ul className="after-intro border-t border-[var(--scene-line)]">
               {projects.map((project, i) => (
-                <Reveal
-                  as="li"
-                  key={project.slug}
-                  delay={(i % 3) * 70}
-                  className="border-b border-[var(--scene-line)]"
-                >
+                <Reveal as="li" key={project.slug} delay={(i % 3) * 70}>
                   <Link
                     href={`/work/${project.slug}`}
-                    className="group/p grid gap-x-10 gap-y-4 py-12 md:grid-cols-12"
+                    className="row row-pad group/p grid items-start gap-x-10 gap-y-4 md:grid-cols-12"
                   >
                     <div className="md:col-span-3">
                       <p className="eyebrow">{project.year}</p>
-                      <h2 className="mt-4 text-[1.5rem] tracking-[-0.025em] transition-colors duration-500 group-hover/p:text-[var(--scene-accent)]">
+                      <h2 className="title mt-4 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/p:text-[var(--scene-accent)]">
                         {project.client}
                       </h2>
                     </div>
@@ -87,13 +82,13 @@ export default function WorkPage() {
         </Scene>
       ) : (
         <Scene tone="paper" aria-labelledby="confidential-title">
-          <div className="shell grid gap-x-10 gap-y-8 md:grid-cols-12">
+          <div className="shell grid items-baseline gap-x-10 gap-y-8 md:grid-cols-12">
             <Reveal className="md:col-span-3">
               <h2 id="confidential-title" className="eyebrow">
                 On client confidentiality
               </h2>
             </Reveal>
-            <div className="md:col-span-8 lg:col-span-7">
+            <div className="md:col-span-9 lg:col-span-8">
               <Reveal>
                 <p className="text-[1.1875rem] leading-relaxed">
                   Client environments are covered by confidentiality, so named
@@ -115,7 +110,7 @@ export default function WorkPage() {
                     className="group/ref inline-flex items-center gap-2.5 text-sm font-medium"
                   >
                     Request client references
-                    <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/ref:translate-x-1" />
+                    <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/ref:translate-x-1" />
                   </a>
                 </p>
               </Reveal>
@@ -134,20 +129,17 @@ export default function WorkPage() {
             lede="decodingIT offers six ways to work together, from fixing what is in front of you today to running the whole estate or extending a team you already have. These are the two named models."
           />
 
-          <div className="mt-16 border-t border-[var(--scene-line)]">
+          <ul className="spec after-intro">
             {engagementShapes.map((shape, i) => (
               <Reveal
+                as="li"
                 key={shape.index}
                 delay={(i % 3) * 60}
-                className="grid gap-x-10 gap-y-5 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
+                className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
-                    {shape.index}
-                  </p>
-                  <h3 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.03em]">
-                    {shape.title}
-                  </h3>
+                  <p className="eyebrow text-[var(--scene-accent)]">{shape.index}</p>
+                  <h3 className="title mt-4">{shape.title}</h3>
                   <p className="eyebrow mt-4">{shape.disciplines.join(" · ")}</p>
                 </div>
                 <div className="md:col-span-4">
@@ -164,7 +156,7 @@ export default function WorkPage() {
                 </div>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </Scene>
 

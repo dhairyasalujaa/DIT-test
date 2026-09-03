@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { primaryNav } from "@/content/navigation";
+import { mobileNav } from "@/content/navigation";
+import { Facets } from "@/components/hero/facets";
 import { Action } from "@/components/ui/action";
 
 export const metadata: Metadata = {
@@ -13,30 +14,40 @@ export const metadata: Metadata = {
  *
  * Brand-consistent and brief: a joke that belongs to this company specifically,
  * then the fastest routes back. No illustration, no apology paragraph.
+ *
+ * It opens on the same `.enter` choreography as every other page. A 404 with
+ * no motion at all, on a site whose every other page has an entrance, reads
+ * as a page somebody forgot about.
  */
+const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
+
 export default function NotFound() {
   return (
     <section
       data-header-tone="ink"
-      className="scene-ink flex min-h-svh flex-col justify-center py-32"
+      className="scene-ink relative flex min-h-svh flex-col justify-center overflow-hidden py-32"
     >
-      <div className="shell">
-        <p className="eyebrow">Error 404</p>
-        <h1 className="display mt-7 max-w-[14ch]">
+      <Facets className="pointer-events-none absolute -right-28 -bottom-32 w-[24rem] opacity-[0.14] sm:w-[32rem]" />
+
+      <div className="shell relative">
+        <p className="enter eyebrow" style={enter(80)}>
+          Error 404
+        </p>
+        <h1 className="enter-resolve display mt-7 max-w-[14ch]" style={enter(180)}>
           Something got lost in <span className="text-[var(--scene-accent)]">translation</span>.
         </h1>
-        <p className="lede mt-8 max-w-[42ch]">
+        <p className="enter lede mt-8" style={enter(460)}>
           This page does not exist, or it moved. Neither is your fault.
         </p>
 
-        <div className="mt-12">
+        <div className="enter mt-12" style={enter(560)}>
           <Action href="/">Return home</Action>
         </div>
 
-        <nav aria-label="Site sections" className="mt-20">
+        <nav aria-label="Site sections" className="enter mt-20" style={enter(660)}>
           <p className="eyebrow">Or try</p>
           <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
-            {primaryNav.map((item) => (
+            {mobileNav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -46,14 +57,6 @@ export default function NotFound() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/contact"
-                className="link-underline text-sm text-[var(--scene-fg-muted)] hover:text-[var(--scene-fg)]"
-              >
-                Contact
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>

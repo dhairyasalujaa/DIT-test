@@ -36,13 +36,13 @@ export default function AboutPage() {
 
       {/* The manifesto proper: argument, not company history. */}
       <Scene tone="paper" aria-labelledby="manifesto-title">
-        <div className="shell grid gap-x-10 gap-y-8 md:grid-cols-12">
+        <div className="shell grid items-baseline gap-x-10 gap-y-8 md:grid-cols-12">
           <Reveal className="md:col-span-3">
             <h2 id="manifesto-title" className="eyebrow">
               The argument
             </h2>
           </Reveal>
-          <div className="md:col-span-8 lg:col-span-7">
+          <div className="md:col-span-9 lg:col-span-8">
             {manifesto.body.map((paragraph, i) => (
               <Reveal key={i} delay={i * 90}>
                 <p className="mb-8 text-[1.1875rem] leading-relaxed last:mb-0">{paragraph}</p>
@@ -63,19 +63,15 @@ export default function AboutPage() {
             lede={whoWeServe.body}
           />
 
-          <ul className="mt-14 grid gap-px border-t border-[var(--scene-line)] sm:grid-cols-2">
+          <ul className="after-intro grid gap-4 sm:grid-cols-2">
             {whoWeServe.points.map((point, i) => (
-              <Reveal
-                as="li"
-                key={point}
-                delay={(i % 2) * 70}
-                className="flex gap-4 border-b border-[var(--scene-line)] py-6 sm:odd:border-r sm:odd:pr-10 sm:even:pl-10"
-              >
-                <span
-                  aria-hidden
-                  className="mt-2.5 size-1 shrink-0 rounded-full bg-[var(--scene-accent)]"
-                />
-                <p className="text-[0.9375rem] leading-relaxed">{point}</p>
+              <Reveal as="li" key={point} delay={(i % 2) * 70}>
+                <div className="panel flex h-full gap-4">
+                  <span className="eyebrow shrink-0 pt-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-[0.9375rem] leading-relaxed">{point}</p>
+                </div>
               </Reveal>
             ))}
           </ul>
@@ -91,7 +87,7 @@ export default function AboutPage() {
         <Scene tone="paper" aria-labelledby="leadership-title">
           <div className="shell">
             <SceneIntro eyebrow="Leadership" id="leadership-title" title="Who runs decodingIT." />
-            <ul className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="after-intro grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {leadership.map((person, i) => (
                 <Reveal as="li" key={person.name} delay={(i % 3) * 70}>
                   <h3 className="text-[1.25rem] tracking-[-0.025em]">{person.name}</h3>
@@ -116,11 +112,11 @@ export default function AboutPage() {
             lede={`We deliver directly in ${markets.join(", ")}. Support is remote by default and on site when remote is not enough.`}
           />
 
-          <div className="mt-14 grid gap-x-10 gap-y-10 border-t border-[var(--scene-line)] pt-10 md:grid-cols-2">
+          <ul className="after-intro grid gap-4 md:grid-cols-2">
             {locations.map((location, i) => (
-              <Reveal key={location.id} delay={i * 90}>
+              <Reveal as="li" key={location.id} delay={i * 90} className="panel">
                 <p className="eyebrow">{location.role}</p>
-                <h3 className="mt-4 text-[1.5rem] tracking-[-0.025em]">
+                <h3 className="title mt-4">
                   {location.city}, {location.country}
                 </h3>
                 <address className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)] not-italic">
@@ -138,7 +134,7 @@ export default function AboutPage() {
                 </address>
               </Reveal>
             ))}
-          </div>
+          </ul>
 
           <Reveal delay={80}>
             <p className="mt-10 text-[0.9375rem] text-[var(--scene-fg-muted)]">

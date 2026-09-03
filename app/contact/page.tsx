@@ -35,7 +35,9 @@ export default function ContactPage() {
       />
 
       <Scene tone="paper">
-        <div className="shell grid gap-x-16 gap-y-16 lg:grid-cols-12">
+        {/* The site's one gutter, here too: gap-x-16 gave this page column
+            boundaries no other page shared. 7 + 4 starting at 9 = twelve. */}
+        <div className="shell grid gap-x-10 gap-y-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <ContactForm />
           </div>

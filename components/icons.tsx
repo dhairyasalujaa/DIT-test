@@ -35,10 +35,10 @@ export function ArrowUpRight({ className }: IconProps) {
   );
 }
 
-export function Plus({ className }: IconProps) {
+export function ChevronDown({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
-      <path d="M8 3v10M3 8h10" />
+      <path d="m4 6.5 4 4 4-4" />
     </svg>
   );
 }

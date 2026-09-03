@@ -44,33 +44,28 @@ export default function InsightsPage() {
                 <Reveal as="li" key={article.slug} delay={(i % 3) * 70}>
                   <Link
                     href={`/insights/${article.slug}`}
-                    className="group/a relative grid gap-x-10 gap-y-4 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
+                    className="row row-pad group/a grid items-start gap-x-10 gap-y-4 md:grid-cols-12"
                   >
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[var(--scene-accent)] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover/a:scale-x-100 group-focus-visible/a:scale-x-100"
-                    />
-
                     <div className="md:col-span-3">
                       <p className="eyebrow">{article.topic}</p>
                       <time
                         dateTime={article.published}
-                        className="mt-3 block font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase"
+                        className="mt-3 block eyebrow"
                       >
                         {formatDate(article.published)} · {article.readingMinutes} min
                       </time>
                     </div>
 
-                    <div className="md:col-span-8 lg:col-span-7">
-                      <h2 className="text-[1.5rem] leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover/a:text-[var(--scene-accent)] md:text-[1.75rem]">
+                    <div className="md:col-span-9 lg:col-span-8">
+                      <h2 className="title transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/a:text-[var(--scene-accent)]">
                         {article.title}
                       </h2>
-                      <p className="mt-4 max-w-[56ch] text-[1rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                      <p className="mt-4 max-w-(--measure-lede) text-[1rem] leading-relaxed text-[var(--scene-fg-muted)]">
                         {article.standfirst}
                       </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm">
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--scene-fg)]">
                         Read
-                        <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/a:translate-x-1" />
+                        <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/a:translate-x-1" />
                       </span>
                     </div>
                   </Link>
@@ -84,11 +79,11 @@ export default function InsightsPage() {
               been removed. It fills again the moment real entries are added to
               content/insights.ts.
             */
-            <div className="grid gap-x-10 gap-y-8 border-t border-[var(--scene-line)] pt-12 md:grid-cols-12">
+            <div className="grid items-baseline gap-x-10 gap-y-8 border-t border-[var(--scene-line)] pt-12 md:grid-cols-12">
               <Reveal className="md:col-span-3">
                 <p className="eyebrow">Nothing published here yet</p>
               </Reveal>
-              <div className="md:col-span-8 lg:col-span-7">
+              <div className="md:col-span-9 lg:col-span-8">
                 <Reveal>
                   <p className="text-[1.1875rem] leading-relaxed">
                     Our engineers write about the things clients actually ask —
@@ -112,7 +107,7 @@ export default function InsightsPage() {
                       className="group/ref inline-flex items-center gap-2.5 text-sm font-medium"
                     >
                       Ask us a technical question
-                      <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/ref:translate-x-1" />
+                      <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/ref:translate-x-1" />
                     </a>
                   </p>
                 </Reveal>

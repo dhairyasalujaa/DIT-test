@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Action } from "@/components/ui/action";
+import { ServiceTiers } from "@/components/sections/service-tiers";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
@@ -43,32 +44,34 @@ export default function ApproachPage() {
             lede="How an engagement runs, whether we are running your IT day to day or delivering a single project."
           />
 
-          <ol className="mt-16 border-t border-[var(--scene-line)]">
+          {/*
+            Three columns that sum to twelve. This grid used to run 3 + 7 with
+            a third block starting at column 10 — inside the second block's
+            span — so the "You get" column dropped to a row of its own the
+            moment a stage carried one.
+          */}
+          <ol className="spec after-intro">
             {processStages.map((stage, i) => (
               <Reveal
                 as="li"
                 key={stage.index}
                 delay={(i % 3) * 60}
-                className="grid gap-x-10 gap-y-6 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
+                className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
-                    {stage.index}
-                  </p>
-                  <h2 className="mt-4 text-[1.75rem] leading-tight tracking-[-0.03em]">
-                    {stage.name}
-                  </h2>
+                  <p className="eyebrow text-[var(--scene-accent)]">{stage.index}</p>
+                  <h2 className="title mt-4">{stage.name}</h2>
                   <p className="mt-3 text-[0.9375rem] text-[var(--scene-fg-muted)]">
                     {stage.summary}
                   </p>
                 </div>
 
-                <div className="md:col-span-7">
+                <div className={stage.output ? "md:col-span-6" : "md:col-span-9"}>
                   <p className="text-[1.0625rem] leading-relaxed">{stage.detail}</p>
                 </div>
 
                 {stage.output && (
-                  <div className="md:col-span-3 md:col-start-10">
+                  <div className="md:col-span-3">
                     <p className="eyebrow">You get</p>
                     <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                       {stage.output}
@@ -91,22 +94,19 @@ export default function ApproachPage() {
             lede="Four things decodingIT does differently, and the reasons clients give for staying."
           />
 
-          <div className="mt-16 grid border-t border-[var(--scene-line)] md:grid-cols-2">
+          <ul className="after-intro grid gap-4 md:grid-cols-2">
             {principles.map((principle, i) => (
-              <Reveal
-                key={principle.title}
-                delay={(i % 2) * 80}
-                className="border-b border-[var(--scene-line)] py-10 md:odd:border-r md:odd:pr-12 md:even:pl-12"
-              >
-                <h3 className="text-[1.25rem] leading-snug tracking-[-0.025em]">
-                  {principle.title}
-                </h3>
-                <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                  {principle.body}
-                </p>
+              <Reveal as="li" key={principle.title} delay={(i % 2) * 80}>
+                <div className="panel h-full">
+                  <p className="eyebrow">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="title mt-5 text-[1.25rem]">{principle.title}</h3>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    {principle.body}
+                  </p>
+                </div>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </Scene>
 
@@ -131,6 +131,8 @@ export default function ApproachPage() {
           />
         </div>
       </Scene>
+
+      <ServiceTiers tone="paper" />
 
       <ClosingCta />
     </>

@@ -7,13 +7,15 @@ import { markets } from "@/content/site";
  * Scene 04 — Proof.
  *
  * The rhythm deliberately changes here: after the open, editorial services
- * index, a dense technical band on ink. This is where the visitor's real
- * question — "can these people actually do this?" — gets answered with things
- * that can be checked rather than adjectives.
+ * index, a dark band. It opens with a statement at display size and no
+ * container rules at all — the one moment on the page where type sits on a
+ * ground with nothing ruled around it — and only then gets dense.
  *
- * Every line is a commitment a prospective client could hold us to, which is
- * the only kind of proof worth printing when the client work itself is
- * confidential.
+ * This is where the visitor's real question — "can these people actually do
+ * this?" — gets answered with things that can be checked rather than
+ * adjectives. Every line is a commitment a prospective client could hold us
+ * to, which is the only kind of proof worth printing when the client work
+ * itself is confidential.
  */
 
 /**
@@ -53,55 +55,60 @@ const portalFeatures = [
 
 export function OperatingModel() {
   return (
-    <Scene tone="ink" aria-labelledby="proof-title">
-      <div className="shell">
-        <Reveal variant="rule">
-          <hr className="rule border-t" />
+    <Scene tone="ink" aria-labelledby="proof-title" className="band">
+      {/* The statement. No rail, no rule, no list — the shape of this moment
+          is the whole point of it. It shifts against the band as it crosses,
+          so the type and the ground move at different rates. */}
+      <div className="shell band-shift">
+        <Reveal variant="clip">
+          <h2 id="proof-title" className="display max-w-[11ch]">
+            One contract, <span className="text-[var(--scene-accent)]">one owner.</span>
+          </h2>
         </Reveal>
+        <Reveal delay={140}>
+          <p className="lede mt-8">
+            Every layer under one agreement, run by one team, with response
+            times written into it.
+          </p>
+        </Reveal>
+      </div>
 
-        <div className="mt-5 grid gap-x-10 gap-y-6 md:grid-cols-12">
-          <Reveal className="md:col-span-3" delay={60}>
-            <p className="eyebrow">How we engage</p>
-          </Reveal>
-          <Reveal className="md:col-span-9 lg:col-span-7" delay={120}>
-            <h2 id="proof-title" className="display-sm">
-              One contract, one owner.
-            </h2>
-          </Reveal>
-        </div>
-
-        {/* Dense two-column commitment grid, ruled like a specification sheet. */}
-        <div className="mt-16 grid border-t border-[var(--scene-line)] sm:grid-cols-2">
+      <div className="shell">
+        {/* Four commitments, as objects rather than as more ruled text. */}
+        <ul className="after-intro grid gap-4 sm:grid-cols-2">
           {commitments.map((item, i) => (
-            <Reveal
-              key={item.label}
-              delay={i * 70}
-              className="border-b border-[var(--scene-line)] py-8 sm:odd:border-r sm:odd:pr-10 sm:even:pl-10"
-            >
-              <p className="eyebrow">{item.label}</p>
-              <h3 className="mt-4 text-[1.125rem] leading-snug tracking-[-0.02em]">{item.title}</h3>
-              <p className="mt-3 max-w-[44ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                {item.body}
-              </p>
+            <Reveal as="li" key={item.label} delay={(i % 2) * 80}>
+              <div className="panel h-full">
+                <p className="eyebrow">{item.label}</p>
+                <h3 className="mt-5 text-[1.125rem] leading-snug tracking-[-0.02em]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                  {item.body}
+                </p>
+              </div>
             </Reveal>
           ))}
-        </div>
+        </ul>
 
         {/* The portal — a concrete artefact rather than a claim. */}
-        <div className="mt-16 grid gap-x-10 gap-y-8 md:grid-cols-12">
-          <Reveal className="md:col-span-5" delay={60}>
+        <div className="mt-20 grid items-baseline gap-x-10 gap-y-10 md:grid-cols-12">
+          <Reveal className="md:col-span-3" delay={60}>
             <p className="eyebrow">Visibility</p>
-            <h3 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.025em]">
-              You can see what we are doing, without asking us.
-            </h3>
-            <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-              Monitoring, tickets, project progress and monthly reports are all
-              tracked inside your client portal — so the state of your estate is
-              something you can look at rather than ask about.
-            </p>
           </Reveal>
 
-          <Reveal className="md:col-span-6 md:col-start-7" delay={140}>
+          <div className="md:col-span-4">
+            <Reveal delay={120}>
+              <h3 className="title">You can see what we are doing, without asking us.</h3>
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                Monitoring, tickets, project progress and monthly reports are
+                all tracked inside your client portal — so the state of your
+                estate is something you can look at rather than ask about.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal className="md:col-span-5" delay={200}>
             <ul className="border-t border-[var(--scene-line)]">
               {portalFeatures.map((feature) => (
                 <li
@@ -113,14 +120,12 @@ export function OperatingModel() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase">
-              Delivered in {markets.join(" · ")}
-            </p>
+            <p className="eyebrow mt-6">Delivered in {markets.join(" · ")}</p>
           </Reveal>
         </div>
 
         <Reveal delay={120}>
-          <div className="mt-14">
+          <div className="mt-16">
             <Action href="/approach" variant="secondary">
               How an engagement runs
             </Action>

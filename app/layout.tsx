@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
-// The site's own three faces, self-hosted. Google Fonts is unreachable from
-// the build environment, and self-hosting removes a third-party round trip
-// from first paint anyway.
-import "@fontsource-variable/exo-2";
-import "@fontsource-variable/roboto-condensed";
-import "@fontsource-variable/open-sans";
+// Geist, self-hosted through next/font. Two faces only: the sans carries
+// everything a reader reads, the mono carries everything the site states about
+// itself — labels, indices, counts, spec values.
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 import { SiteHeader } from "@/components/layout/site-header";
@@ -59,12 +58,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       // `js` is set server-side so the scroll-entrance styles apply before
       // first paint — no flash of content appearing and then hiding. The
       // <noscript> block below hands everything straight back if JS never runs.
-      className="js h-full"
+      className={`js h-full ${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
+        {/* No JavaScript: hand the hidden state straight back — but only
+            where the browser cannot run the scroll-driven path, which is pure
+            CSS and works perfectly well without scripting. */}
         <noscript>
-          <style>{`[data-reveal],[data-reveal] .reveal-clip{opacity:1!important;transform:none!important;clip-path:none!important;scale:1 1!important}`}</style>
+          <style>{`@supports not (animation-timeline: view()){[data-reveal],[data-reveal] .reveal-clip{opacity:1!important;transform:none!important;clip-path:none!important;scale:1 1!important}}`}</style>
         </noscript>
       </head>
       <body className="flex min-h-full flex-col">

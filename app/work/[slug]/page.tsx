@@ -83,37 +83,36 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SceneIntro eyebrow="The engagement" id="story-title" title="What happened." />
 
-          <div className="mt-16 border-t border-[var(--scene-line)]">
+          <ul className="spec after-intro">
             {chapters.map((chapter, i) => (
               <Reveal
+                as="li"
                 key={chapter.label}
                 delay={(i % 3) * 70}
-                className="grid gap-x-10 gap-y-4 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
+                className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
+                  <p className="eyebrow text-[var(--scene-accent)]">
                     {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h2 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.03em]">
-                    {chapter.label}
-                  </h2>
+                  <h2 className="title mt-4">{chapter.label}</h2>
                 </div>
-                <p className="md:col-span-8 text-[1.0625rem] leading-relaxed">{chapter.body}</p>
+                <p className="text-[1.0625rem] leading-relaxed md:col-span-9">{chapter.body}</p>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </Scene>
 
       <Scene tone="paper-raised" aria-labelledby="proj-stack-title">
         <div className="shell">
           <SceneIntro eyebrow="Technology" id="proj-stack-title" title="What it was built with." />
-          <ul className="mt-14 flex flex-wrap gap-3">
+          <ul className="after-intro grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {project.stack.map((item, i) => (
-              <Reveal as="li" key={item} delay={i * 45} shift="0.75rem">
-                <span className="inline-block rounded-[4px] border border-[var(--scene-line)] px-4 py-2 font-heading text-[0.8125rem] font-semibold tracking-[0.04em] text-[var(--scene-fg-muted)]">
-                  {item}
-                </span>
+              <Reveal as="li" key={item} delay={(i % 5) * 55} shift="0.75rem">
+                <div className="plate h-full">
+                  <span className="plate-name text-center">{item}</span>
+                </div>
               </Reveal>
             ))}
           </ul>
@@ -132,12 +131,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </Reveal>
             <Reveal delay={80}>
               <Link href={`/work/${next.slug}`} className="group/next mt-6 block">
-                <h2 className="display-sm max-w-[16ch] transition-colors duration-500 group-hover/next:text-[var(--scene-accent)]">
+                <h2 className="display-sm max-w-[16ch] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/next:text-[var(--scene-accent)]">
                   {next.title}
                 </h2>
                 <span className="mt-6 inline-flex items-center gap-2.5 text-sm">
                   {next.client} · {next.year}
-                  <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/next:translate-x-1" />
+                  <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/next:translate-x-1" />
                 </span>
               </Link>
             </Reveal>

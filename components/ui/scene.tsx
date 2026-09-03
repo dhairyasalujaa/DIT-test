@@ -16,8 +16,6 @@ interface SceneProps {
   id?: string;
   as?: ElementType;
   className?: string;
-  /** Removes the default vertical rhythm when a section sets its own. */
-  flush?: boolean;
   "aria-labelledby"?: string;
 }
 
@@ -33,14 +31,13 @@ export function Scene({
   id,
   as: Tag = "section",
   className = "",
-  flush = false,
   ...rest
 }: SceneProps) {
   return (
     <Tag
       id={id}
       data-header-tone={tone === "ink" ? "ink" : "paper"}
-      className={`${toneClass[tone]} relative ${flush ? "" : "py-(--spacing-scene)"} ${className}`}
+      className={`${toneClass[tone]} relative py-(--spacing-scene) ${className}`}
       {...rest}
     >
       {children}
@@ -58,14 +55,27 @@ interface SceneIntroProps {
   as?: "h1" | "h2";
   id?: string;
   className?: string;
-  /** Optional right-hand column, e.g. a link out of the section. */
+  /** Optional trailing element, e.g. a link out of the section. */
   aside?: ReactNode;
 }
 
 /**
  * The standard opening of a scene: a hairline, an index label, a heading and
- * an optional lede. Repeating this exactly is what makes the page feel like
- * one document rather than a stack of templates.
+ * an optional lede.
+ *
+ * There is exactly one of these, and every section uses it. The audit that
+ * prompted this pass found three hand-rolled copies that had drifted apart —
+ * different column spans, different gaps, different label tracking — which is
+ * most of why the page read as assembled rather than designed.
+ *
+ * The grid is the site's only grid: a twelve-column field with a `gap-x-10`
+ * gutter, a three-column label rail, and content on nine (eight at `lg`).
+ * Every other twelve-column grid on the site matches it exactly, so a label
+ * on one section sits on the same vertical as a label on the next.
+ *
+ * `items-baseline` is the optical correction: without it the mono label's
+ * cap-height floats above the heading's, and the top of every section on
+ * every page steps by a few pixels for no reason.
  */
 export function SceneIntro({
   eyebrow,
@@ -81,7 +91,7 @@ export function SceneIntro({
       <Reveal variant="rule">
         <hr className="rule border-t" />
       </Reveal>
-      <div className="mt-5 grid gap-x-10 gap-y-6 md:grid-cols-12">
+      <div className="mt-6 grid items-baseline gap-x-10 gap-y-6 md:grid-cols-12">
         <Reveal className="md:col-span-3" delay={60}>
           <p className="eyebrow">{eyebrow}</p>
         </Reveal>
@@ -93,12 +103,12 @@ export function SceneIntro({
           </Reveal>
           {lede && (
             <Reveal delay={200}>
-              <p className="lede mt-6 max-w-(--measure)">{lede}</p>
+              <p className="lede mt-6">{lede}</p>
             </Reveal>
           )}
           {aside && (
             <Reveal delay={260}>
-              <div className="mt-8">{aside}</div>
+              <div className="mt-9">{aside}</div>
             </Reveal>
           )}
         </div>

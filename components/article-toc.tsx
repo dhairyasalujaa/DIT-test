@@ -30,9 +30,9 @@ export function ArticleToc({ blocks }: { blocks: ArticleBlock[] }) {
             <li key={section.id} className="border-b border-[var(--scene-line)]">
               <a
                 href={`#${section.id}`}
-                className="group/toc flex gap-3 py-3 text-[0.875rem] leading-snug text-[var(--scene-fg-muted)] transition-colors duration-300 hover:text-[var(--scene-fg)]"
+                className="group/toc flex gap-3 py-3 text-[0.875rem] leading-snug text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
               >
-                <span className="font-heading text-[0.75rem] font-bold tabular-nums opacity-70">
+                <span className="eyebrow opacity-70">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span>{section.text}</span>

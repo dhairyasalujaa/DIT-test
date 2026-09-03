@@ -1,5 +1,4 @@
-import { Reveal } from "@/components/motion/reveal";
-import { Scene } from "@/components/ui/scene";
+import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Action } from "@/components/ui/action";
 import { site } from "@/content/site";
 
@@ -9,45 +8,32 @@ import { site } from "@/content/site";
  * Deliberately the quietest scene on the page. By this point the argument has
  * been made; raising the volume now would undo it. One line, one action, and
  * a great deal of space — then the credits.
+ *
+ * It uses `SceneIntro` like every other section. It used to hand-roll the same
+ * markup with `pt-20` where the shared component uses `mt-6`, which put the
+ * final section of nine pages on a rhythm of its own.
  */
 export function ClosingCta() {
   return (
-    <Scene tone="paper" aria-labelledby="cta-title" className="pb-(--spacing-scene)">
+    <Scene tone="paper" aria-labelledby="cta-title">
       <div className="shell">
-        <Reveal variant="rule">
-          <hr className="rule border-t" />
-        </Reveal>
-
-        <div className="grid gap-x-10 gap-y-10 pt-20 md:grid-cols-12">
-          <Reveal className="md:col-span-3" delay={60}>
-            <p className="eyebrow">Next</p>
-          </Reveal>
-
-          <div className="md:col-span-9 lg:col-span-8">
-            <Reveal delay={120}>
-              <h2 id="cta-title" className="display-sm max-w-[20ch]">
-                Tell us what you are running, and what is not working.
-              </h2>
-            </Reveal>
-            <Reveal delay={200}>
-              <p className="lede mt-8 max-w-[46ch]">
-                {site.responsePromise} Not an auto-responder, and not a
-                salesperson.
-              </p>
-            </Reveal>
-            <Reveal delay={260}>
-              <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <Action href="/contact">Start a conversation</Action>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="link-underline text-sm text-[var(--scene-fg-muted)] hover:text-[var(--scene-fg)]"
-                >
-                  {site.email}
-                </a>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+        <SceneIntro
+          eyebrow="Next"
+          id="cta-title"
+          title="Tell us what you are running, and what is not working."
+          lede={`${site.responsePromise} Not an auto-responder, and not a salesperson.`}
+          aside={
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Action href="/contact">Start a conversation</Action>
+              <a
+                href={`mailto:${site.email}`}
+                className="link-underline text-sm text-[var(--scene-fg-muted)] hover:text-[var(--scene-fg)]"
+              >
+                {site.email}
+              </a>
+            </div>
+          }
+        />
       </div>
     </Scene>
   );

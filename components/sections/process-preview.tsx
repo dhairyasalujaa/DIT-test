@@ -5,9 +5,13 @@ import { Scene, SceneIntro } from "@/components/ui/scene";
 /**
  * Scene 05 — Confidence.
  *
- * The five stages of an engagement, each naming what the client actually
- * receives at the end of it. A process diagram that does not say what it
- * produces is decoration; the `output` line is what makes this checkable.
+ * The four phases of an engagement, drawn as a stepped run rather than four
+ * equal columns: a rule carries the eye left to right, each phase sits on a
+ * node, and the phases step down the page slightly so the sequence reads as
+ * a progression instead of a row of boxes.
+ *
+ * The connecting rule is drawn with a scroll-linked scaleX, so it writes
+ * itself across the section as the reader arrives at it.
  */
 export function ProcessPreview() {
   return (
@@ -20,32 +24,40 @@ export function ProcessPreview() {
           lede="Four phases, whether we are running your IT day to day or delivering a single project."
         />
 
-        <ol className="mt-16 grid gap-px border-t border-[var(--scene-line)] md:grid-cols-4 md:border-t-0">
-          {processStages.map((stage, i) => (
-            <Reveal
-              as="li"
-              key={stage.index}
-              delay={i * 80}
-              className="border-b border-[var(--scene-line)] py-8 md:border-t md:border-b-0 md:pr-6"
-            >
-              <div className="flex items-baseline gap-3">
-                <span className="font-heading text-[0.75rem] font-bold tracking-[0.14em] text-[var(--scene-accent)]">
-                  {stage.index}
-                </span>
-                <h3 className="text-[1.125rem] tracking-[-0.02em]">{stage.name}</h3>
-              </div>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                {stage.summary}
-              </p>
-              {stage.output && (
-                <p className="mt-5 border-t border-[var(--scene-line)] pt-4 text-[0.8125rem] leading-relaxed">
-                  <span className="eyebrow block">You get</span>
-                  <span className="mt-2 block text-[var(--scene-fg-muted)]">{stage.output}</span>
-                </p>
-              )}
-            </Reveal>
-          ))}
-        </ol>
+        <div className="after-intro relative">
+          {/* The rule the phases hang from. Horizontal from md up, where the
+              steps sit side by side; vertical below it, where they stack. */}
+          <Reveal variant="rule">
+            <hr className="rule absolute top-0 left-0 hidden w-full border-t md:block" />
+          </Reveal>
+
+          <ol className="grid gap-x-10 gap-y-10 md:grid-cols-12">
+            {processStages.map((stage, i) => (
+              <Reveal
+                as="li"
+                key={stage.index}
+                delay={i * 90}
+                className="relative border-t border-[var(--scene-line)] pt-6 md:col-span-3 md:border-t-0"
+                // Each phase sits a little lower than the one before it, so
+                // the four read as a run rather than a rank.
+                style={{ "--step-offset": `${i * 1.25}rem` } as React.CSSProperties}
+              >
+                <span
+                  aria-hidden
+                  className="absolute -top-[3px] left-0 hidden size-1.5 rounded-full bg-[var(--scene-accent)] md:block"
+                />
+                <div className="md:pt-(--step-offset)">
+                  <p className="eyebrow text-[var(--scene-accent)]">{stage.index}</p>
+                  <h3 className="title mt-4 text-[1.25rem]">{stage.name}</h3>
+                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    {stage.summary}
+                  </p>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed">{stage.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </div>
     </Scene>
   );

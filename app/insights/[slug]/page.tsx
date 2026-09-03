@@ -114,10 +114,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     <li key={service.slug}>
                       <Link
                         href={`/services/${service.slug}`}
-                        className="group/rs inline-flex items-center gap-2 rounded-[4px] border border-[var(--scene-line)] px-4 py-2 text-sm transition-colors duration-500 hover:border-[var(--scene-fg)]"
+                        className="group/rs inline-flex items-center gap-2 rounded-[4px] border border-[var(--scene-line)] px-4 py-2 text-sm transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:border-[var(--scene-fg)]"
                       >
                         {service.name}
-                        <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/rs:translate-x-0.5" />
+                        <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/rs:translate-x-0.5" />
                       </Link>
                     </li>
                   ))}
@@ -157,7 +157,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   className="group/m flex h-full flex-col py-8"
                 >
                   <p className="eyebrow">{item.topic}</p>
-                  <h3 className="mt-4 text-[1.25rem] leading-snug tracking-[-0.025em] transition-colors duration-500 group-hover/m:text-[var(--scene-accent)]">
+                  <h3 className="mt-4 text-[1.25rem] leading-snug tracking-[-0.025em] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/m:text-[var(--scene-accent)]">
                     {item.title}
                   </h3>
                   <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">

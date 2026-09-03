@@ -9,9 +9,15 @@ import { ArrowRight } from "@/components/icons";
  * Scene 03 — Exploration.
  *
  * Services as an editorial index rather than a grid of identical cards: an
- * ordered list with a number, a name, a plain description and the disciplines
- * underneath it. Each row is one link, so the whole row is a target on touch
- * and a single tab stop for the keyboard.
+ * ordered list with a number, a name and a plain description. Each row is one
+ * link, so the whole row is a target on touch and a single tab stop for the
+ * keyboard.
+ *
+ * The row spans read `3 / 6 / 2 / 1` — twelve exactly, on the site's one
+ * gutter, so the numerals sit on the same vertical as every other label on
+ * the page. The `.row` surface supplies the wash and the accent bar that draws
+ * down the leading edge; `items-start` keeps the arrow off the heading's
+ * baseline, where it used to be dragged by `items-baseline`.
  */
 export function ServicesIndex() {
   return (
@@ -29,46 +35,33 @@ export function ServicesIndex() {
           }
         />
 
-        <ul className="mt-16 border-t border-[var(--scene-line)]">
+        <ul className="after-intro border-t border-[var(--scene-line)]">
           {services.map((service, i) => (
             <Reveal as="li" key={service.slug} delay={i * 60} shift="1.5rem">
               <Link
                 href={`/services/${service.slug}`}
-                className="group/row relative grid grid-cols-1 items-baseline gap-x-8 gap-y-3 border-b border-[var(--scene-line)] py-8 transition-colors duration-500 md:grid-cols-12 md:py-10"
+                className="row row-pad group/row grid grid-cols-1 items-start gap-x-10 gap-y-3 md:grid-cols-12"
               >
-                {/* The accent rule that draws in from the left on hover — the
-                    one place the row's colour changes. */}
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[var(--scene-accent)] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover/row:scale-x-100 group-focus-visible/row:scale-x-100"
-                />
+                <span className="eyebrow md:col-span-3 md:pt-2">{service.index}</span>
 
-                <span className="eyebrow md:col-span-2">{service.index}</span>
-
-                <div className="md:col-span-5">
-                  <h3 className="text-[1.375rem] leading-tight tracking-[-0.025em] transition-colors duration-500 group-hover/row:text-[var(--scene-accent)] md:text-[1.625rem]">
+                <div className="md:col-span-6">
+                  <h3 className="title transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/row:text-[var(--scene-accent)]">
                     {service.name}
                   </h3>
-                  <p className="mt-3 max-w-[42ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)] md:hidden lg:block">
+                  <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {service.summary}
                   </p>
                 </div>
 
-                <div className="md:col-span-4">
-                  <ul className="flex flex-wrap gap-x-2 gap-y-2">
-                    {service.stack.slice(0, 3).map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-[4px] border border-[var(--scene-line)] px-3 py-1 font-heading text-[0.75rem] font-semibold tracking-[0.05em] text-[var(--scene-fg-muted)]"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* The platforms this practice is actually built on. A count
+                    was here first and read as information; it was six on every
+                    row, so it said nothing. */}
+                <span className="hidden font-mono text-[0.75rem] leading-relaxed tracking-[0.02em] text-[var(--scene-fg-muted)] md:col-span-2 md:block">
+                  {service.stack.slice(0, 2).join(" · ")}
+                </span>
 
-                <span className="hidden justify-self-end md:col-span-1 md:block">
-                  <ArrowRight className="size-4 text-[var(--scene-fg-muted)] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/row:translate-x-1 group-hover/row:text-[var(--scene-accent)]" />
+                <span className="hidden justify-self-end md:col-span-1 md:block md:pt-1">
+                  <ArrowRight className="size-4 text-[var(--scene-fg-muted)] transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/row:translate-x-1 group-hover/row:text-[var(--scene-accent)]" />
                 </span>
               </Link>
             </Reveal>

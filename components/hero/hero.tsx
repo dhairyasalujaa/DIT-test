@@ -14,23 +14,30 @@ import { heroTagRow, site } from "@/content/site";
  *
  * White ground with the faceted triangle motif behind it, matching the live
  * site, which is blue-on-white rather than dark.
+ *
+ * The `.enter` sequence is a load choreography, not a scroll one: everything
+ * is in the HTML and readable from the first frame if animation never runs.
+ * It ends inside 1.5s, and `PageHeader` runs the same sequence so an interior
+ * page opens the same way this one does.
  */
 export function Hero() {
   return (
     <section
       data-header-tone="paper"
-      className="scene-paper relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28"
+      className="scene-paper relative overflow-hidden pt-40 pb-24 sm:pt-48 sm:pb-32"
       aria-labelledby="hero-title"
     >
-      {/* Decorative facets, bleeding off the right edge. */}
-      <Facets className="pointer-events-none absolute -top-16 -right-24 hidden w-[38rem] opacity-[0.13] lg:block" />
+      {/* The logo motif, drifting against the page as it scrolls. Present at
+          every width now — it was the only artwork on the site and it was
+          hidden below `lg`, which is most of the traffic. */}
+      <Facets className="drift pointer-events-none absolute -top-20 -right-28 w-[24rem] opacity-[0.09] sm:-top-24 sm:-right-32 sm:w-[34rem] lg:w-[44rem]" />
 
       <div className="shell relative">
         <p className="enter eyebrow" style={{ "--enter-delay": "80ms" } as React.CSSProperties}>
           {site.tagline}
         </p>
 
-        <h1 id="hero-title" className="display mt-6 max-w-[17ch]">
+        <h1 id="hero-title" className="display mt-7 max-w-[15ch]">
           <span className="enter block" style={{ "--enter-delay": "160ms" } as React.CSSProperties}>
             Extend your team,
           </span>
@@ -43,7 +50,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="enter lede mt-7 max-w-[54ch]"
+          className="enter lede mt-8 max-w-[52ch]"
           style={{ "--enter-delay": "560ms" } as React.CSSProperties}
         >
           MegaAssist, GigaExtend and TeraConsult — augment your team exactly
@@ -52,7 +59,7 @@ export function Hero() {
 
         {/* The tag row, with the triangle separator the live site uses. */}
         <ul
-          className="enter mt-10 flex flex-wrap items-center gap-x-4 gap-y-3"
+          className="enter mt-11 flex flex-wrap items-center gap-x-4 gap-y-3"
           style={{ "--enter-delay": "660ms" } as React.CSSProperties}
         >
           {heroTagRow.map((tag, i) => (
@@ -68,19 +75,19 @@ export function Hero() {
         </ul>
 
         <div
-          className="enter mt-11 flex flex-wrap items-center gap-4"
+          className="enter mt-12 flex flex-wrap items-center gap-4"
           style={{ "--enter-delay": "740ms" } as React.CSSProperties}
         >
           <Link
             href="/contact"
-            className="group/h inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-bold text-[var(--scene-cta-fg)] transition-colors duration-300 hover:bg-[var(--scene-cta-bg-hover)]"
+            className="group/h inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-cta-bg-hover)]"
           >
             Talk to Our Experts
-            <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
+            <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
           </Link>
           <Link
             href="/services"
-            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-bold text-[var(--scene-accent)] transition-colors duration-300 hover:bg-[var(--scene-accent)] hover:text-white"
+            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-semibold text-[var(--scene-accent)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-accent)] hover:text-white"
           >
             Browse Solutions
           </Link>

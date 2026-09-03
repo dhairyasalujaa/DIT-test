@@ -24,17 +24,17 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group/s inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-bold text-[var(--scene-cta-fg)] transition-colors duration-300 hover:bg-[var(--scene-cta-bg-hover)] disabled:opacity-60"
+      className="group/s inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-cta-bg-hover)] disabled:opacity-60"
     >
       {pending ? "Sending…" : "Send it over"}
-      <ArrowRight className="size-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/s:translate-x-1" />
+      <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/s:translate-x-1" />
     </button>
   );
 }
 
 const fieldClass =
   "mt-2 w-full border-b border-[var(--scene-line)] bg-transparent pb-3 text-[1.0625rem] " +
-  "outline-none transition-colors duration-300 placeholder:text-[var(--scene-fg-muted)]/70 " +
+  "outline-none transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] placeholder:text-[var(--scene-fg-muted)]/70 " +
   "focus:border-[var(--scene-accent)]";
 
 export function ContactForm() {
@@ -46,8 +46,8 @@ export function ContactForm() {
     return (
       <div role="status" className="border-t border-[var(--scene-line)] pt-10">
         <p className="eyebrow">Received</p>
-        <h2 className="display-sm mt-5 max-w-[18ch]">Thank you — that has reached us.</h2>
-        <p className="lede mt-6 max-w-[46ch]">
+        <h2 className="display-sm mt-6 max-w-[18ch]">Thank you — that has reached us.</h2>
+        <p className="lede mt-6">
           A real person reads every one of these. You will hear back within one
           working day, and it will be from somebody who has actually read what
           you wrote rather than an automated sequence.

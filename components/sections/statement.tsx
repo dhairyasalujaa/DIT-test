@@ -4,34 +4,36 @@ import { Scene } from "@/components/ui/scene";
 /**
  * Scene 02 — The statement.
  *
- * The page arrives out of the dark into paper, which is the brand argument
- * made structurally: the visitor has just moved from encoded to legible.
- * One idea, set large, with the explanation kept deliberately short.
+ * The one section on the page with no eyebrow rail, no list and no rules: a
+ * single oversized line held against two short columns of prose. Its job in
+ * the sequence is to be the shape nothing else on the page is, so the reader
+ * registers a change of gear rather than another block of the same thing.
  */
 export function Statement() {
   return (
-    <Scene tone="paper" aria-labelledby="statement-title">
-      <div className="shell">
-        <Reveal variant="clip">
-          <h2 id="statement-title" className="display max-w-[22ch]">
-            When something breaks, there is no argument about whose layer it is.
-          </h2>
-        </Reveal>
-
-        <div className="mt-16 grid gap-x-10 gap-y-8 md:grid-cols-12">
-          <Reveal className="md:col-span-3" delay={80}>
-            <p className="eyebrow">What we do</p>
+    <Scene tone="paper" aria-labelledby="statement-title" className="band">
+      <div className="shell grid gap-x-10 gap-y-12 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <Reveal variant="clip">
+            <h2 id="statement-title" className="display max-w-[13ch]">
+              When something breaks, there is no argument about whose layer it
+              is.
+            </h2>
           </Reveal>
-          <Reveal className="md:col-span-5" delay={140}>
-            <p className="text-[1.0625rem] leading-relaxed">
+        </div>
+
+        <div className="md:col-span-4 md:col-start-9 md:self-end">
+          <Reveal delay={120}>
+            <p className="eyebrow">What we do</p>
+            <p className="mt-5 text-[1.0625rem] leading-relaxed">
               Full-stack IT infrastructure, cloud, cybersecurity and managed
               services — provided to corporate, SME and government
               organisations across a range of verticals, on the ground in Oman
               and for clients in the UAE and India.
             </p>
           </Reveal>
-          <Reveal className="md:col-span-4" delay={200}>
-            <p className="text-[1.0625rem] leading-relaxed text-[var(--scene-fg-muted)]">
+          <Reveal delay={220}>
+            <p className="mt-8 border-t border-[var(--scene-line)] pt-8 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
               As a value-added reseller we work with globally recognised
               hardware and software vendors, and our focus is the management,
               access and monitoring of IT infrastructure and operations — the

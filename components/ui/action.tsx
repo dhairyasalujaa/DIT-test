@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
 
-type Variant = "primary" | "secondary" | "quiet";
+type Variant = "primary" | "secondary";
 
 interface ActionProps {
   href: string;
@@ -14,8 +14,8 @@ interface ActionProps {
 }
 
 const shared =
-  "group/action inline-flex items-center gap-2.5 rounded-[4px] text-sm font-bold " +
-  "transition-[background-color,color,border-color] duration-500 ease-[var(--ease-out-expo)]";
+  "group/action inline-flex items-center gap-2.5 rounded-[4px] text-sm font-semibold " +
+  "transition-[background-color,color,border-color] duration-[var(--dur-hover)] ease-[var(--ease-rise)]";
 
 const variants: Record<Variant, string> = {
   // Fills with the scene's own foreground, so the button inverts correctly on
@@ -26,7 +26,6 @@ const variants: Record<Variant, string> = {
   secondary:
     "h-11 px-6 border border-[var(--scene-accent)] text-[var(--scene-accent)] " +
     "hover:bg-[var(--scene-accent)] hover:text-white",
-  quiet: "text-[var(--scene-fg)] hover:text-[var(--scene-accent)]",
 };
 
 /**
@@ -50,7 +49,7 @@ export function Action({
       {icon !== "none" && (
         <Icon
           className={
-            "size-4 shrink-0 transition-transform duration-500 ease-[var(--ease-out-expo)] " +
+            "size-4 shrink-0 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] " +
             (icon === "up-right"
               ? "group-hover/action:-translate-y-0.5 group-hover/action:translate-x-0.5"
               : "group-hover/action:translate-x-1")

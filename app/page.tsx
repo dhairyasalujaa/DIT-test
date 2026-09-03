@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/hero/hero";
 import { Statement } from "@/components/sections/statement";
 import { ServicesIndex } from "@/components/sections/services-index";
+import { ServiceTiers } from "@/components/sections/service-tiers";
 import { OperatingModel } from "@/components/sections/operating-model";
+import { TechnologyStrip } from "@/components/sections/technology-strip";
 import { ProcessPreview } from "@/components/sections/process-preview";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { pageMetadata } from "@/lib/seo";
@@ -20,10 +22,11 @@ export const metadata: Metadata = pageMetadata({
  *
  *   Arrival     → curiosity      what is this?
  *   Statement   → clarity        what do they do?
- *   Services    → relevance      can they do the thing I need?
+ *   Solutions   → relevance      can they do the thing I need?
+ *   Tiers       → fit            how much of it would I hand over?
  *   Proof       → confidence     can they actually do it?
+ *   Technology  → substance      what is it built on?
  *   Approach    → trust          what would working with them be like?
- *   Insights    → authority      do they understand this properly?
  *   Resolution  → action         how do I start?
  *
  * Each scene answers the question the previous one raises.
@@ -34,7 +37,9 @@ export default function HomePage() {
       <Hero />
       <Statement />
       <ServicesIndex />
+      <ServiceTiers />
       <OperatingModel />
+      <TechnologyStrip tone="paper-raised" />
       <ProcessPreview />
       <ClosingCta />
     </>

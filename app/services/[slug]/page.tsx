@@ -79,35 +79,33 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             title="The parts of the service."
           />
 
-          <div className="mt-16 grid border-t border-[var(--scene-line)] md:grid-cols-2">
+          <ul className="after-intro grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {service.capabilities.map((capability, i) => (
-              <Reveal
-                key={capability.title}
-                delay={(i % 2) * 80}
-                className="border-b border-[var(--scene-line)] py-8 md:odd:border-r md:odd:pr-12 md:even:pl-12"
-              >
-                <p className="eyebrow">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="mt-4 text-[1.1875rem] leading-snug tracking-[-0.02em]">
-                  {capability.title}
-                </h3>
-                <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                  {capability.description}
-                </p>
+              <Reveal as="li" key={capability.title} delay={(i % 3) * 70}>
+                <div className="panel h-full">
+                  <p className="eyebrow">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-5 text-[1.1875rem] leading-snug tracking-[-0.02em]">
+                    {capability.title}
+                  </h3>
+                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    {capability.description}
+                  </p>
+                </div>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </Scene>
 
       {/* The questions a buyer actually arrives with, in their own words. */}
       <Scene tone="ink" aria-labelledby="answers-title">
-        <div className="shell grid gap-x-10 gap-y-12 md:grid-cols-12">
+        <div className="shell grid items-baseline gap-x-10 gap-y-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Reveal>
               <p className="eyebrow">Why people call us</p>
             </Reveal>
             <Reveal variant="clip" delay={80}>
-              <h2 id="answers-title" className="display-sm mt-5">
+              <h2 id="answers-title" className="display-sm mt-6">
                 The questions behind the enquiry.
               </h2>
             </Reveal>
@@ -138,12 +136,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             lede={service.stackNote}
           />
 
-          <ul className="mt-14 flex flex-wrap gap-3">
+          {/* The stack, as plates rather than as grey chips. A named vendor
+              gets a slot the client can drop a logo file into; everything
+              else is a discipline, and reads as one. */}
+          <ul className="after-intro grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {service.stack.map((item, i) => (
-              <Reveal as="li" key={item} delay={i * 45} shift="0.75rem">
-                <span className="inline-block rounded-[4px] border border-[var(--scene-line)] px-4 py-2 font-heading text-[0.8125rem] font-semibold tracking-[0.04em] text-[var(--scene-fg-muted)]">
-                  {item}
-                </span>
+              <Reveal as="li" key={item} delay={(i % 5) * 55} shift="0.75rem">
+                <div className="plate h-full">
+                  <span className="plate-name text-center">{item}</span>
+                </div>
               </Reveal>
             ))}
           </ul>
@@ -159,28 +160,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             title="Usually bought alongside."
           />
 
-          <ul className="mt-14 grid gap-px border-t border-[var(--scene-line)] md:grid-cols-3">
+          <ul className="after-intro grid gap-4 md:grid-cols-3">
             {related.map((item, i) => (
-              <Reveal
-                as="li"
-                key={item.slug}
-                delay={i * 80}
-                className="border-b border-[var(--scene-line)] md:border-b-0 md:px-6 md:not-last:border-r md:first:pl-0 md:last:pr-0"
-              >
-                <Link
-                  href={`/services/${item.slug}`}
-                  className="group/rel flex h-full flex-col py-8"
-                >
+              <Reveal as="li" key={item.slug} delay={i * 80}>
+                <Link href={`/services/${item.slug}`} className="panel group/rel flex h-full flex-col">
                   <p className="eyebrow">{item.index}</p>
-                  <h3 className="mt-4 text-[1.125rem] tracking-[-0.02em] transition-colors duration-500 group-hover/rel:text-[var(--scene-accent)]">
+                  <h3 className="panel-title mt-5 text-[1.125rem] tracking-[-0.02em]">
                     {item.name}
                   </h3>
                   <p className="mt-3 flex-1 text-[0.875rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {item.summary}
                   </p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm">
-                    {item.name}
-                    <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/rel:translate-x-1" />
+                  <span className="mt-8 inline-flex items-center gap-2 text-sm text-[var(--scene-accent)]">
+                    Read on
+                    <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/rel:translate-x-1" />
                   </span>
                 </Link>
               </Reveal>

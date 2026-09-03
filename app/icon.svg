@@ -1,6 +1,15 @@
+<!--
+  The favicon.
+
+  decodingIT's mark is a stacked, faceted triangle in three blues — the same
+  shape `components/hero/facets.tsx` draws across the site. This is that
+  motif at 32px, on the brand navy. It replaced an icon left over from an
+  earlier palette that used three colours the site no longer contains
+  anywhere.
+-->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="7" fill="#0d0d0c"/>
-  <circle cx="13" cy="19.5" r="6" fill="none" stroke="#f4f2ed" stroke-width="3.2"/>
-  <rect x="17.4" y="5.5" width="3.2" height="20.5" fill="#f4f2ed"/>
-  <circle cx="25.5" cy="24" r="2.1" fill="#da4a22"/>
+  <rect width="32" height="32" rx="6" fill="#0b1a2b"/>
+  <polygon points="14,7 26,16 14,25" fill="#42afea" opacity="0.45"/>
+  <polygon points="9.5,8.5 20,16 9.5,23.5" fill="#007acd" opacity="0.7"/>
+  <polygon points="5.5,10 13.5,16 5.5,22" fill="#42afea"/>
 </svg>

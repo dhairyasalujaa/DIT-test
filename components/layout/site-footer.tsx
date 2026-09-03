@@ -17,8 +17,11 @@ export function SiteFooter() {
   return (
     <footer data-header-tone="ink" className="scene-ink relative">
       <div className="shell pt-(--spacing-scene) pb-12">
+        {/* A step quieter than the closing call to action above it. Two
+            consecutive display-size statements a few hundred pixels apart
+            made the end of every page read as an argument being restated. */}
         <Reveal variant="clip">
-          <p className="display max-w-[20ch] text-balance">
+          <p className="display-sm max-w-[16ch] text-balance">
             One contract.
             <br />
             <span className="text-[var(--scene-accent)]">One</span> owner.
@@ -33,11 +36,17 @@ export function SiteFooter() {
           The address and both office numbers are in the columns below.
         */}
 
-        <hr className="rule mt-20 border-t" />
+        <hr className="rule mt-16 border-t" />
 
+        {/*
+          The columns sum to twelve at both breakpoints. They used to add up
+          to fifteen at `md`, so "Reach us" wrapped and left column twelve
+          empty, and at `lg` a `col-start-10` left column nine dead.
+          md: 6 / 3 / 3, then Reach on its own row.  lg: 4 / 2 / 2 / 4.
+        */}
         <div className="grid gap-x-10 gap-y-12 pt-12 md:grid-cols-12">
           {/* Offices */}
-          <div className="md:col-span-5 lg:col-span-4">
+          <div className="md:col-span-6 lg:col-span-4">
             <p className="eyebrow">Offices</p>
             <ul className="mt-6 space-y-8">
               {locations.map((location) => (
@@ -77,7 +86,7 @@ export function SiteFooter() {
             <nav
               key={group.title}
               aria-label={group.title}
-              className="md:col-span-3 lg:col-span-2 lg:col-start-auto"
+              className="md:col-span-3 lg:col-span-2"
             >
               <p className="eyebrow">{group.title}</p>
               <ul className="mt-6 space-y-3">
@@ -85,7 +94,7 @@ export function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="link-underline text-sm text-[var(--scene-fg-muted)] transition-colors duration-300 hover:text-[var(--scene-fg)]"
+                      className="link-underline text-sm text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
                     >
                       {item.label}
                     </Link>
@@ -96,7 +105,7 @@ export function SiteFooter() {
           ))}
 
           {/* Reach */}
-          <div className="md:col-span-4 lg:col-span-3 lg:col-start-10">
+          <div className="md:col-span-6 lg:col-span-4">
             <p className="eyebrow">Reach us</p>
             <ul className="mt-6 space-y-3 text-sm text-[var(--scene-fg-muted)]">
               <li>
@@ -135,11 +144,11 @@ export function SiteFooter() {
 
         <hr className="rule mt-16 border-t" />
 
-        <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/" aria-label="decodingIT — home" className="-m-2 p-2">
             <Wordmark />
           </Link>
-          <p className="font-heading text-[0.75rem] font-bold tracking-[0.12em] text-[var(--scene-fg-muted)] uppercase">
+          <p className="eyebrow">
             © {year} {site.legalName} — Oman · United Arab Emirates · India
           </p>
         </div>

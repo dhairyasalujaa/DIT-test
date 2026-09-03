@@ -65,7 +65,7 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
                   <ul className="mt-6 space-y-4">
                     {block.items.map((item, n) => (
                       <li key={item} className="flex gap-4 text-[0.9375rem] leading-relaxed">
-                        <span className="font-heading text-[0.75rem] font-bold text-[var(--scene-accent)] tabular-nums">
+                        <span className="eyebrow text-[var(--scene-accent)]">
                           {String(n + 1).padStart(2, "0")}
                         </span>
                         <span>{item}</span>

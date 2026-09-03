@@ -41,16 +41,11 @@ export default function ServicesPage() {
               <Reveal as="li" key={service.slug} delay={(i % 3) * 70}>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group/row relative grid gap-x-10 gap-y-6 border-b border-[var(--scene-line)] py-12 md:grid-cols-12"
+                  className="row row-pad group/row grid items-start gap-x-10 gap-y-6 md:grid-cols-12"
                 >
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[var(--scene-accent)] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover/row:scale-x-100 group-focus-visible/row:scale-x-100"
-                  />
-
                   <div className="md:col-span-3">
                     <p className="eyebrow">{service.index}</p>
-                    <h2 className="mt-4 text-[1.5rem] leading-tight tracking-[-0.025em] transition-colors duration-500 group-hover/row:text-[var(--scene-accent)]">
+                    <h2 className="title mt-4 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/row:text-[var(--scene-accent)]">
                       {service.name}
                     </h2>
                   </div>
@@ -59,9 +54,9 @@ export default function ServicesPage() {
                     <p className="text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                       {service.summary}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm">
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm text-[var(--scene-fg)]">
                       Read more
-                      <ArrowRight className="size-3.5 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/row:translate-x-1" />
+                      <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/row:translate-x-1" />
                     </span>
                   </div>
 
