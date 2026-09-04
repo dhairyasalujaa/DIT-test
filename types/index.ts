@@ -88,20 +88,6 @@ export type ArticleBlock =
  * would be worse than having none. Add real entries here and `/work`
  * switches from the engagement-shapes view to a full project gallery.
  */
-export interface Project {
-  slug: Slug;
-  client: string;
-  title: string;
-  year: string;
-  disciplines: string[];
-  /** The situation before decodingIT was engaged. */
-  problem: string;
-  /** What was designed and built. */
-  approach: string;
-  /** What measurably changed. Only include what the client has confirmed. */
-  result: string;
-  stack: string[];
-}
 
 export interface Location {
   id: string;

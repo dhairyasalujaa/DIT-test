@@ -9,6 +9,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { RevealEngine } from "@/components/motion/reveal-engine";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { TopBar } from "@/components/layout/top-bar";
 import { JsonLd } from "@/components/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/jsonld";
 import { site, siteUrl } from "@/content/site";
@@ -76,12 +78,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <TopBar />
         <SiteHeader />
         <main id="main" className="flex-1">
           {children}
         </main>
         <SiteFooter />
         <RevealEngine />
+        <SmoothScroll />
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
       </body>
     </html>

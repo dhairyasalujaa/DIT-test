@@ -37,7 +37,7 @@ export function PageHeader({
   return (
     <section
       data-header-tone="ink"
-      className="scene-ink relative overflow-hidden pt-40 pb-20 sm:pt-48 sm:pb-24"
+      className="scene-ink relative overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-24"
     >
       <Facets className="drift pointer-events-none absolute -top-24 -right-28 w-[24rem] opacity-[0.16] sm:-right-32 sm:w-[32rem] lg:w-[40rem]" />
 

@@ -25,7 +25,7 @@ export default function NotFound() {
   return (
     <section
       data-header-tone="ink"
-      className="scene-ink relative flex min-h-svh flex-col justify-center overflow-hidden py-32"
+      className="scene-ink relative flex min-h-[80svh] flex-col justify-center overflow-hidden py-24"
     >
       <Facets className="pointer-events-none absolute -right-28 -bottom-32 w-[24rem] opacity-[0.14] sm:w-[32rem]" />
 

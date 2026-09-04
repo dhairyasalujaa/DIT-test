@@ -26,7 +26,7 @@ export function Hero() {
   return (
     <section
       data-header-tone="paper"
-      className="scene-paper relative overflow-hidden pt-40 pb-24 sm:pt-48 sm:pb-28"
+      className="scene-paper relative overflow-hidden pt-24 pb-24 sm:pt-32 sm:pb-28"
       aria-labelledby="hero-title"
     >
       <ArtField />
