@@ -1,0 +1,8 @@
+Vendor logo files go here.
+
+The marquee in components/sections/technology-strip.tsx checks for each
+vendor's file at build time and upgrades that vendor from a name pill to an
+image the moment the file exists. Filenames are listed in content/technology.ts.
+
+This placeholder exists because git does not track empty directories, so
+without it `public/` is absent from a fresh clone entirely.
