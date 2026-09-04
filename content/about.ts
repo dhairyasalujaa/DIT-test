@@ -29,20 +29,15 @@ export const manifesto = {
 /**
  * Who each engagement is for.
  *
- * These are the "For:" audiences decodingIT publishes against its own service
- * plans, not an audience list written here.
+ * The audiences themselves come from `content/plans.ts`, which transcribes
+ * decodingIT's own "For:" lines. This file used to carry its own copy of the
+ * six strings, lightly reworded — a second source of truth that could drift
+ * from the one on /services, and had already picked up added full stops and
+ * a changed capital.
  */
 export const whoWeServe = {
   title: "Who we work with",
   body: "Six ways to work with us — from fixing what is in front of you today to running the whole estate, or extending a team you already have.",
-  points: [
-    "Business with occasional IT support needs.",
-    "Organisations without an internal IT team.",
-    "Regulated or high-exposure environments.",
-    "IT teams needing on-demand L3 support.",
-    "Existing infrastructure needing an operator.",
-    "A change big enough to plan properly.",
-  ],
 };
 
 /**

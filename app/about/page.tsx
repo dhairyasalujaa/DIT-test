@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { leadership, manifesto, whoWeServe } from "@/content/about";
+import { plans } from "@/content/plans";
 import { locations, marketsShort, site } from "@/content/site";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
@@ -54,11 +55,21 @@ export default function AboutPage() {
         <div className="shell">
           <SceneIntro id="clients-title" title={whoWeServe.title} lede={whoWeServe.body} />
 
-          <ul className="after-intro grid gap-4 sm:grid-cols-2">
-            {whoWeServe.points.map((point, i) => (
-              <Reveal as="li" key={point} delay={(i % 2) * 70}>
+          {/* Each card names the plan it describes. They used to carry the
+              audience line alone — "IT teams needing on-demand L3 support."
+              with nothing to say what that was the audience FOR. */}
+          <ul className="after-intro grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {plans.map((plan, i) => (
+              <Reveal as="li" key={`${plan.prefix}${plan.accent}`} delay={(i % 3) * 70}>
                 <div className="panel h-full">
-                  <p className="text-[0.9375rem] leading-relaxed">{point}</p>
+                  <h3 className="text-[1.25rem] leading-none font-medium tracking-[-0.03em]">
+                    {plan.prefix}
+                    <span className="text-[var(--scene-accent)]">{plan.accent}</span>
+                    {plan.suffix ? <span className="font-normal"> {plan.suffix}</span> : null}
+                  </h3>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    <span className="text-[var(--scene-fg)]">For:</span> {plan.audience}
+                  </p>
                 </div>
               </Reveal>
             ))}
