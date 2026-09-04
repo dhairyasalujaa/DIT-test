@@ -28,6 +28,10 @@ import { externalProps } from "@/lib/motion";
 export function SiteHeader() {
   const pathname = usePathname();
   const [tone, setTone] = useState<"ink" | "paper">("paper");
+  // True once the bar has pinned to the top of the viewport, i.e. the
+  // utility bar above it has scrolled away and page content is now
+  // passing underneath it.
+  const [pinned, setPinned] = useState(false);
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -62,6 +66,9 @@ export function SiteHeader() {
       // Validated rather than asserted: a typo in any data-header-tone would
       // otherwise sail through as a valid tone and mis-colour the chrome.
       setTone(scene?.dataset.headerTone === "ink" ? "ink" : "paper");
+      // Same rect, no extra listener: the bar is pinned when its own top edge
+      // has reached the top of the viewport.
+      setPinned(Math.round(top) <= 1);
     };
 
     const schedule = () => {
@@ -279,12 +286,28 @@ export function SiteHeader() {
     </div>
   );
 
+  // The bar is transparent only while it is sitting on the page's own opening
+  // frame. The moment it pins, page content starts passing underneath it and
+  // a transparent bar means the wordmark is printed over body copy — legible
+  // by the letter, a mess to look at. It takes the ground of whatever scene
+  // is behind it, so it stays part of that section rather than becoming a
+  // separate white strip.
+  const grounded = pinned || open;
+
   return (
     <header
       ref={headerRef}
       className={
         (chromeTone === "ink" ? "scene-ink" : "scene-paper") +
-        " chrome-legible z-50 bg-transparent! transition-colors duration-150 ease-[var(--ease-rise)] " +
+        " z-50 transition-[background-color,border-color,color] duration-200 ease-[var(--ease-rise)] " +
+        // The border is always present, just transparent when the bar is —
+        // otherwise it appears at the pin and shifts the layout by a pixel.
+        (grounded
+          ? "border-b border-[var(--scene-line)] bg-[var(--scene-bg)] "
+          : // `chrome-legible` haloes the text against whatever is behind it.
+            // Only needed while there is nothing behind it; over its own
+            // ground the halo just muddies the type.
+            "chrome-legible border-b border-transparent bg-transparent! ") +
         // Sticky rather than fixed, so it sits below the utility bar at the
         // top of the page and pins once that bar has scrolled away. While the
         // mobile panel is open it is pinned outright, so the panel can be
@@ -292,13 +315,6 @@ export function SiteHeader() {
         (open ? "fixed inset-x-0 top-0" : "sticky top-0")
       }
     >
-      {/* While the mobile panel is open the bar needs a ground of its own,
-          because the panel starts below it. Rendered only when open rather
-          than faded to zero: an invisible navy plate left in the tree still
-          answers hit-tests, and anything measuring what is behind the nav —
-          a contrast audit, or a browser's own tooling — reads it as the
-          background the links sit on. */}
-      {open && <div aria-hidden className="absolute inset-0 -z-10 bg-navy" />}
 
       {/* `relative` so the mega panels below anchor to the page, not to their
           nav item. A 1152px panel centred on a 108px trigger hangs off the
