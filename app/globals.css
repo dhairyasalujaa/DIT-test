@@ -29,11 +29,11 @@
   --color-surface: #ffffff;
   --color-surface-tint: #f8fafc;
   --color-surface-wash: #eff6fc;
-  --color-hairline: #dbe6f0;
+  --color-hairline: #bdc7d0;
 
   /* ---- Type ------------------------------------------------------------- */
   --color-heading: #161c26;
-  --color-body: #55697b;
+  --color-body: #4a5b6a;
   --color-on-navy: #ffffff;
   --color-on-navy-muted: #a7bccd;
 
@@ -113,10 +113,10 @@
   --color-surface: #0b1a2b;
   --color-surface-tint: #0f2135;
   --color-surface-wash: #132a41;
-  --color-hairline: #263b53;
+  --color-hairline: #33506f;
 
   --color-heading: #e9f1f8;
-  --color-body: #9db2c5;
+  --color-body: #a9bccd;
 
   /* The contrast band goes deeper than the canvas rather than lighter, so the
      page still opens and closes in its darkest state. */
@@ -350,7 +350,12 @@
      the accent blue is already doing work elsewhere. */
   .release {
     font-weight: 300;
-    color: color-mix(in oklab, var(--scene-fg) 45%, transparent);
+    /* 45% is the reference's value and it composites to 3.18:1 on white —
+       below AA, on display type that carries half the meaning of a heading.
+       Solved rather than guessed: 62% is the first value that clears 4.5:1
+       in both themes. The weight drop is doing most of the work anyway; the
+       opacity is there to soften, not to hide. */
+    color: color-mix(in oklab, var(--scene-fg) 62%, transparent);
   }
 
   .display {
@@ -590,14 +595,17 @@
 @layer utilities {
   .js [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, var(--reveal-shift, 3rem), 0);
+    filter: blur(var(--reveal-blur, 14px));
+    transform: translate3d(0, var(--reveal-shift, 2rem), 0);
     transition:
-      opacity 0.85s var(--ease-rise) var(--reveal-delay, 0ms),
-      transform 0.85s var(--ease-rise) var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
+      opacity 0.85s var(--ease-editorial) var(--reveal-delay, 0ms),
+      filter 0.85s var(--ease-editorial) var(--reveal-delay, 0ms),
+      transform 0.85s var(--ease-editorial) var(--reveal-delay, 0ms);
+    will-change: opacity, filter, transform;
   }
 
   .js [data-reveal].is-revealed {
+    filter: blur(0);
     opacity: 1;
     transform: none;
     will-change: auto;
@@ -617,6 +625,7 @@
   @media (prefers-reduced-motion: reduce) {
     .js [data-reveal] {
       opacity: 1 !important;
+      filter: none !important;
       transform: none !important;
       clip-path: none !important;
     }
@@ -639,9 +648,21 @@
    ========================================================================== */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
+    /* The brief's reveal: opacity, blur AND a small translation together.
+       The blur is what separates it from the fade-up everyone ships — the
+       element resolves into focus rather than merely arriving.
+
+       Blur is applied here, on the block, and deliberately NOT on `.rt-word`:
+       a heading blurred word by word is dozens of separately rasterised
+       layers, which is expensive, and at word size the blur reads as mush
+       rather than as focus. */
     @keyframes reveal-rise {
-      from { opacity: 0; transform: translate3d(0, var(--reveal-shift, 3rem), 0); }
-      to   { opacity: 1; transform: none; }
+      from {
+        opacity: 0;
+        filter: blur(var(--reveal-blur, 14px));
+        transform: translate3d(0, var(--reveal-shift, 2rem), 0);
+      }
+      to { opacity: 1; filter: blur(0); transform: none; }
     }
 
 
@@ -654,7 +675,7 @@
       opacity: 1;
       transform: none;
       transition: none;
-      animation: reveal-rise both var(--ease-rise);
+      animation: reveal-rise both var(--ease-editorial);
       animation-timeline: view();
       animation-range:
         entry calc(9% + var(--reveal-lag, 0) * 3%)
@@ -1069,6 +1090,78 @@
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
     background-size: 140px 140px;
+  }
+
+  /* The footer's link underline, drawn from the right.
+
+     A 1px rule that grows from the right edge rather than the left. It is a
+     small thing, but the direction is the whole point: left-to-right reads
+     as a progress bar, right-to-left reads as a line being drawn under a
+     word. 500ms on the draw curve, per the brief. */
+  .underline-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .underline-draw:hover,
+  .underline-draw:focus-visible {
+    background-size: 100% 1px;
+    background-position: 0 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .underline-draw { transition: none; }
+  }
+
+  /* The two-icon arrow swap.
+
+     The brief's card affordance: on hover the arrow leaves up and to the
+     right while a second one arrives from down and left. A single arrow that
+     slides and comes back is the common version; this one reads as the link
+     handing over rather than nudging, and it is the detail that makes a row
+     feel considered at no layout cost.
+
+     Both icons are always present and only ever transformed, so nothing
+     reflows and the swap is compositor-only. */
+  .swap {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .swap > * {
+    display: block;
+    transition:
+      transform 0.5s var(--ease-editorial),
+      opacity 0.5s var(--ease-editorial);
+  }
+
+  .swap > :last-child {
+    position: absolute;
+    inset: 0;
+    transform: translate3d(-70%, 70%, 0);
+    opacity: 0;
+  }
+
+  .group\/card:hover .swap > :first-child,
+  .group\/action:hover .swap > :first-child,
+  .group\/a:hover .swap > :first-child {
+    transform: translate3d(70%, -70%, 0);
+    opacity: 0;
+  }
+
+  .group\/card:hover .swap > :last-child,
+  .group\/action:hover .swap > :last-child,
+  .group\/a:hover .swap > :last-child {
+    transform: none;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .swap > * { transition: none; }
   }
 
   /* Card artwork — decodingIT's own `.post-thumb`, generalised.

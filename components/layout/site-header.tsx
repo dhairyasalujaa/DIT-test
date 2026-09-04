@@ -32,6 +32,11 @@ export function SiteHeader() {
   // utility bar above it has scrolled away and page content is now
   // passing underneath it.
   const [pinned, setPinned] = useState(false);
+  // The brief's nav behaviour: after 80px, scrolling down takes the bar away
+  // and scrolling up brings it back. It gives the reader the whole viewport
+  // while they are moving forward, and returns the navigation the instant
+  // they look for it.
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -49,6 +54,7 @@ export function SiteHeader() {
   // bug was.
   useEffect(() => {
     let frame = 0;
+    let lastY = window.scrollY;
 
     const read = () => {
       frame = 0;
@@ -69,6 +75,16 @@ export function SiteHeader() {
       // Same rect, no extra listener: the bar is pinned when its own top edge
       // has reached the top of the viewport.
       setPinned(Math.round(top) <= 1);
+
+      // Direction, from the same frame. The 80px floor keeps the bar put
+      // while the page is still near the top, and the 6px threshold stops a
+      // trackpad's jitter from flickering it.
+      const scrollY = window.scrollY;
+      const delta = scrollY - lastY;
+      if (Math.abs(delta) > 6) {
+        setHidden(scrollY > 80 && delta > 0);
+        lastY = scrollY;
+      }
     };
 
     const schedule = () => {
@@ -293,13 +309,19 @@ export function SiteHeader() {
   // is behind it, so it stays part of that section rather than becoming a
   // separate white strip.
   const grounded = pinned || open;
+  // Never retract while a menu is open or the keyboard is inside the bar —
+  // a nav that vanishes under a tabbing user is a trap, not a flourish.
+  const retracted = hidden && !open && !menu;
 
   return (
+    <>
     <header
       ref={headerRef}
+      onFocusCapture={() => setHidden(false)}
       className={
         (chromeTone === "ink" ? "scene-ink" : "scene-paper") +
-        " z-50 transition-[background-color,border-color,color] duration-200 ease-[var(--ease-rise)] " +
+        " z-50 transition-[background-color,border-color,color,translate] duration-500 ease-out " +
+        (retracted ? "-translate-y-full " : "translate-y-0 ") +
         // The border is always present, just transparent when the bar is —
         // otherwise it appears at the pin and shifts the layout by a pixel.
         (grounded
@@ -401,9 +423,19 @@ export function SiteHeader() {
           </span>
         </button>
       </div>
+    </header>
+
 
       {/* Full-screen mobile navigation, carrying the whole tree — a phone has
-          no room for a mega menu, so the groups become sections instead. */}
+          no room for a mega menu, so the groups become sections instead.
+
+          A SIBLING of <header>, not a child, and that is load-bearing: the
+          header now carries a `translate` for its retraction, and a transform
+          or translate on an ancestor makes that ancestor the containing block
+          for `position: fixed` descendants. Inside the header, this panel's
+          `top: var(--header-h); bottom: 0` resolved against the header's own
+          68px box instead of the viewport and computed to a height of zero —
+          present, positioned, and completely invisible. */}
       <div
         id="mobile-menu"
         ref={panelRef}
@@ -497,6 +529,6 @@ export function SiteHeader() {
           </div>
         </nav>
       </div>
-    </header>
+  </>
   );
 }

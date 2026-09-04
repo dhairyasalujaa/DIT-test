@@ -30,14 +30,11 @@ export function CardAffordance({
       className={`inline-flex items-center gap-2 text-sm font-medium text-[var(--scene-accent)] ${className}`}
     >
       {label}
-      <Icon
-        className={
-          "size-3.5 shrink-0 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] " +
-          (external
-            ? "group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
-            : "group-hover/card:translate-x-1")
-        }
-      />
+      {/* Two arrows, swapped rather than nudged — see `.swap` in globals.css. */}
+      <span className="swap size-3.5 shrink-0" aria-hidden>
+        <Icon className="size-3.5" />
+        <Icon className="size-3.5" />
+      </span>
       {external && <span className="sr-only">(opens on {host})</span>}
     </span>
   );

@@ -12,6 +12,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { RevealText } from "@/components/motion/reveal-text";
 import { Wordmark } from "@/components/layout/wordmark";
 import { slugify } from "@/lib/format";
+import { BackToTop } from "@/components/layout/back-to-top";
 import { externalProps } from "@/lib/motion";
 
 /**
@@ -66,7 +67,7 @@ export function SiteFooter() {
                     <Link
                       href={item.href}
                       {...externalProps(item.href)}
-                      className="link-underline text-sm text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
+                      className="underline-draw text-sm text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
                     >
                       {item.label}
                     </Link>
@@ -94,13 +95,13 @@ export function SiteFooter() {
               ))}
               <a
                 href={`tel:${india.phoneHref}`}
-                className="link-underline block transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                className="underline-draw block transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
               >
                 {india.phone}
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="link-underline block transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                className="underline-draw block transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
               >
                 {site.email}
               </a>
@@ -110,7 +111,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/contact"
-                  className="link-underline text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                  className="underline-draw text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                 >
                   Chat with us
                 </Link>
@@ -120,7 +121,7 @@ export function SiteFooter() {
                   href={whatsapp.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="link-underline text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                  className="underline-draw text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                 >
                   {whatsapp.label}
                 </a>
@@ -143,7 +144,7 @@ export function SiteFooter() {
                 if the site is never rebuilt — which is the right trade for
                 not shipping a client component to print one number. */}
             © {new Date().getFullYear()}{" "}
-            <Link href="/" className="link-underline hover:text-[var(--scene-fg)]">
+            <Link href="/" className="underline-draw hover:text-[var(--scene-fg)]">
               {site.legalName}
             </Link>
             . All Rights Reserved.
@@ -155,7 +156,7 @@ export function SiteFooter() {
                 <a
                   href={social.href}
                   {...externalProps(social.href)}
-                  className="link-underline text-[0.8125rem] text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                  className="underline-draw text-[0.8125rem] text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                 >
                   {social.label}
                 </a>
@@ -163,6 +164,10 @@ export function SiteFooter() {
             ))}
           </ul>
         </div>
+
+        {/* The page ends on the company's name at display scale, which is
+            also the way back up. See back-to-top.tsx. */}
+        <BackToTop />
       </div>
     </footer>
   );
