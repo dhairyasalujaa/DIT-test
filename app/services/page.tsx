@@ -76,7 +76,7 @@ export default function ServicesPage() {
                     rel="noreferrer"
                     className="group/card mt-4 inline-flex"
                   >
-                    <CardAffordance label="Explore" external />
+                    <CardAffordance label="Explore" external href={plan.href} />
                   </a>
                 </div>
               </Reveal>

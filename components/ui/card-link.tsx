@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
+import { externalHost } from "@/lib/motion";
 
 /**
  * The "keep going" affordance at the foot of a card or row.
@@ -12,13 +13,17 @@ import { ArrowRight, ArrowUpRight } from "@/components/icons";
 export function CardAffordance({
   label,
   external = false,
+  href,
   className = "",
 }: {
   label: string;
   /** Uses the outward arrow and is announced as leaving the site. */
   external?: boolean;
+  /** The destination, so the off-site note can name the real host. */
+  href?: string;
   className?: string;
 }) {
+  const host = (href && externalHost(href)) || "decodingit.com";
   const Icon = external ? ArrowUpRight : ArrowRight;
   return (
     <span
@@ -33,7 +38,7 @@ export function CardAffordance({
             : "group-hover/card:translate-x-1")
         }
       />
-      {external && <span className="sr-only">(opens on decodingit.com)</span>}
+      {external && <span className="sr-only">(opens on {host})</span>}
     </span>
   );
 }

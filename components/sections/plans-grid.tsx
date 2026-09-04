@@ -44,7 +44,7 @@ export function PlansGrid() {
                 <p className="mt-5 border-t border-[var(--scene-line)] pt-4 text-[0.875rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   <span className="text-[var(--scene-fg)]">For:</span> {plan.audience}
                 </p>
-                <CardAffordance label="Explore" external className="mt-6" />
+                <CardAffordance label="Explore" external href={plan.href} className="mt-6" />
               </a>
             </Reveal>
           ))}

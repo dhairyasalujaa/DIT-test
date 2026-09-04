@@ -32,7 +32,7 @@ export function FieldNotes() {
                 <h3 className="panel-title mt-4 flex-1 text-[1.125rem] leading-snug tracking-[-0.02em]">
                   {note.title}
                 </h3>
-                <CardAffordance label="Read" external className="mt-6" />
+                <CardAffordance label="Read" external href={note.href} className="mt-6" />
               </a>
             </Reveal>
           ))}

@@ -51,6 +51,16 @@
     0, 0.22 7%, 0.42 12%, 0.60 18%, 0.75 24%, 0.86 32%,
     0.93 40%, 0.98 52%, 0.997 68%, 1
   );
+  /* The same rise, redistributed for a SCROLL timeline. On a time-based
+     animation the curve above is right: it snaps and settles. Driven by
+     scroll position it is wrong — 98% of the travel is spent in the first
+     half of the range, so the word arrives almost immediately and then
+     creeps, and the reader never sees it move with them. This one keeps a
+     soft landing but spreads the distance across the range. */
+  --ease-rise-scroll: linear(
+    0, 0.07 8%, 0.19 18%, 0.34 29%, 0.51 41%, 0.67 53%,
+    0.81 65%, 0.91 77%, 0.97 88%, 1
+  );
   /* Rules and bars drawing themselves in — symmetric, no overshoot. */
   --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
   /* Small objects arriving: a 2% overshoot, then settle. */
@@ -580,8 +590,20 @@
     /* The upward text reveal. Each word owns its timeline, so a heading
        resolves line by line as it rises through the viewport; `--w` offsets
        words within a line so one line does not land as a single block.
-       The range is short and early: the line has to be still by the time it
-       is at a comfortable reading height. */
+
+       Both ends are expressed in `cover`, and that is the whole trick. The
+       `entry` range of an element spans the element's OWN height — for a
+       single word that is about 40px of scrolling, so a range of
+       `entry 4% → entry 88%` finished before the word had cleared the
+       bottom edge. The animation ran; nobody could see it. Measured, not
+       guessed: at a scroll position that put the word 828px down a 900px
+       viewport, its computed progress was already 1.
+
+       `cover` spans the viewport plus the element, so 19% of it is ~180px
+       of real scrolling, and the per-word offset pushes each word's whole
+       range later rather than just stretching it — which is what makes the
+       line cascade instead of arriving at once. The range still resolves
+       well above reading height. */
     /* Same shape as the scroll keyframe, kept separate so the load variant
        can be retimed without touching the scroll one. */
     @keyframes rt-rise-load {
@@ -608,11 +630,11 @@
     }
 
     .rt-word {
-      animation: rt-rise both var(--ease-rise);
+      animation: rt-rise both var(--ease-rise-scroll);
       animation-timeline: view();
       animation-range:
-        entry calc(4% + var(--w, 0) * 1.1%)
-        entry calc(88% + var(--w, 0) * 1.1%);
+        cover calc(1% + var(--w, 0) * 1.6%)
+        cover calc(20% + var(--w, 0) * 1.6%);
     }
 
     /* Content shifting against a full-bleed band as it crosses. */
@@ -756,9 +778,22 @@
     word-spacing: 0.02em;
   }
 
+  /* The clip is `clip-path`, NOT `overflow: hidden`, and the difference is
+     the whole effect.
+
+     `overflow: hidden` makes an element a scroll container. `view()` on a
+     descendant resolves against its nearest ancestor scroll container — so
+     every word's timeline was measuring the word against its own mask, which
+     it fills exactly, which pins progress at 1 forever. The animation was
+     attached, native, and permanently finished. Measured, not inferred:
+     `getAnimations()[0].timeline.source` came back as `SPAN.rt-mask`.
+
+     `clip-path` clips identically at the border box but creates no scroll
+     container, so the timeline resolves against the document, as intended.
+     The padding/negative-margin pair keeps the descenders on g, y and p. */
   .rt-mask {
     display: inline-block;
-    overflow: hidden;
+    clip-path: inset(0);
     padding-bottom: 0.18em;
     margin-bottom: -0.18em;
     vertical-align: bottom;

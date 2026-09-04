@@ -300,7 +300,11 @@ export function SiteHeader() {
           background the links sit on. */}
       {open && <div aria-hidden className="absolute inset-0 -z-10 bg-navy" />}
 
-      <div className="shell flex h-(--header-h) items-center justify-between gap-6">
+      {/* `relative` so the mega panels below anchor to the page, not to their
+          nav item. A 1152px panel centred on a 108px trigger hangs off the
+          right of the viewport for the rightmost menus — measured at 1440,
+          the document scrolled 150px sideways. */}
+      <div className="shell relative flex h-(--header-h) items-center justify-between gap-6">
         <Link href="/" className="-m-2 p-2 text-[var(--scene-fg)]" aria-label={`${site.name} — home`}>
           <Wordmark />
         </Link>
@@ -310,7 +314,7 @@ export function SiteHeader() {
             entry.groups ? (
               <div
                 key={entry.label}
-                className="relative flex items-center"
+                className="flex items-center"
                 onMouseEnter={() => setMenu(entry.label)}
                 onMouseLeave={() => setMenu(null)}
               >

@@ -73,7 +73,7 @@ export default function InsightsPage() {
                   >
                     {note.title}
                   </h2>
-                  <CardAffordance label="Read" external className="mt-6" />
+                  <CardAffordance label="Read" external href={note.href} className="mt-6" />
                 </a>
               </Reveal>
             ))}
