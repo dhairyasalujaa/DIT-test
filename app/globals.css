@@ -65,7 +65,7 @@
   /* Kept because the hover language across the site is built on it. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --spacing-scene: clamp(5.5rem, 11vw, 11rem);
+  --spacing-scene: clamp(4rem, 7.5vw, 7.5rem);
 }
 
 @layer base {
@@ -79,6 +79,10 @@
     --measure-display: 20ch;
     --measure-lede: 46ch;
     --measure-body: 34rem;
+    /* The box a section's heading and its lede share. Wide enough that a
+       display-size heading breaks at a sensible line length rather than at
+       the lede's measure, which is set for 16px text. */
+    --measure-head: 52rem;
 
     /* One hover duration and one sweep duration, so a row, a button and a
        nav item all answer the cursor at the same speed. */
@@ -488,27 +492,6 @@
     will-change: auto;
   }
 
-  /* A line of type wiping up into place. The clip lives on an inner span so
-     the observed element itself is never clipped — see components/motion/reveal.
-     The end state insets negatively so descenders are not shaved off. */
-  .js [data-reveal="clip"] {
-    opacity: 1;
-    transform: none;
-  }
-
-  .js [data-reveal="clip"] > .reveal-clip {
-    display: block;
-    clip-path: inset(0 0 105% 0);
-    transform: translate3d(0, 0.28em, 0);
-    transition:
-      clip-path 1.1s var(--ease-rise) var(--reveal-delay, 0ms),
-      transform 1.1s var(--ease-rise) var(--reveal-delay, 0ms);
-  }
-
-  .js [data-reveal="clip"].is-revealed > .reveal-clip {
-    clip-path: inset(-15% 0 -15% 0);
-    transform: none;
-  }
 
   /* A hairline that draws itself in — used to separate scenes. */
   .js [data-reveal="rule"] {
@@ -521,8 +504,7 @@
   .js [data-reveal="rule"].is-revealed { scale: 1 1; }
 
   @media (prefers-reduced-motion: reduce) {
-    .js [data-reveal],
-    .js [data-reveal="clip"] > .reveal-clip {
+    .js [data-reveal] {
       opacity: 1 !important;
       transform: none !important;
       clip-path: none !important;
@@ -553,10 +535,6 @@
       to   { opacity: 1; transform: none; }
     }
 
-    @keyframes reveal-clip {
-      from { clip-path: inset(0 0 105% 0); transform: translate3d(0, 0.28em, 0); }
-      to   { clip-path: inset(-15% 0 -15% 0); transform: none; }
-    }
 
     @keyframes reveal-draw {
       from { scale: 0 1; }
@@ -574,17 +552,7 @@
         cover calc(25% + var(--reveal-lag, 0) * 3%);
     }
 
-    [data-reveal="clip"] {
-      animation: none;
-    }
 
-    [data-reveal="clip"] > .reveal-clip {
-      display: block;
-      transition: none;
-      animation: reveal-clip both var(--ease-rise);
-      animation-timeline: view();
-      animation-range: entry 6% cover 28%;
-    }
 
     [data-reveal="rule"] {
       opacity: 1;
@@ -708,7 +676,7 @@
   /* The one gap between a section's intro and its content. The audit found
      four different values doing this job (mt-16, mt-12, mt-10, pt-20). */
   .after-intro {
-    margin-top: clamp(2.75rem, 4.5vw, 4.25rem);
+    margin-top: clamp(2.25rem, 3.6vw, 3.25rem);
   }
 
   /* The one vertical padding for an item in a ruled list. Six variants of
@@ -913,5 +881,37 @@
   .art ~ * {
     position: relative;
     z-index: 1;
+  }
+}
+
+/* ==========================================================================
+   Legibility for chrome that has no ground of its own.
+
+   The header is transparent at every scroll position, which means its text
+   sits directly on whatever the page happens to be showing. The tone observer
+   recolours it to match the scene beneath, but a section boundary can run
+   straight through the bar — and for the frames either side of that, part of
+   the text is over the wrong ground.
+
+   A halo in the scene's own background colour fixes it without ever painting
+   a bar: the text keeps a hairline of its own ground around it, so it stays
+   readable in the transitional frames and over any edge it crosses. It is
+   invisible when text and background already agree.
+   ========================================================================== */
+@layer components {
+  .chrome-legible a,
+  .chrome-legible button,
+  .chrome-legible span {
+    text-shadow:
+      0 0 4px var(--scene-bg),
+      0 0 12px var(--scene-bg);
+  }
+
+  /* The mega panels have a real ground, so they must not inherit the halo. */
+  .chrome-legible .flyout a,
+  .chrome-legible .flyout span,
+  .chrome-legible [data-open="true"] a,
+  .chrome-legible [data-open="true"] span {
+    text-shadow: none;
   }
 }

@@ -23,7 +23,7 @@ export function PlansGrid() {
           <hr className="rule border-t" />
         </Reveal>
 
-        <div className="mt-8 max-w-(--measure-lede)">
+        <div className="mt-8 max-w-(--measure-head)">
           <RevealText as="h2" id="plans-title" className="display-sm">
             {plansSection.title}
           </RevealText>

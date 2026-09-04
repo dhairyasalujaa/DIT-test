@@ -30,6 +30,7 @@ interface RevealTextProps {
   /** Delay before the first word, in words' worth of stagger. */
   offset?: number;
   id?: string;
+  style?: React.CSSProperties;
 }
 
 /** Splits on whitespace but keeps the words' own punctuation intact. */
@@ -54,6 +55,7 @@ export function RevealText({
   after,
   offset = 0,
   id,
+  style,
 }: RevealTextProps) {
   let n = offset;
   const lead = words(children).map((word) => <Word key={`l${n}`} word={word} index={n++} />);
@@ -67,7 +69,7 @@ export function RevealText({
   const tail = after ? words(after).map((word) => <Word key={`t${n}`} word={word} index={n++} />) : null;
 
   return (
-    <Tag id={id} className={`rt ${className}`}>
+    <Tag id={id} className={`rt ${className}`} style={style}>
       {lead}
       {mid}
       {tail}

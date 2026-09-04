@@ -37,11 +37,16 @@ export function Hero() {
           {site.tagline}
         </p>
 
-        <h1 id="hero-title" className="display rt-enter mt-6" style={enter(140)}>
-          <RevealText accent={lead.accent} after={lead.after}>
-            {lead.before}
-          </RevealText>
-        </h1>
+        <RevealText
+          as="h1"
+          id="hero-title"
+          className="display rt-enter mt-6"
+          style={enter(140)}
+          accent={lead.accent}
+          after={lead.after}
+        >
+          {lead.before}
+        </RevealText>
 
         <p className="enter lede mt-8" style={enter(560)}>
           {lead.sub}

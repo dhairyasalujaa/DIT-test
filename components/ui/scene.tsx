@@ -1,5 +1,6 @@
 import type { ElementType, ReactNode } from "react";
 import { Reveal } from "@/components/motion/reveal";
+import { RevealText } from "@/components/motion/reveal-text";
 
 type Tone = "ink" | "paper" | "paper-raised";
 
@@ -46,8 +47,8 @@ export function Scene({
 }
 
 interface SceneIntroProps {
-  /** The scene's heading. Rendered as an h2 by default. */
-  title: ReactNode;
+  /** The scene's heading. Plain text, so it can be split into words. */
+  title: string;
   /** Supporting paragraph. */
   lede?: ReactNode;
   as?: "h1" | "h2";
@@ -64,13 +65,12 @@ interface SceneIntroProps {
  * a small mono kicker label beside the heading (Solutions, Technology, How we
  * work…) — removed sitewide on the client's instruction: no small subtitles
  * anywhere. The heading now opens the section directly, which is also why its
- * per-line entrance (see `Reveal`'s `clip` variant) carries more weight than
+ * per-word entrance carries more weight than
  * it used to.
  *
- * The grid is the site's only grid: a twelve-column field with a `gap-x-10`
- * gutter and content on nine columns (eight at `lg`), starting at column one.
- * Every other twelve-column grid on the site matches it, so a heading on one
- * section sits on the same vertical as a heading on the next.
+ * The heading rises word by word out of its own masks, the same way every
+ * heading on the home page does — one motion idea for the whole site rather
+ * than one per section.
  */
 export function SceneIntro({
   title,
@@ -85,13 +85,11 @@ export function SceneIntro({
       <Reveal variant="rule">
         <hr className="rule border-t" />
       </Reveal>
-      <div className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-12">
-        <div className="md:col-span-9 lg:col-span-8">
-          <Reveal variant="clip">
-            <Heading id={id} className="display-sm">
-              {title}
-            </Heading>
-          </Reveal>
+      <div className="mt-8 max-w-(--measure-head)">
+        <div>
+          <RevealText as={Heading} id={id} className="display-sm">
+            {title}
+          </RevealText>
           {lede && (
             <Reveal delay={120}>
               <p className="lede mt-6">{lede}</p>

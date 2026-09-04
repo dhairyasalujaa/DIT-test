@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             where the browser cannot run the scroll-driven path, which is pure
             CSS and works perfectly well without scripting. */}
         <noscript>
-          <style>{`@supports not (animation-timeline: view()){[data-reveal],[data-reveal] .reveal-clip{opacity:1!important;transform:none!important;clip-path:none!important;scale:1 1!important}}`}</style>
+          <style>{`@supports not (animation-timeline: view()){[data-reveal]{opacity:1!important;transform:none!important;scale:1 1!important}.rt-word{transform:none!important}}`}</style>
         </noscript>
       </head>
       <body className="flex min-h-full flex-col">

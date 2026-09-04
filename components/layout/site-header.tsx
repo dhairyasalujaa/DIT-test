@@ -36,26 +36,46 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
 
-  // Which scene is under the header line? IntersectionObserver delivers an
-  // initial callback for every target, so the opening value arrives through
-  // the same path as every later one — no synchronous seeding.
+  // Which scene is under the header line?
+  //
+  // Read directly rather than observed. An IntersectionObserver band is fixed
+  // to the viewport, and this header is sticky: it sits below the utility bar
+  // at the top of the page and pins to zero once that bar scrolls away, so
+  // the line to sample moves. Sampling the header's own bottom edge is exact
+  // at every scroll position, and one hit-test per frame is cheaper than the
+  // bug was.
   useEffect(() => {
-    const scenes = Array.from(document.querySelectorAll<HTMLElement>("[data-header-tone]"));
-    if (scenes.length === 0 || typeof IntersectionObserver === "undefined") return;
+    let frame = 0;
 
-    const height = Math.round(headerRef.current?.getBoundingClientRect().height ?? 68);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setTone(((entry.target as HTMLElement).dataset.headerTone as "ink" | "paper") ?? "paper");
-          }
-        }
-      },
-      { rootMargin: `-${height}px 0px -100% 0px`, threshold: 0 },
-    );
-    scenes.forEach((scene) => observer.observe(scene));
-    return () => observer.disconnect();
+    const read = () => {
+      frame = 0;
+      const header = headerRef.current;
+      if (!header) return;
+      const { top, bottom } = header.getBoundingClientRect();
+      const x = Math.round(window.innerWidth / 2);
+      // Sample the header's middle rather than its edge: when a section
+      // boundary runs through the bar, the majority of what sits behind the
+      // text is what the text has to be legible against.
+      const y = Math.round((top + bottom) / 2);
+      const scene = document
+        .elementsFromPoint(x, y)
+        .find((el) => (el as HTMLElement).dataset?.headerTone) as HTMLElement | undefined;
+      setTone((scene?.dataset.headerTone as "ink" | "paper") ?? "paper");
+    };
+
+    const schedule = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(read);
+    };
+
+    read();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, [pathname]);
 
   const close = useCallback(() => setOpen(false), []);
@@ -138,9 +158,6 @@ export function SiteHeader() {
 
   const chromeTone = open ? "ink" : tone;
 
-  // The header no longer overlays the page from a fixed position, so the tone
-  // observer's band has to sit at the header's height from the viewport top.
-
   const navLink =
     "group/nav relative px-3 py-2 text-sm text-[var(--scene-fg)]/80 transition-colors " +
     "duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)] " +
@@ -216,7 +233,7 @@ export function SiteHeader() {
       ref={headerRef}
       className={
         (chromeTone === "ink" ? "scene-ink" : "scene-paper") +
-        " z-50 bg-transparent! transition-colors duration-200 ease-[var(--ease-rise)] " +
+        " chrome-legible z-50 bg-transparent! transition-colors duration-150 ease-[var(--ease-rise)] " +
         // Sticky rather than fixed, so it sits below the utility bar at the
         // top of the page and pins once that bar has scrolled away. While the
         // mobile panel is open it is pinned outright, so the panel can be
@@ -224,15 +241,13 @@ export function SiteHeader() {
         (open ? "fixed inset-x-0 top-0" : "sticky top-0")
       }
     >
-      {/* The mobile panel is the one thing here that needs a ground, and it is
-          a panel rather than the bar: the bar itself stays transparent. */}
-      <div
-        aria-hidden
-        className={
-          "absolute inset-0 -z-10 bg-navy transition-opacity duration-300 " +
-          (open ? "opacity-100" : "opacity-0")
-        }
-      />
+      {/* While the mobile panel is open the bar needs a ground of its own,
+          because the panel starts below it. Rendered only when open rather
+          than faded to zero: an invisible navy plate left in the tree still
+          answers hit-tests, and anything measuring what is behind the nav —
+          a contrast audit, or a browser's own tooling — reads it as the
+          background the links sit on. */}
+      {open && <div aria-hidden className="absolute inset-0 -z-10 bg-navy" />}
 
       <div className="shell flex h-(--header-h) items-center justify-between gap-6">
         <Link href="/" className="-m-2 p-2 text-[var(--scene-fg)]" aria-label={`${site.name} — home`}>
@@ -340,6 +355,7 @@ export function SiteHeader() {
               <Link
                 href={entry.href}
                 onClick={close}
+                data-nav-top
                 aria-current={isActive(entry.href) ? "page" : undefined}
                 className="text-[1.5rem] leading-none tracking-[-0.03em] text-[var(--scene-fg)]"
               >

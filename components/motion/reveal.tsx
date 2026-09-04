@@ -1,6 +1,6 @@
 import type { ElementType, ReactNode } from "react";
 
-type RevealVariant = "shift" | "clip" | "rule";
+type RevealVariant = "shift" | "rule";
 
 interface RevealProps {
   children: ReactNode;
@@ -31,10 +31,6 @@ interface RevealProps {
  * the native path turns into a shift along the scroll range. A progress
  * timeline has no time axis, so a stagger has to be expressed as distance.
  *
- * The `clip` variant wraps its children in an inner element and clips *that*,
- * never the observed node: Chromium factors an element's own `clip-path` into
- * its intersection rect, so a clipped target reports zero intersection and the
- * observer would never fire for it.
  */
 export function Reveal({
   children,
@@ -53,7 +49,7 @@ export function Reveal({
 
   return (
     <Tag data-reveal={variant === "shift" ? "" : variant} className={className} style={merged}>
-      {variant === "clip" ? <span className="reveal-clip">{children}</span> : children}
+      {children}
     </Tag>
   );
 }

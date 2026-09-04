@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 import { ArrowRight } from "@/components/icons";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Service Plans — MegaFix, GigaManaged, TeraSecure & more",
+  title: "Service Plans",
   description:
     "Six ways to work with decodingIT — from fixed hours when you need them to a fully managed IT department, or an L2/L3 team alongside your own.",
   path: "/services",

@@ -21,7 +21,7 @@ export function ToolsGrid() {
           <hr className="rule border-t" />
         </Reveal>
 
-        <div className="mt-8 max-w-(--measure-lede)">
+        <div className="mt-8 max-w-(--measure-head)">
           <RevealText as="h2" id="tools-title" className="display-sm">
             {toolsSection.title}
           </RevealText>
@@ -42,14 +42,14 @@ export function ToolsGrid() {
                 <span className="flex items-start justify-between gap-4">
                   <h3 className="panel-title text-[1.0625rem] leading-snug font-medium tracking-[-0.02em]">
                     {tool.name}
+                    {tool.isNew && (
+                      <span className="ml-2 inline-flex translate-y-[-1px] rounded-full bg-[var(--scene-accent)]/12 px-2 py-0.5 align-middle text-[0.6875rem] font-medium text-[var(--scene-accent)]">
+                        New
+                      </span>
+                    )}
                   </h3>
                   <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-[var(--scene-fg-muted)] transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/tool:-translate-y-0.5 group-hover/tool:translate-x-0.5" />
                 </span>
-                {tool.isNew && (
-                  <span className="mt-3 inline-flex w-fit rounded-full bg-[var(--scene-accent)]/12 px-2.5 py-0.5 text-[0.75rem] font-medium text-[var(--scene-accent)]">
-                    New
-                  </span>
-                )}
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   {tool.description}
                 </p>

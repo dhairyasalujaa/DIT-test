@@ -20,7 +20,7 @@ export function FieldNotes() {
           <hr className="rule border-t" />
         </Reveal>
 
-        <div className="mt-8 max-w-(--measure-lede)">
+        <div className="mt-8 max-w-(--measure-head)">
           <RevealText as="h2" id="notes-title" className="display-sm">
             {insightsSection.title}
           </RevealText>
