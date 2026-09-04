@@ -8,7 +8,7 @@ import { ClosingCta } from "@/components/sections/closing-cta";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight } from "@/components/icons";
+import { CardAffordance } from "@/components/ui/card-link";
 
 export const metadata: Metadata = pageMetadata({
   title: "Service Plans",
@@ -72,10 +72,11 @@ export default function ServicesPage() {
                   </p>
                   <a
                     href={plan.href}
-                    className="group/p mt-4 inline-flex items-center gap-2 text-sm font-medium text-[var(--scene-accent)]"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/card mt-4 inline-flex"
                   >
-                    Explore
-                    <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/p:translate-x-1" />
+                    <CardAffordance label="Explore" external />
                   </a>
                 </div>
               </Reveal>

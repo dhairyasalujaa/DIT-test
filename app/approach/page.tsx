@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { principles, processStages } from "@/content/approach";
+import { commitments, portal } from "@/content/approach";
+import { plans } from "@/content/plans";
+import { bandSection } from "@/content/home";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
@@ -10,91 +12,51 @@ import { breadcrumbSchema, graph } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "How We Work — Assessment to Managed Service",
+  title: "Our Approach",
   description:
-    "The five stages of a decodingIT engagement — assess, design, transition, operate, review — and what you receive at the end of each one.",
+    "One partner, every layer, full accountability — how an engagement with Decoding IT is set up and who owns it.",
   path: "/approach",
 });
 
 const crumbs = [
   { name: "Home", path: "/" },
-  { name: "Approach", path: "/approach" },
+  { name: "Our Approach", path: "/approach" },
 ];
 
+/**
+ * Our Approach.
+ *
+ * Built entirely from what decodingIT publishes about how they work: the
+ * three commitments in their accountability band, the portal their navigation
+ * describes, and the six plans they scope engagements with. There is no
+ * methodology diagram here because they do not publish one.
+ */
 export default function ApproachPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        title="What working with us is actually like."
+        title={bandSection.title}
         crumbs={crumbs}
-        lede="Most process diagrams are decoration. This one names what you physically receive at the end of every stage, because a stage that produces nothing you can hold is a stage you should not be paying for."
+        lede="One team across every layer, one agreement that covers all of it, and a named account manager who owns whether the response times in it are met."
       />
 
-      {/* The five stages, at full detail. */}
-      <Scene tone="paper" aria-labelledby="stages-title">
+      <Scene tone="paper" aria-labelledby="commitments-title">
         <div className="shell">
           <SceneIntro
-            id="stages-title"
-            title="Four phases."
-            lede="How an engagement runs, whether we are running your IT day to day or delivering a single project."
+            id="commitments-title"
+            title="What you are actually buying."
+            lede="Three things decodingIT states about how the service works, and holds itself to."
           />
 
-          {/*
-            Three columns that sum to twelve. This grid used to run 3 + 7 with
-            a third block starting at column 10 — inside the second block's
-            span — so the "You get" column dropped to a row of its own the
-            moment a stage carried one.
-          */}
-          <ol className="spec after-intro">
-            {processStages.map((stage, i) => (
-              <Reveal
-                as="li"
-                key={stage.index}
-                delay={(i % 3) * 60}
-                className="spec-row row-pad md:grid-cols-12"
-              >
-                <div className="md:col-span-3">
-                  <h2 className="title">{stage.name}</h2>
-                  <p className="mt-3 text-[0.9375rem] text-[var(--scene-fg-muted)]">
-                    {stage.summary}
-                  </p>
-                </div>
-
-                <div className={stage.output ? "md:col-span-6" : "md:col-span-9"}>
-                  <p className="text-[1.0625rem] leading-relaxed">{stage.detail}</p>
-                </div>
-
-                {stage.output && (
-                  <div className="md:col-span-3">
-                    <p className="text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                      {stage.output}
-                    </p>
-                  </div>
-                )}
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </Scene>
-
-      {/* Commitments, stated so they can be held against us. */}
-      <Scene tone="ink" aria-labelledby="principles-title">
-        <div className="shell">
-          <SceneIntro
-            id="principles-title"
-            title="What makes the service different."
-            lede="Four things decodingIT does differently, and the reasons clients give for staying."
-          />
-
-          <ul className="after-intro grid gap-4 md:grid-cols-2">
-            {principles.map((principle, i) => (
-              <Reveal as="li" key={principle.title} delay={(i % 2) * 80}>
+          <ul className="after-intro grid gap-4 md:grid-cols-3">
+            {commitments.map((commitment, i) => (
+              <Reveal as="li" key={commitment.title} delay={i * 80}>
                 <div className="panel h-full">
-                  <h3 className="title text-[1.25rem]">{principle.title}</h3>
+                  <h3 className="title text-[1.25rem]">{commitment.title}</h3>
                   <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                    {principle.body}
+                    {commitment.body}
                   </p>
                 </div>
               </Reveal>
@@ -103,24 +65,51 @@ export default function ApproachPage() {
         </div>
       </Scene>
 
-      {/*
-        The four engagement shapes used to be repeated here in full. They are
-        /work's entire subject — that page exists to describe them, since there
-        are no case studies to show — so printing them twice made two pages of
-        substantially the same copy. This points there instead.
-      */}
-      <Scene tone="paper-raised" aria-labelledby="shapes-title">
+      <Scene tone="paper-raised" aria-labelledby="portal-title">
         <div className="shell">
           <SceneIntro
-            id="shapes-title"
-            title="Four shapes most work takes."
-            lede="Not every project fits one of these, but most start as one of them — a managed service transition, an infrastructure build, a security programme, or a move to cloud and Microsoft 365."
+            id="portal-title"
+            title="You can see what we are doing."
+            lede={portal.summary}
             aside={
-              <Action href="/work" variant="secondary">
-                What each one involves
+              <Action href={portal.href} variant="secondary" icon="up-right">
+                {portal.name}
               </Action>
             }
           />
+        </div>
+      </Scene>
+
+      <Scene tone="paper" aria-labelledby="scope-title">
+        <div className="shell">
+          <SceneIntro
+            id="scope-title"
+            title="How much you hand over is your call."
+            lede="Six ways to work with us — from fixing what is in front of you today to running the whole estate, or extending a team you already have."
+            aside={
+              <Action href="/services" variant="secondary">
+                Compare the six plans
+              </Action>
+            }
+          />
+
+          <ul className="after-intro grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {plans.map((plan, i) => (
+              <Reveal as="li" key={`${plan.prefix}${plan.accent}`} delay={(i % 3) * 60}>
+                <div className="panel h-full">
+                  <p className="label">{plan.tag}</p>
+                  <h3 className="mt-3 text-[1.25rem] leading-none font-medium tracking-[-0.03em]">
+                    {plan.prefix}
+                    <span className="text-[var(--scene-accent)]">{plan.accent}</span>
+                    {plan.suffix ? <span className="font-normal"> {plan.suffix}</span> : null}
+                  </h3>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    <span className="text-[var(--scene-fg)]">For:</span> {plan.audience}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </Scene>
 

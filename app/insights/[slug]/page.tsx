@@ -64,7 +64,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       <PageHeader
         title={article.title}
-        crumbs={[crumbs[0], crumbs[1], { name: "Article", path: crumbs[2].path }]}
+        crumbs={crumbs}
         lede={article.standfirst}
         meta={[
           {

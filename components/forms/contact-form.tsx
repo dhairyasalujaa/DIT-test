@@ -44,8 +44,18 @@ export function ContactForm() {
 
   if (state.status === "sent") {
     return (
-      <div role="status" className="border-t border-[var(--scene-line)] pt-10">
-        <p className="eyebrow">Received</p>
+      // tabIndex + autoFocus rather than role="status" alone: a live region
+      // inserted into the DOM already holding its text is not reliably
+      // announced, and with the form gone focus would otherwise fall to the
+      // body. Moving focus here reads the confirmation and puts the reader
+      // where the next thing to read is.
+      <div
+        role="status"
+        tabIndex={-1}
+        autoFocus
+        className="border-t border-[var(--scene-line)] pt-10 outline-none"
+      >
+        <p className="label">Received</p>
         <h2 className="display-sm mt-6 max-w-[18ch]">Thank you — that has reached us.</h2>
         <p className="lede mt-6">
           A real person reads every one of these. You will hear back within one
@@ -77,7 +87,7 @@ export function ContactForm() {
 
       <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
         <div>
-          <label htmlFor={`${uid}-name`} className="eyebrow">
+          <label htmlFor={`${uid}-name`} className="label">
             Your name
           </label>
           <input
@@ -99,7 +109,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor={`${uid}-email`} className="eyebrow">
+          <label htmlFor={`${uid}-email`} className="label">
             Email
           </label>
           <input
@@ -121,8 +131,8 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor={`${uid}-company`} className="eyebrow">
-            Company <span className="normal-case">(optional)</span>
+          <label htmlFor={`${uid}-company`} className="label">
+            Company (optional)
           </label>
           <input
             id={`${uid}-company`}
@@ -135,7 +145,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor={`${uid}-need`} className="eyebrow">
+          <label htmlFor={`${uid}-need`} className="label">
             What is this about?
           </label>
           <select
@@ -153,7 +163,7 @@ export function ContactForm() {
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor={`${uid}-message`} className="eyebrow">
+          <label htmlFor={`${uid}-message`} className="label">
             What is not working?
           </label>
           <textarea

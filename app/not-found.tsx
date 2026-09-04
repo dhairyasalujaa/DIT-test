@@ -25,12 +25,12 @@ export default function NotFound() {
   return (
     <section
       data-header-tone="ink"
-      className="scene-ink relative flex min-h-[80svh] flex-col justify-center overflow-hidden py-24"
+      className="scene-ink relative -mt-(--header-h) flex min-h-[80svh] flex-col justify-center overflow-hidden py-24 pt-[calc(var(--header-h)+6rem)]"
     >
       <Facets className="pointer-events-none absolute -right-28 -bottom-32 w-[24rem] opacity-[0.14] sm:w-[32rem]" />
 
       <div className="shell relative">
-        <p className="enter eyebrow" style={enter(80)}>
+        <p className="enter label" style={enter(80)}>
           Error 404
         </p>
         <h1 className="enter-resolve display mt-7 max-w-[14ch]" style={enter(180)}>
@@ -45,7 +45,7 @@ export default function NotFound() {
         </div>
 
         <nav aria-label="Site sections" className="enter mt-20" style={enter(660)}>
-          <p className="eyebrow">Or try</p>
+          <p className="label">Or try</p>
           <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
             {mobileNav.map((item) => (
               <li key={item.href}>

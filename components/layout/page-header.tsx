@@ -34,10 +34,15 @@ export function PageHeader({
   /** Small key/value pairs shown along the base of the header. */
   meta?: { label: string; value: ReactNode }[];
 }) {
+  // The header is transparent and sticky, so this section is pulled up behind
+  // it and pads itself back out. Without that the page's first band starts
+  // below the bar, and a dark opening leaves a strip of body colour between
+  // the utility bar and the section — a sandwich that reads as a mistake.
+  // This way the ground runs unbroken from the top and the chrome sits on it.
   return (
     <section
       data-header-tone="ink"
-      className="scene-ink relative overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-24"
+      className="scene-ink relative -mt-(--header-h) overflow-hidden pt-[calc(var(--header-h)+5rem)] pb-20 sm:pt-[calc(var(--header-h)+6.5rem)] sm:pb-24"
     >
       <Facets className="drift pointer-events-none absolute -top-24 -right-28 w-[24rem] opacity-[0.16] sm:-right-32 sm:w-[32rem] lg:w-[40rem]" />
 

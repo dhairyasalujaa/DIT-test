@@ -26,11 +26,11 @@ export function Hero() {
   return (
     <section
       data-header-tone="paper"
-      className="scene-paper relative overflow-hidden pt-24 pb-24 sm:pt-32 sm:pb-28"
+      className="scene-paper relative -mt-(--header-h) overflow-hidden pt-[calc(var(--header-h)+5rem)] pb-24 sm:pt-[calc(var(--header-h)+7rem)] sm:pb-28"
       aria-labelledby="hero-title"
     >
       <ArtField />
-      <Facets className="drift pointer-events-none absolute -top-20 -right-28 w-[24rem] opacity-[0.10] sm:-top-24 sm:-right-32 sm:w-[34rem] lg:w-[44rem]" />
+      <Facets className="drift pointer-events-none absolute -top-16 -right-32 w-[22rem] opacity-[0.055] sm:-top-24 sm:-right-32 sm:w-[34rem] sm:opacity-[0.09] lg:w-[44rem]" />
 
       <div className="shell relative">
         <p className="enter label" style={enter(60)}>
@@ -58,27 +58,29 @@ export function Hero() {
         >
           {heroTagRow.map((tag, i) => (
             <li key={tag} className="flex items-center gap-4">
-              {i > 0 && (
+              <span className="text-sm text-[var(--scene-fg-muted)]">{tag}</span>
+              {/* The separator trails its own tag rather than leading the
+                  next one, so a wrapped row never opens with a lone mark. */}
+              {i < heroTagRow.length - 1 && (
                 <span aria-hidden className="text-[0.5rem] text-[var(--color-brand-light)]">
                   ▲
                 </span>
               )}
-              <span className="text-sm text-[var(--scene-fg-muted)]">{tag}</span>
             </li>
           ))}
         </ul>
 
-        <div className="enter mt-11 flex flex-wrap items-center gap-4" style={enter(740)}>
+        <div className="enter mt-11 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4" style={enter(740)}>
           <Link
             href="/contact"
-            className="group/h inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-cta-bg-hover)]"
+            className="group/h inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-cta-bg-hover)]"
           >
             {heroActions.primary}
             <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
           </Link>
           <Link
             href={heroActions.secondary.href}
-            className="inline-flex h-12 items-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-semibold text-[var(--scene-accent)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-accent)] hover:text-white"
+            className="inline-flex h-12 items-center justify-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-semibold text-[var(--scene-accent)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-accent)] hover:text-white"
           >
             {heroActions.secondary.label}
           </Link>
@@ -87,6 +89,8 @@ export function Hero() {
         <p className="enter mt-8" style={enter(820)}>
           <a
             href={heroActions.check.href}
+            target="_blank"
+            rel="noreferrer"
             className="group/c inline-flex items-center gap-2.5 text-sm text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-accent)]"
           >
             <Shield className="size-4 text-[var(--scene-accent)]" />

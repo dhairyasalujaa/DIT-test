@@ -1,8 +1,7 @@
 import { tools } from "@/content/tools";
 import { toolsSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
-import { RevealText } from "@/components/motion/reveal-text";
-import { Scene } from "@/components/ui/scene";
+import { Scene, SceneIntro } from "@/components/ui/scene";
 import { ArrowUpRight } from "@/components/icons";
 
 /**
@@ -17,25 +16,14 @@ export function ToolsGrid() {
   return (
     <Scene tone="paper-raised" id="tools" aria-labelledby="tools-title">
       <div className="shell">
-        <Reveal variant="rule">
-          <hr className="rule border-t" />
-        </Reveal>
-
-        <div className="mt-8 max-w-(--measure-head)">
-          <RevealText as="h2" id="tools-title" className="display-sm">
-            {toolsSection.title}
-          </RevealText>
-          <Reveal delay={120}>
-            <p className="lede mt-6">{toolsSection.lede}</p>
-          </Reveal>
-        </div>
+        <SceneIntro id="tools-title" title={toolsSection.title} lede={toolsSection.lede} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool, i) => (
             <Reveal as="li" key={tool.name} delay={(i % 3) * 60}>
               <a
                 href={tool.href}
-                className="panel group/tool flex h-full flex-col"
+                className="panel group/card flex h-full flex-col"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -48,7 +36,8 @@ export function ToolsGrid() {
                       </span>
                     )}
                   </h3>
-                  <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-[var(--scene-fg-muted)] transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/tool:-translate-y-0.5 group-hover/tool:translate-x-0.5" />
+                  <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-[var(--scene-fg-muted)] transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5" />
+                  <span className="sr-only">(opens on decodingit.com)</span>
                 </span>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   {tool.description}

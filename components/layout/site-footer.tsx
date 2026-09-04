@@ -11,8 +11,8 @@ import {
 import { Reveal } from "@/components/motion/reveal";
 import { RevealText } from "@/components/motion/reveal-text";
 import { Wordmark } from "@/components/layout/wordmark";
-
-const isExternal = (href: string) => href.startsWith("http") || href.startsWith("mailto:");
+import { slugify } from "@/lib/format";
+import { externalProps } from "@/lib/motion";
 
 /**
  * The footer.
@@ -46,8 +46,18 @@ export function SiteFooter() {
 
         <div className="grid gap-x-10 gap-y-12 pt-12 md:grid-cols-12">
           {footerNav.map((group) => (
-            <nav key={group.title} aria-labelledby={`f-${group.title}`} className="md:col-span-4 lg:col-span-3">
-              <h2 id={`f-${group.title}`} className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">
+            // aria-labelledby is a space-separated list of IDREFs, so a
+            // title like "Key Solutions" would resolve to two ids that do not
+            // exist and leave the landmark unnamed.
+            <nav
+              key={group.title}
+              aria-labelledby={`f-${slugify(group.title)}`}
+              className="md:col-span-4 lg:col-span-3"
+            >
+              <h2
+                id={`f-${slugify(group.title)}`}
+                className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]"
+              >
                 {group.title}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -55,7 +65,7 @@ export function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      {...(isExternal(item.href) ? { target: "_blank", rel: "noreferrer" } : {})}
+                      {...externalProps(item.href)}
                       className="link-underline text-sm text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
                     >
                       {item.label}
@@ -140,7 +150,7 @@ export function SiteFooter() {
               <li key={social.href}>
                 <a
                   href={social.href}
-                  {...(social.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                  {...externalProps(social.href)}
                   className="link-underline text-[0.8125rem] text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                 >
                   {social.label}

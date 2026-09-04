@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { primaryNav, type NavEntry } from "@/content/navigation";
+import { primaryNav, type NavEntry, type NavGroup } from "@/content/navigation";
 import { locations, site } from "@/content/site";
 import { Wordmark } from "@/components/layout/wordmark";
 import { ArrowRight, ChevronDown } from "@/components/icons";
-
-const isExternal = (href: string) => href.startsWith("http");
+import { externalProps } from "@/lib/motion";
 
 /**
  * The header.
@@ -59,8 +58,10 @@ export function SiteHeader() {
       const y = Math.round((top + bottom) / 2);
       const scene = document
         .elementsFromPoint(x, y)
-        .find((el) => (el as HTMLElement).dataset?.headerTone) as HTMLElement | undefined;
-      setTone((scene?.dataset.headerTone as "ink" | "paper") ?? "paper");
+        .find((el): el is HTMLElement => el instanceof HTMLElement && Boolean(el.dataset.headerTone));
+      // Validated rather than asserted: a typo in any data-header-tone would
+      // otherwise sail through as a valid tone and mis-colour the chrome.
+      setTone(scene?.dataset.headerTone === "ink" ? "ink" : "paper");
     };
 
     const schedule = () => {
@@ -108,9 +109,18 @@ export function SiteHeader() {
         return;
       }
       if (event.key !== "Tab" || !panel) return;
-      const focusable = panel.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      );
+      // The close button lives in the bar, not the panel, so it has to be
+      // added to the cycle by hand. Without it a keyboard user can open the
+      // menu and never reach the control that shuts it — Escape works, but
+      // nothing on screen says so.
+      const focusable = [
+        ...(toggleRef.current ? [toggleRef.current] : []),
+        ...Array.from(
+          panel.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ),
+      ];
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -175,7 +185,7 @@ export function SiteHeader() {
     />
   );
 
-  const megaPanel = (entry: NavEntry) => (
+  const megaPanel = (entry: NavEntry & { groups: NavGroup[] }) => (
     <div
       id={`mega-${entry.label}`}
       data-open={menu === entry.label}
@@ -184,9 +194,9 @@ export function SiteHeader() {
     >
       <div
         className="grid gap-2"
-        style={{ gridTemplateColumns: `repeat(${entry.groups!.length}, minmax(0, 1fr))` }}
+        style={{ gridTemplateColumns: `repeat(${entry.groups.length}, minmax(0, 1fr))` }}
       >
-        {entry.groups!.map((group) => (
+        {entry.groups.map((group) => (
           <div key={group.title} className="rounded-[4px] p-3">
             <p className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">{group.title}</p>
             <p className="mt-1 text-[0.8125rem] leading-snug text-[var(--scene-fg-muted)]">
@@ -197,7 +207,7 @@ export function SiteHeader() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    {...(isExternal(item.href) ? { target: "_blank", rel: "noreferrer" } : {})}
+                    {...externalProps(item.href)}
                     className="group/f block rounded-[3px] p-3 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-wash)]"
                   >
                     <span className="block text-[0.9375rem] font-medium text-[var(--scene-fg)] transition-colors duration-[var(--dur-hover)] group-hover/f:text-[var(--scene-accent)]">
@@ -289,7 +299,7 @@ export function SiteHeader() {
                     }
                   />
                 </button>
-                {megaPanel(entry)}
+                {megaPanel({ ...entry, groups: entry.groups })}
               </div>
             ) : (
               <Link
@@ -372,9 +382,7 @@ export function SiteHeader() {
                             <Link
                               href={item.href}
                               onClick={close}
-                              {...(isExternal(item.href)
-                                ? { target: "_blank", rel: "noreferrer" }
-                                : {})}
+                              {...externalProps(item.href)}
                               className="text-[0.9375rem] text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                             >
                               {item.label}

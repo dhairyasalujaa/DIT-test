@@ -24,7 +24,6 @@
   /* ---- Navy: the dark bands and the footer ------------------------------ */
   --color-navy: #0b1a2b;
   --color-navy-raised: #0d1f3c;
-  --color-navy-deep: #05080e;
 
   /* ---- Neutrals: blue-tinted, never pure grey --------------------------- */
   --color-surface: #ffffff;
@@ -35,7 +34,6 @@
   /* ---- Type ------------------------------------------------------------- */
   --color-heading: #161c26;
   --color-body: #55697b;
-  --color-body-strong: #475569;
   --color-on-navy: #ffffff;
   --color-on-navy-muted: #a7bccd;
 
@@ -78,7 +76,6 @@
        long. Ad-hoc `ch` values are how the old build drifted to sixteen. */
     --measure-display: 20ch;
     --measure-lede: 46ch;
-    --measure-body: 34rem;
     /* The box a section's heading and its lede share. Wide enough that a
        display-size heading breaks at a sensible line length rather than at
        the lede's measure, which is set for 16px text. */
@@ -453,10 +450,11 @@
   .spec-row:hover::before { transform: scaleY(1); }
 
   /* ---- .band — a full-bleed statement -----------------------------------
-     No container rules, no list, no eyebrow rail. Type on a ground. */
+     No container rules and no list: type on a ground. Clipping is left to the
+     call site's own `overflow-hidden`, which sits in a later layer and would
+     win anyway. */
   .band {
     position: relative;
-    overflow: clip;
   }
 }
 
@@ -513,8 +511,6 @@
     .rt-word { animation: none !important; transform: none !important; }
     .marquee-track { animation: none !important; }
   }
-
-  .text-balance { text-wrap: balance; }
 }
 
 /* ==========================================================================
@@ -582,12 +578,28 @@
        words within a line so one line does not land as a single block.
        The range is short and early: the line has to be still by the time it
        is at a comfortable reading height. */
+    /* Same shape as the scroll keyframe, kept separate so the load variant
+       can be retimed without touching the scroll one. */
+    @keyframes rt-rise-load {
+      from { transform: translate3d(0, 110%, 0); }
+      to   { transform: translate3d(0, 0, 0); }
+    }
+
     @keyframes rt-rise {
       from { transform: translate3d(0, 110%, 0); }
       to   { transform: translate3d(0, 0, 0); }
     }
 
+    /* The load variant has to restate the WHOLE shorthand here, not just the
+       timeline. These rules are unlayered, so they beat the layered `.js`
+       rule that would otherwise supply the duration — and the scroll
+       shorthand below deliberately carries no duration, because a progress
+       timeline does not use one. Overriding the timeline alone therefore left
+       the hero heading on a 0s animation: it snapped into place instead of
+       rising, which is exactly what this escape hatch exists to prevent. */
     .rt-enter .rt-word {
+      animation: rt-rise-load 0.95s var(--ease-rise)
+        calc(var(--enter-delay, 0ms) + var(--w, 0) * 42ms) both;
       animation-timeline: auto;
     }
 
@@ -653,11 +665,6 @@
   /* The word reveal as a load choreography rather than a scroll one. Used
      where the type is already on screen at first paint — a scroll timeline
      there would resolve instantly and the entrance would never be seen. */
-  @keyframes rt-rise-load {
-    from { transform: translate3d(0, 110%, 0); }
-    to   { transform: translate3d(0, 0, 0); }
-  }
-
   .js .rt-enter .rt-word {
     animation: rt-rise-load 0.95s var(--ease-rise)
       calc(var(--enter-delay, 0ms) + var(--w, 0) * 42ms) both;
@@ -794,7 +801,16 @@
     display: flex;
     width: max-content;
     align-items: center;
+  }
+
+  /* One of two identical runs inside the track. The track is what moves; if
+     these carried the animation too, both would translate on top of it and
+     the -50% loop would neither be seamless nor the speed it claims. */
+  .marquee-run {
+    display: flex;
+    align-items: center;
     gap: clamp(2rem, 4vw, 3.5rem);
+    padding-right: clamp(2rem, 4vw, 3.5rem);
   }
 
   .marquee-item {

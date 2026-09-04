@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { leadership, manifesto, whoWeServe } from "@/content/about";
-import { locations, markets, site } from "@/content/site";
+import { locations, marketsShort, site } from "@/content/site";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
   title: "About decodingIT",
   exactTitle: true,
   description:
-    "decodingIT is an IT services company working across Oman, the UAE and India. What we believe, who we work with, and how we think about technology.",
+    "One partner, every layer, full accountability — Decoding IT across Oman, UAE and India.",
   path: "/about",
 });
 
@@ -95,14 +95,13 @@ export default function AboutPage() {
         <div className="shell">
           <SceneIntro
             id="offices-title"
-            title="Two offices, three markets."
-            lede={`We deliver directly in ${markets.join(", ")}. Support is remote by default and on site when remote is not enough.`}
+            title="Where we are."
+            lede={`We serve ${marketsShort.join(", ")}.`}
           />
 
           <ul className="after-intro grid gap-4 md:grid-cols-2">
             {locations.map((location, i) => (
               <Reveal as="li" key={location.id} delay={i * 90} className="panel">
-                <p className="label">{location.role}</p>
                 <h3 className="title mt-4">
                   {location.city}, {location.country}
                 </h3>
@@ -128,8 +127,7 @@ export default function AboutPage() {
               Enquiries:{" "}
               <a href={`mailto:${site.email}`} className="link-underline text-[var(--scene-fg)]">
                 {site.email}
-              </a>{" "}
-              · {site.responsePromise}
+              </a>
             </p>
           </Reveal>
         </div>

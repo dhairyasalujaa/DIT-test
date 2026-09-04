@@ -1,9 +1,8 @@
 import { plans } from "@/content/plans";
 import { plansSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
-import { RevealText } from "@/components/motion/reveal-text";
-import { Scene } from "@/components/ui/scene";
-import { ArrowRight } from "@/components/icons";
+import { Scene, SceneIntro } from "@/components/ui/scene";
+import { CardAffordance } from "@/components/ui/card-link";
 
 /**
  * The six service plans — the Mega / Giga / Tera line.
@@ -19,26 +18,17 @@ export function PlansGrid() {
   return (
     <Scene tone="paper" id="services" aria-labelledby="plans-title">
       <div className="shell">
-        <Reveal variant="rule">
-          <hr className="rule border-t" />
-        </Reveal>
-
-        <div className="mt-8 max-w-(--measure-head)">
-          <RevealText as="h2" id="plans-title" className="display-sm">
-            {plansSection.title}
-          </RevealText>
-          <Reveal delay={120}>
-            <p className="lede mt-6">{plansSection.lede}</p>
-          </Reveal>
-        </div>
+        <SceneIntro id="plans-title" title={plansSection.title} lede={plansSection.lede} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan, i) => (
             <Reveal as="li" key={`${plan.prefix}${plan.accent}`} delay={(i % 3) * 70}>
               <a
                 href={plan.href}
+                target="_blank"
+                rel="noreferrer"
                 className={
-                  "panel group/plan flex h-full flex-col " +
+                  "panel group/card flex h-full flex-col " +
                   (plan.featured ? "border-[var(--scene-accent)]/45 bg-[var(--scene-wash)]" : "")
                 }
               >
@@ -54,10 +44,7 @@ export function PlansGrid() {
                 <p className="mt-5 border-t border-[var(--scene-line)] pt-4 text-[0.875rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   <span className="text-[var(--scene-fg)]">For:</span> {plan.audience}
                 </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--scene-accent)]">
-                  Explore
-                  <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/plan:translate-x-1" />
-                </span>
+                <CardAffordance label="Explore" external className="mt-6" />
               </a>
             </Reveal>
           ))}

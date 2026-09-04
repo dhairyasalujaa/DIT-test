@@ -45,12 +45,6 @@ export interface ProcessStage {
   name: string;
   summary: string;
   detail: string;
-  /**
-   * What the client receives at the end of the stage.
-   * Optional: only stated where decodingIT states it, rather than inventing
-   * a deliverable to fill the column.
-   */
-  output?: string;
 }
 
 export interface Article {
@@ -80,20 +74,11 @@ export type ArticleBlock =
   | { kind: "checklist"; title: string; items: string[] }
   | { kind: "quote"; text: string };
 
-/**
- * A delivered project.
- *
- * The array in `content/projects.ts` is intentionally empty: decodingIT's
- * client work is not published without consent, and inventing case studies
- * would be worse than having none. Add real entries here and `/work`
- * switches from the engagement-shapes view to a full project gallery.
- */
-
+/** An office decodingIT publishes a postal address for. */
 export interface Location {
   id: string;
   city: string;
   country: string;
-  role: string;
   addressLines: string[];
   phone: string;
   phoneHref: string;

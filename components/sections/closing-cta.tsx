@@ -31,14 +31,16 @@ export function ClosingCta() {
           <div className="mt-11 flex flex-wrap items-center gap-4">
             <Link
               href="/contact"
-              className="group/g inline-flex h-12 items-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-cta-bg-hover)]"
+              className="group/g inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-cta-bg-hover)]"
             >
               {closingSection.primary}
               <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/g:translate-x-1" />
             </Link>
             <a
               href={closingSection.secondary.href}
-              className="inline-flex h-12 items-center rounded-[4px] border border-[var(--scene-fg)]/35 px-6 text-sm font-semibold text-[var(--scene-fg)] transition-[background-color,color,border-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:border-[var(--scene-fg)] hover:bg-[var(--scene-fg)] hover:text-[var(--color-navy)]"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-[4px] border border-[var(--scene-fg)]/35 px-6 text-sm font-semibold text-[var(--scene-fg)] transition-[background-color,color,border-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:border-[var(--scene-fg)] hover:bg-[var(--scene-fg)] hover:text-[var(--color-navy)]"
             >
               {closingSection.secondary.label}
             </a>

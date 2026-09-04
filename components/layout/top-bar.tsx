@@ -23,22 +23,25 @@ export function TopBar() {
           <span className="text-[var(--scene-fg-muted)]/70">{topBar.market}</span>
         </a>
 
-        <span aria-hidden className="h-3 w-px bg-white/15" />
+        <span aria-hidden className="hidden h-3 w-px bg-white/15 sm:block" />
 
+        {/* "Talk to us" is the first thing to go on a narrow bar: the same
+            destination is a button in the header and a section of the page.
+            The portal has no other entry point, so it stays. */}
         <Link
           href="/contact"
-          className="text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+          className="hidden text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)] sm:inline"
         >
           {topBar.talkLabel}
         </Link>
 
-        <span aria-hidden className="hidden h-3 w-px bg-white/15 sm:block" />
+        <span aria-hidden className="h-3 w-px bg-white/15" />
 
         <a
           href={topBar.portalHref}
           target="_blank"
           rel="noreferrer"
-          className="hidden text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)] sm:inline"
+          className="text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
         >
           {topBar.portalLabel}
         </a>

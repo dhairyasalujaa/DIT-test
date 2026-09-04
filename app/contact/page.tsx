@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { locations, site } from "@/content/site";
+import { locations, phoneNumbers, site, whatsapp } from "@/content/site";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
@@ -10,10 +10,10 @@ import { pageMetadata } from "@/lib/seo";
 import { Mail, Phone, Pin } from "@/components/icons";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact decodingIT — Muscat & Gurugram",
+  title: "Contact Decoding IT",
   exactTitle: true,
   description:
-    "Tell us what is not working and we will tell you what we would do about it. Offices in Muscat, Oman and Gurugram, India.",
+    "Tell us what you are trying to solve. Our experts will help you find the right way forward — across Oman, UAE and India.",
   path: "/contact",
 });
 
@@ -28,9 +28,9 @@ export default function ContactPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        title="Tell us what is not working."
+        title="Got a complex IT challenge? Let’s decode it into a simple solution."
         crumbs={crumbs}
-        lede="A description of the problem in your own words is enough to start. A real engineer will get back to you within four business hours — not an auto-responder, and not a salesperson."
+        lede="Tell us what you’re trying to solve. Our experts will help you find the right way forward."
       />
 
       <Scene tone="paper">
@@ -63,7 +63,6 @@ export default function ContactPage() {
                     <h3 className="text-[1.0625rem] tracking-[-0.02em]">
                       {location.city}, {location.country}
                     </h3>
-                    <p className="label mt-2">{location.role}</p>
                     <address className="mt-3 flex gap-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)] not-italic">
                       <Pin className="mt-1 size-4 shrink-0" />
                       <span>
@@ -86,10 +85,24 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <h2 className="mt-12 text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Response</h2>
-              <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                {site.responsePromise}
-              </p>
+              <h2 className="mt-12 text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Call us</h2>
+              <ul className="mt-6 space-y-3 text-[0.9375rem]">
+                {phoneNumbers.map((number) => (
+                  <li key={number.href} className="flex items-center gap-3">
+                    <Phone className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
+                    <a href={`tel:${number.href}`} className="link-underline">
+                      {number.phone}
+                    </a>
+                    <span className="text-[var(--scene-fg-muted)]">{number.region}</span>
+                  </li>
+                ))}
+                <li className="flex items-center gap-3">
+                  <Phone className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
+                  <a href={whatsapp.href} target="_blank" rel="noreferrer" className="link-underline">
+                    {whatsapp.label}
+                  </a>
+                </li>
+              </ul>
             </Reveal>
           </aside>
         </div>

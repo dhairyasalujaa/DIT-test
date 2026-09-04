@@ -189,7 +189,6 @@ export const services: Service[] = [
   },
 ];
 
-export const serviceSlugs = services.map((s) => s.slug);
 
 export function getService(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);

@@ -1,35 +1,47 @@
 /**
  * About content.
  *
- * Rebuilt from decodingIT's own published description of itself, replacing an
- * earlier version that was authored rather than sourced. It is deliberately
- * shorter: where the company has not said something, this page does not say it
- * on the company's behalf.
+ * Every sentence here is traceable to decodingIT's own home page or to the
+ * design extraction the client supplied. A previous version of this file said
+ * several things that were not: that the company serves government
+ * organisations, that it operates "as a value-added reseller" in partnership
+ * with named vendors, that it works "on the ground in Oman", and that it has
+ * been going "since 2013" — the last derived by subtracting their "13+ years
+ * in the region" from the current year. None of those had a source. They have
+ * been removed rather than softened.
  *
- * How the company works is on /approach, so the two pages do not restate
- * each other.
+ * The page is short as a result. That is the correct outcome: where the
+ * company has not said something, this page does not say it for them.
  */
 
 export const manifesto = {
-  eyebrow: "About",
-  title: "One team, since 2013.",
+  title: "One partner. Every layer. Full accountability.",
   standfirst:
-    "Full-stack IT infrastructure, cloud, cybersecurity and managed services. One team, end-to-end — for businesses across Oman, the UAE and India.",
+    "Full-stack IT infrastructure, cloud, cybersecurity, and managed services. One team, end-to-end — serving businesses across Oman, UAE, and India.",
+  /** Their band copy, which is the fullest statement of position they publish. */
   body: [
-    "We provide IT services, solutions and products to corporate, SME and government organisations across a range of verticals, working on the ground in Oman and serving clients in the UAE and India.",
-    "As a value-added reseller we work in partnership with globally recognised IT hardware and software vendors, and our focus is the management, access and monitoring of IT infrastructure and IT operations — the part that has to keep working after the project ends.",
-    "The same team that designs a solution deploys it and supports it long-term. There is no handoff between a project team and a support desk, which means there is one point of accountability throughout.",
+    "Thirteen or more years in the region: long enough to have seen how these estates age — and to have supported them through it, across Oman and India.",
+    "Foundation, network, cloud, continuity, workplace and security, answered by one team. When something breaks, there is no argument about whose layer it is.",
+    "One agreement covers every layer, with response times written into it — and a named account manager who owns whether they are met.",
   ],
 };
 
+/**
+ * Who each engagement is for.
+ *
+ * These are the "For:" audiences decodingIT publishes against its own service
+ * plans, not an audience list written here.
+ */
 export const whoWeServe = {
   title: "Who we work with",
-  body: "Corporate, SME and government organisations across a range of verticals, in Oman, the United Arab Emirates and India.",
+  body: "Six ways to work with us — from fixing what is in front of you today to running the whole estate, or extending a team you already have.",
   points: [
-    "Organisations without an internal IT team, who need one that answers.",
-    "Organisations with an internal team that needs an L2/L3 specialist alongside it.",
-    "Multi-site operations that need the same standard in every location.",
-    "Environments where controls have to be documented, not merely present.",
+    "Business with occasional IT support needs.",
+    "Organisations without an internal IT team.",
+    "Regulated or high-exposure environments.",
+    "IT teams needing on-demand L3 support.",
+    "Existing infrastructure needing an operator.",
+    "A change big enough to plan properly.",
   ],
 };
 

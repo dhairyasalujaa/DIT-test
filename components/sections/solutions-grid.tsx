@@ -2,9 +2,8 @@ import Link from "next/link";
 import { services } from "@/content/services";
 import { solutionsSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
-import { RevealText } from "@/components/motion/reveal-text";
-import { Scene } from "@/components/ui/scene";
-import { ArrowRight } from "@/components/icons";
+import { Scene, SceneIntro } from "@/components/ui/scene";
+import { CardAffordance } from "@/components/ui/card-link";
 
 /**
  * The six solutions, as the live site presents them.
@@ -17,18 +16,7 @@ export function SolutionsGrid() {
   return (
     <Scene tone="paper-raised" id="solutions" aria-labelledby="solutions-title">
       <div className="shell">
-        <Reveal variant="rule">
-          <hr className="rule border-t" />
-        </Reveal>
-
-        <div className="mt-8 max-w-(--measure-head)">
-          <RevealText as="h2" id="solutions-title" className="display-sm">
-            {solutionsSection.title}
-          </RevealText>
-          <Reveal delay={120}>
-            <p className="lede mt-6">{solutionsSection.lede}</p>
-          </Reveal>
-        </div>
+        <SceneIntro id="solutions-title" title={solutionsSection.title} lede={solutionsSection.lede} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
@@ -41,10 +29,7 @@ export function SolutionsGrid() {
                 <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   {service.summary}
                 </p>
-                <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[var(--scene-accent)]">
-                  Explore
-                  <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/card:translate-x-1" />
-                </span>
+                <CardAffordance label="Explore" className="mt-8" />
               </Link>
             </Reveal>
           ))}

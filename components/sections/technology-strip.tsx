@@ -37,7 +37,7 @@ export function TechnologyStrip({ tone = "paper" }: { tone?: "paper" | "paper-ra
       <div className="marquee mt-10">
         <div className="marquee-track">
           {[0, 1].map((copy) => (
-            <div key={copy} className="marquee-track" aria-hidden={copy === 1 || undefined}>
+            <div key={copy} className="marquee-run" aria-hidden={copy === 1 || undefined}>
               {run.map((vendor) => (
                 <div key={`${copy}-${vendor.name}`} className="marquee-item">
                   {vendor.present ? (
