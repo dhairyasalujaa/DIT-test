@@ -937,6 +937,73 @@
     position: relative;
     z-index: 1;
   }
+
+  /* A large drawn plane behind a section — see <Prism> in hero/facets.tsx.
+     Sits under the blurred blooms and gives them an edge to catch on; a
+     gradient with no geometry in it reads as a smudge. */
+  .prism {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain.
+
+     One SVG turbulence tile, inlined as a data URI so it costs no request.
+     This is the cheapest thing on the site that stops a flat colour reading
+     as a flat colour: navy at #0b1a2b over a large band looks like a fill,
+     and the same navy with 3% of noise over it looks like a material.
+
+     `overlay` rather than `normal` so the noise modulates what is beneath it
+     instead of greying it out — which is what keeps the contrast audit
+     passing over it. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+    background-size: 140px 140px;
+  }
+
+  /* Card artwork — decodingIT's own `.post-thumb`, generalised.
+
+     Full-bleed inside the card, so the card's own padding has to be undone
+     on three sides. The aspect ratio is fixed so the art cannot cause layout
+     shift while the rest of the card renders. */
+  .card-art {
+    position: relative;
+    display: block;
+    margin: calc(clamp(1.5rem, 2.2vw, 2rem) * -1);
+    margin-bottom: clamp(1.25rem, 1.8vw, 1.5rem);
+    aspect-ratio: 20 / 9;
+    width: calc(100% + clamp(1.5rem, 2.2vw, 2rem) * 2);
+    overflow: hidden;
+    border-radius: 3px 3px 0 0;
+    /* The card's own hairline runs behind this; a second one under the art
+       separates it from the copy without doubling up at the corners. */
+    border-bottom: 1px solid var(--scene-line);
+  }
+
+  .card-art svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: scale var(--dur-sweep) var(--ease-rise);
+  }
+
+  /* The art answers the pointer with the rest of the card. Scaling the SVG
+     rather than the container keeps the card's own edges still. */
+  .panel:hover .card-art svg,
+  .panel:focus-within .card-art svg {
+    scale: 1.04;
+  }
 }
 
 /* ==========================================================================

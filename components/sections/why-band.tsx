@@ -1,5 +1,5 @@
 import { bandSection } from "@/content/home";
-import { ArtField } from "@/components/hero/facets";
+import { ArtField, Prism } from "@/components/hero/facets";
 import { Reveal } from "@/components/motion/reveal";
 import { RevealText } from "@/components/motion/reveal-text";
 import { Scene } from "@/components/ui/scene";
@@ -17,7 +17,8 @@ import { Scene } from "@/components/ui/scene";
  */
 export function WhyBand() {
   return (
-    <Scene tone="ink" aria-labelledby="band-title" className="band overflow-hidden">
+    <Scene tone="ink" aria-labelledby="band-title" className="band grain overflow-hidden">
+      <Prism tone="ink" id="band" className="prism opacity-[0.55]" />
       <ArtField tone="ink" />
 
       <div className="shell band-shift">

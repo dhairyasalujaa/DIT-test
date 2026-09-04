@@ -3,6 +3,7 @@ import { insightsSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { CardAffordance } from "@/components/ui/card-link";
+import { CardArt } from "@/components/hero/facets";
 
 /**
  * Three published pieces, as the live home page lists them.
@@ -26,6 +27,11 @@ export function FieldNotes() {
                 target="_blank"
                 rel="noreferrer"
               >
+                {/* decodingIT's own `.post-thumb`: two abstract shapes over
+                    a wash, drawn rather than photographed. */}
+                <span className="card-art">
+                  <CardArt seed={note.href} />
+                </span>
                 <p className="label">
                   {note.topic} · {note.readingMinutes} min
                 </p>

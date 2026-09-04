@@ -4,6 +4,7 @@ import { solutionsSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { CardAffordance } from "@/components/ui/card-link";
+import { CardArt } from "@/components/hero/facets";
 
 /**
  * The six solutions, as the live site presents them.
@@ -25,6 +26,11 @@ export function SolutionsGrid() {
                 href={`/solutions/${service.slug}`}
                 className="panel group/card flex h-full flex-col"
               >
+                {/* Drawn from the service's own slug, so each of the six
+                    reads differently and none of it changes between builds. */}
+                <span className="card-art">
+                  <CardArt seed={service.slug} />
+                </span>
                 <h3 className="panel-title title text-[1.25rem]">{service.name}</h3>
                 <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                   {service.summary}

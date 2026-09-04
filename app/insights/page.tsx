@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 import { CardAffordance } from "@/components/ui/card-link";
+import { CardArt } from "@/components/hero/facets";
 
 export const metadata: Metadata = pageMetadata({
   title: "Insights",
@@ -56,6 +57,9 @@ export default function InsightsPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
+                  <span className="card-art">
+                    <CardArt seed={note.href} />
+                  </span>
                   {/* Topic and reading time only where decodingIT publishes
                       them. The two pieces listed in their menu carry a title
                       and nothing else, so these cards show a title and

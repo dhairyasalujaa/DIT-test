@@ -1,4 +1,4 @@
-import { ArtField, Facets } from "@/components/hero/facets";
+import { ArtField, Facets, Prism } from "@/components/hero/facets";
 import { ArrowRight, Shield } from "@/components/icons";
 import { Action } from "@/components/ui/action";
 import { enterDelay } from "@/lib/motion";
@@ -29,6 +29,11 @@ export function Hero() {
       aria-labelledby="hero-title"
     >
       <ArtField />
+      {/* The ground, in three layers: blurred blooms for colour, a drawn
+          prism for structure, and the logo mark itself at the top right.
+          The blooms alone read as a smudge — the planes give the light an
+          edge to break on. */}
+      <Prism tone="paper" id="hero" className="prism left-[34%] opacity-[0.45]" />
       <Facets className="drift pointer-events-none absolute -top-16 -right-32 w-[22rem] opacity-[0.055] sm:-top-24 sm:-right-32 sm:w-[34rem] sm:opacity-[0.09] lg:w-[44rem]" />
 
       <div className="shell relative">

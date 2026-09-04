@@ -1,5 +1,5 @@
 import { closingSection } from "@/content/home";
-import { ArtField } from "@/components/hero/facets";
+import { ArtField, Prism } from "@/components/hero/facets";
 import { Reveal } from "@/components/motion/reveal";
 import { RevealText } from "@/components/motion/reveal-text";
 import { Scene } from "@/components/ui/scene";
@@ -14,7 +14,8 @@ import { Action } from "@/components/ui/action";
  */
 export function ClosingCta() {
   return (
-    <Scene tone="ink" id="contact" aria-labelledby="cta-title" className="band overflow-hidden">
+    <Scene tone="ink" id="contact" aria-labelledby="cta-title" className="band grain overflow-hidden">
+      <Prism tone="ink" id="close" className="prism opacity-[0.55]" />
       <ArtField tone="ink" />
 
       <div className="shell band-shift">
