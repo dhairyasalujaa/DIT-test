@@ -24,9 +24,24 @@ export interface NavGroup {
   items: NavItem[];
 }
 
+/**
+ * The promotional column decodingIT places at the end of two of its mega
+ * menus. Headline, body and bullets are their words.
+ */
+export interface NavPromo {
+  kicker: string;
+  title: string;
+  body: string;
+  points: string[];
+  cta: string;
+  href: string;
+}
+
 export interface NavEntry extends NavItem {
   /** Present when the item opens a mega menu. */
   groups?: NavGroup[];
+  /** The panel's closing column, where their menu has one. */
+  promo?: NavPromo;
 }
 
 export const primaryNav: NavEntry[] = [
@@ -78,6 +93,14 @@ export const primaryNav: NavEntry[] = [
         ],
       },
     ],
+    promo: {
+      kicker: "Free Assessment",
+      title: "Know Your Risk in 5 Minutes",
+      body: "Take our free Cyber Health Check — instant results, no sign-up required.",
+      points: ["15 quick questions", "Instant Cyber Health Score", "No sign-up required"],
+      cta: "Take the Free Check",
+      href: `${liveSite}/tools/cyber-health-check`,
+    },
   },
   {
     label: "Services",
@@ -90,17 +113,17 @@ export const primaryNav: NavEntry[] = [
           {
             label: "MegaFix SME",
             href: `${liveSite}/flex-it-services`,
-            hint: "Flexible IT Support bundled as Fixed Hours that scales with your business",
+            hint: "Flexible IT Support bundled as Fixed Hours that scales with your business. For: Business with occasional IT support needs",
           },
           {
             label: "GigaManaged",
             href: `${liveSite}/managed-it-services`,
-            hint: "Your outsourced IT department: proactive Managed IT Service with Unlimited Support",
+            hint: "Your outsourced IT department: proactive Managed IT Service with Unlimited Support. For: organisations without an internal IT team",
           },
           {
             label: "TeraSecure",
             href: `${liveSite}/managed-cybersecurity-services`,
-            hint: "Always-on threat detection and protection with Managed Security Services",
+            hint: "Always-on threat detection and protection with Managed Security Services. For: regulated or high-exposure environments",
           },
         ],
       },
@@ -111,17 +134,17 @@ export const primaryNav: NavEntry[] = [
           {
             label: "MegaAssist",
             href: `${liveSite}/co-managed-services`,
-            hint: "Co-managed L2/L3 support for your datacentre bundled as Fixed Hours",
+            hint: "Co-managed L2/L3 support for your datacentre bundled as Fixed Hours. For: IT teams needing on-demand L3 support",
           },
           {
             label: "GigaExtend",
             href: `${liveSite}/gigaextend-it-services`,
-            hint: "Co-managed IT Service for organisations with complex environments",
+            hint: "Co-managed IT Service for organisations with complex environments — managed by an L2/L3 specialist team. For: existing infrastructure needing an operator",
           },
           {
             label: "TeraConsult",
             href: `${liveSite}/it-consulting-services`,
-            hint: "Gap assessment and consultancy for infrastructure, security, risk and compliance",
+            hint: "Gap assessment and consultancy for infrastructure, security, risk and compliance. For: a change big enough to plan properly",
           },
         ],
       },
@@ -157,6 +180,11 @@ export const primaryNav: NavEntry[] = [
         summary: "Browse our latest articles and guides",
         items: [
           {
+            label: "Insights",
+            href: "/insights",
+            hint: "Browse our latest articles and guides",
+          },
+          {
             label: "10 Cybersecurity Habits Every Employee Should Follow",
             href: `${liveSite}/10-cybersecurity-habits-every-employee-should-follow`,
           },
@@ -178,6 +206,11 @@ export const primaryNav: NavEntry[] = [
         title: "Free IT Tools",
         summary: "Calculators built for IT professionals",
         items: [
+          {
+            label: "Free IT Tools",
+            href: `${liveSite}/tools`,
+            hint: "Calculators and checkers, free to use",
+          },
           { label: "IP Subnet Calculator", href: `${liveSite}/tools/subnet-calculator` },
           { label: "M365 License Cost Estimator", href: `${liveSite}/tools/m365-cost-estimator` },
           { label: "Downtime Cost Calculator", href: `${liveSite}/tools/downtime-cost-calculator` },
@@ -185,6 +218,18 @@ export const primaryNav: NavEntry[] = [
         ],
       },
     ],
+    promo: {
+      kicker: "Talent Pipeline",
+      title: "Build Your Career With Us",
+      body: "Join a growing team of IT professionals across Oman, UAE & India — infrastructure, cloud, and cybersecurity roles for direct hire and managed service placements.",
+      points: [
+        "Direct hire & managed placements",
+        "Infrastructure, cloud & cybersecurity roles",
+        "Growing presence across the region",
+      ],
+      cta: "Submit Your Resume",
+      href: `${liveSite}/careers`,
+    },
   },
   { label: "Our Approach", href: "/approach" },
   { label: "About Us", href: "/about" },

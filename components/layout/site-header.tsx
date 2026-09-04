@@ -190,11 +190,13 @@ export function SiteHeader() {
       id={`mega-${entry.label}`}
       data-open={menu === entry.label}
       inert={menu !== entry.label}
-      className="flyout scene-paper absolute top-full left-1/2 z-50 w-[min(64rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[6px] border border-hairline p-3"
+      className="flyout scene-paper absolute top-full left-1/2 z-50 w-[min(72rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[6px] border border-hairline p-3"
     >
       <div
         className="grid gap-2"
-        style={{ gridTemplateColumns: `repeat(${entry.groups.length}, minmax(0, 1fr))` }}
+        style={{
+          gridTemplateColumns: `repeat(${entry.groups.length + (entry.promo ? 1 : 0)}, minmax(0, 1fr))`,
+        }}
       >
         {entry.groups.map((group) => (
           <div key={group.title} className="rounded-[4px] p-3">
@@ -224,6 +226,45 @@ export function SiteHeader() {
             </ul>
           </div>
         ))}
+
+        {/* The panel's closing column. Their menu ends two of its three
+            dropdowns with one of these, and it is the only place either the
+            Cyber Health Check or careers is offered from the navigation. */}
+        {entry.promo && (
+          <a
+            href={entry.promo.href}
+            target="_blank"
+            rel="noreferrer"
+            className="group/promo flex flex-col rounded-[4px] bg-[var(--scene-wash)] p-5 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[color-mix(in_oklab,var(--scene-accent)_10%,var(--scene-wash))]"
+          >
+            <span className="label text-[var(--scene-accent)]">{entry.promo.kicker}</span>
+            <span className="mt-2 block text-[1.0625rem] leading-snug font-semibold text-[var(--scene-fg)]">
+              {entry.promo.title}
+            </span>
+            <span className="mt-2 block text-[0.8125rem] leading-relaxed text-[var(--scene-fg-muted)]">
+              {entry.promo.body}
+            </span>
+            <ul className="mt-4 flex-1 space-y-1.5">
+              {entry.promo.points.map((point) => (
+                <li
+                  key={point}
+                  className="flex gap-2.5 text-[0.8125rem] leading-snug text-[var(--scene-fg-muted)]"
+                >
+                  <span
+                    aria-hidden
+                    className="mt-[0.45em] size-1 shrink-0 rounded-full bg-[var(--scene-accent)]"
+                  />
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <span className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[var(--scene-accent)]">
+              {entry.promo.cta}
+              <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/promo:translate-x-1" />
+              <span className="sr-only">(opens on decodingit.com)</span>
+            </span>
+          </a>
+        )}
       </div>
 
       <div className="mt-2 border-t border-hairline px-6 pt-3 pb-1">
@@ -392,6 +433,20 @@ export function SiteHeader() {
                       </ul>
                     </div>
                   ))}
+                  {entry.promo && (
+                    <a
+                      href={entry.promo.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={close}
+                      className="block rounded-[4px] border border-[var(--scene-line)] p-4"
+                    >
+                      <span className="label text-[var(--scene-accent)]">{entry.promo.kicker}</span>
+                      <span className="mt-1 block text-[0.9375rem] font-medium text-[var(--scene-fg)]">
+                        {entry.promo.title}
+                      </span>
+                    </a>
+                  )}
                 </div>
               )}
             </div>
