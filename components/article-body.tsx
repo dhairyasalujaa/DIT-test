@@ -61,13 +61,14 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
             return (
               <Reveal key={i}>
                 <aside className="my-12 border-y border-[var(--scene-line)] py-8">
-                  <p className="eyebrow">{block.title}</p>
+                  <p className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">{block.title}</p>
                   <ul className="mt-6 space-y-4">
-                    {block.items.map((item, n) => (
+                    {block.items.map((item) => (
                       <li key={item} className="flex gap-4 text-[0.9375rem] leading-relaxed">
-                        <span className="eyebrow text-[var(--scene-accent)]">
-                          {String(n + 1).padStart(2, "0")}
-                        </span>
+                        <span
+                          aria-hidden
+                          className="mt-[0.55em] size-1 shrink-0 rounded-full bg-[var(--scene-accent)]"
+                        />
                         <span>{item}</span>
                       </li>
                     ))}

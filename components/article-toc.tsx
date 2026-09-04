@@ -22,20 +22,17 @@ export function ArticleToc({ blocks }: { blocks: ArticleBlock[] }) {
   return (
     <Reveal className="lg:sticky lg:top-28">
       <nav aria-labelledby="toc-title">
-        <p id="toc-title" className="eyebrow">
+        <p id="toc-title" className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">
           In this article
         </p>
         <ol className="mt-5 border-t border-[var(--scene-line)]">
-          {sections.map((section, i) => (
+          {sections.map((section) => (
             <li key={section.id} className="border-b border-[var(--scene-line)]">
               <a
                 href={`#${section.id}`}
-                className="group/toc flex gap-3 py-3 text-[0.875rem] leading-snug text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
+                className="block py-3 text-[0.875rem] leading-snug text-[var(--scene-fg-muted)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:text-[var(--scene-fg)]"
               >
-                <span className="eyebrow opacity-70">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span>{section.text}</span>
+                {section.text}
               </a>
             </li>
           ))}

@@ -67,7 +67,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <JsonLd data={graph(projectSchema(project), breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow={`${project.client} · ${project.year}`}
         title={project.title}
         crumbs={crumbs}
         lede={project.problem}
@@ -81,7 +80,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <Scene tone="paper" aria-labelledby="story-title">
         <div className="shell">
-          <SceneIntro eyebrow="The engagement" id="story-title" title="What happened." />
+          <SceneIntro id="story-title" title="What happened." />
 
           <ul className="spec after-intro">
             {chapters.map((chapter, i) => (
@@ -92,10 +91,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="eyebrow text-[var(--scene-accent)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h2 className="title mt-4">{chapter.label}</h2>
+                  <h2 className="title">{chapter.label}</h2>
                 </div>
                 <p className="text-[1.0625rem] leading-relaxed md:col-span-9">{chapter.body}</p>
               </Reveal>
@@ -106,7 +102,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <Scene tone="paper-raised" aria-labelledby="proj-stack-title">
         <div className="shell">
-          <SceneIntro eyebrow="Technology" id="proj-stack-title" title="What it was built with." />
+          <SceneIntro id="proj-stack-title" title="What it was built with." />
           <ul className="after-intro grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {project.stack.map((item, i) => (
               <Reveal as="li" key={item} delay={(i % 5) * 55} shift="0.75rem">
@@ -125,7 +121,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <Scene tone="ink" aria-labelledby="next-title">
           <div className="shell">
             <Reveal>
-              <p id="next-title" className="eyebrow">
+              <p id="next-title" className="title">
                 Next project
               </p>
             </Reveal>

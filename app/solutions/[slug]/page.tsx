@@ -31,7 +31,7 @@ export async function generateMetadata({
     title: service.metaTitle,
     exactTitle: true,
     description: service.metaDescription,
-    path: `/services/${service.slug}`,
+    path: `/solutions/${service.slug}`,
   });
 }
 
@@ -46,8 +46,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   const crumbs = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: service.name, path: `/services/${service.slug}` },
+    { name: "Services", path: "/solutions" },
+    { name: service.name, path: `/solutions/${service.slug}` },
   ];
 
   return (
@@ -55,7 +55,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <JsonLd data={graph(serviceSchema(service), breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow={`Service ${service.index} / 06`}
         title={service.title}
         crumbs={crumbs}
         lede={service.lede}
@@ -74,7 +73,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Scene tone="paper" aria-labelledby="capabilities-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="What it includes"
             id="capabilities-title"
             title="The parts of the service."
           />
@@ -83,8 +81,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {service.capabilities.map((capability, i) => (
               <Reveal as="li" key={capability.title} delay={(i % 3) * 70}>
                 <div className="panel h-full">
-                  <p className="eyebrow">{String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="mt-5 text-[1.1875rem] leading-snug tracking-[-0.02em]">
+                  <h3 className="text-[1.1875rem] leading-snug tracking-[-0.02em]">
                     {capability.title}
                   </h3>
                   <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
@@ -102,10 +99,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell grid items-baseline gap-x-10 gap-y-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Reveal>
-              <p className="eyebrow">Why people call us</p>
-            </Reveal>
-            <Reveal variant="clip" delay={80}>
-              <h2 id="answers-title" className="display-sm mt-6">
+              <h2 id="answers-title" className="display-sm">
                 The questions behind the enquiry.
               </h2>
             </Reveal>
@@ -130,7 +124,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Scene tone="paper-raised" aria-labelledby="stack-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="Technology"
             id="stack-title"
             title="What we work with."
             lede={service.stackNote}
@@ -155,7 +148,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Scene tone="paper" aria-labelledby="related-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="Related"
             id="related-title"
             title="Usually bought alongside."
           />
@@ -163,9 +155,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <ul className="after-intro grid gap-4 md:grid-cols-3">
             {related.map((item, i) => (
               <Reveal as="li" key={item.slug} delay={i * 80}>
-                <Link href={`/services/${item.slug}`} className="panel group/rel flex h-full flex-col">
-                  <p className="eyebrow">{item.index}</p>
-                  <h3 className="panel-title mt-5 text-[1.125rem] tracking-[-0.02em]">
+                <Link href={`/solutions/${item.slug}`} className="panel group/rel flex h-full flex-col">
+                  <h3 className="panel-title text-[1.125rem] tracking-[-0.02em]">
                     {item.name}
                   </h3>
                   <p className="mt-3 flex-1 text-[0.875rem] leading-relaxed text-[var(--scene-fg-muted)]">

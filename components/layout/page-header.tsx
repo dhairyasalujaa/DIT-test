@@ -15,20 +15,19 @@ export interface Crumb {
  * shape identical across pages is what makes the site read as one document.
  *
  * It runs the same `.enter` load choreography as the home hero, on the same
- * delays. Interior pages used to open as static text — the site had exactly
- * one page with an entrance and ten without, which is a large part of why
- * everything past the home page felt flat.
+ * delays. It used to open with a small mono kicker line above the title
+ * (Approach, Contact, Work…) — removed sitewide on the client's instruction:
+ * no small subtitles anywhere. The breadcrumb trail is the one small-type
+ * element left here, because it is navigation rather than decoration.
  */
 const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
 export function PageHeader({
-  eyebrow,
   title,
   lede,
   crumbs,
   meta,
 }: {
-  eyebrow: string;
   title: string;
   lede?: ReactNode;
   crumbs?: Crumb[];
@@ -49,16 +48,16 @@ export function PageHeader({
               {crumbs.map((crumb, i) => (
                 <li key={crumb.path} className="flex items-center gap-2">
                   {i > 0 && (
-                    <span aria-hidden className="eyebrow">
+                    <span aria-hidden className="label">
                       /
                     </span>
                   )}
                   {i === crumbs.length - 1 ? (
-                    <span className="eyebrow" aria-current="page">
+                    <span className="label" aria-current="page">
                       {crumb.name}
                     </span>
                   ) : (
-                    <Link href={crumb.path} className="eyebrow link-underline hover:text-[var(--scene-fg)]">
+                    <Link href={crumb.path} className="label link-underline hover:text-[var(--scene-fg)]">
                       {crumb.name}
                     </Link>
                   )}
@@ -68,16 +67,12 @@ export function PageHeader({
           </nav>
         )}
 
-        <p className="enter eyebrow" style={enter(120)}>
-          {eyebrow}
-        </p>
-
-        <h1 className="enter display mt-7 max-w-[15ch]" style={enter(220)}>
+        <h1 className="enter display" style={enter(160)}>
           {title}
         </h1>
 
         {lede && (
-          <div className="enter lede mt-8" style={enter(400)}>
+          <div className="enter lede mt-8" style={enter(360)}>
             {lede}
           </div>
         )}
@@ -85,11 +80,11 @@ export function PageHeader({
         {meta && meta.length > 0 && (
           <dl
             className="enter mt-16 grid gap-x-10 gap-y-6 border-t border-[var(--scene-line)] pt-6 sm:grid-cols-2 lg:grid-cols-4"
-            style={enter(520)}
+            style={enter(480)}
           >
             {meta.map((item) => (
               <div key={item.label}>
-                <dt className="eyebrow">{item.label}</dt>
+                <dt className="label">{item.label}</dt>
                 <dd className="mt-2 text-sm text-[var(--scene-fg)]">{item.value}</dd>
               </div>
             ))}

@@ -27,22 +27,18 @@ export default function AboutPage() {
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
-      <PageHeader
-        eyebrow={manifesto.eyebrow}
-        title={manifesto.title}
-        crumbs={crumbs}
-        lede={manifesto.standfirst}
-      />
+      <PageHeader title={manifesto.title} crumbs={crumbs} lede={manifesto.standfirst} />
 
       {/* The manifesto proper: argument, not company history. */}
       <Scene tone="paper" aria-labelledby="manifesto-title">
-        <div className="shell grid items-baseline gap-x-10 gap-y-8 md:grid-cols-12">
-          <Reveal className="md:col-span-3">
-            <h2 id="manifesto-title" className="eyebrow">
+        <div className="shell">
+          <Reveal variant="rule">
+            <hr className="rule border-t" />
+          </Reveal>
+          <div className="mt-8 max-w-(--measure-lede)">
+            <h2 id="manifesto-title" className="sr-only">
               The argument
             </h2>
-          </Reveal>
-          <div className="md:col-span-9 lg:col-span-8">
             {manifesto.body.map((paragraph, i) => (
               <Reveal key={i} delay={i * 90}>
                 <p className="mb-8 text-[1.1875rem] leading-relaxed last:mb-0">{paragraph}</p>
@@ -56,20 +52,12 @@ export default function AboutPage() {
       {/* Who this is for. */}
       <Scene tone="paper-raised" aria-labelledby="clients-title">
         <div className="shell">
-          <SceneIntro
-            eyebrow="Clients"
-            id="clients-title"
-            title={whoWeServe.title}
-            lede={whoWeServe.body}
-          />
+          <SceneIntro id="clients-title" title={whoWeServe.title} lede={whoWeServe.body} />
 
           <ul className="after-intro grid gap-4 sm:grid-cols-2">
             {whoWeServe.points.map((point, i) => (
               <Reveal as="li" key={point} delay={(i % 2) * 70}>
-                <div className="panel flex h-full gap-4">
-                  <span className="eyebrow shrink-0 pt-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <div className="panel h-full">
                   <p className="text-[0.9375rem] leading-relaxed">{point}</p>
                 </div>
               </Reveal>
@@ -86,12 +74,12 @@ export default function AboutPage() {
       {leadership.length > 0 && (
         <Scene tone="paper" aria-labelledby="leadership-title">
           <div className="shell">
-            <SceneIntro eyebrow="Leadership" id="leadership-title" title="Who runs decodingIT." />
+            <SceneIntro id="leadership-title" title="Who runs decodingIT." />
             <ul className="after-intro grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {leadership.map((person, i) => (
                 <Reveal as="li" key={person.name} delay={(i % 3) * 70}>
                   <h3 className="text-[1.25rem] tracking-[-0.025em]">{person.name}</h3>
-                  <p className="eyebrow mt-2">{person.role}</p>
+                  <p className="label mt-2">{person.role}</p>
                   <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {person.bio}
                   </p>
@@ -106,7 +94,6 @@ export default function AboutPage() {
       <Scene tone="paper" aria-labelledby="offices-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="Where we are"
             id="offices-title"
             title="Two offices, three markets."
             lede={`We deliver directly in ${markets.join(", ")}. Support is remote by default and on site when remote is not enough.`}
@@ -115,7 +102,7 @@ export default function AboutPage() {
           <ul className="after-intro grid gap-4 md:grid-cols-2">
             {locations.map((location, i) => (
               <Reveal as="li" key={location.id} delay={i * 90} className="panel">
-                <p className="eyebrow">{location.role}</p>
+                <p className="label">{location.role}</p>
                 <h3 className="title mt-4">
                   {location.city}, {location.country}
                 </h3>

@@ -5,7 +5,7 @@ interface PageMetaInput {
   /** Page-specific title. The site name is appended unless `exactTitle`. */
   title: string;
   description: string;
-  /** Path with a leading slash, e.g. "/services". Home is "/". */
+  /** Path with a leading slash, e.g. "/solutions". Home is "/". */
   path: string;
   /** Use the title verbatim, without the " | decodingIT" suffix. */
   exactTitle?: boolean;

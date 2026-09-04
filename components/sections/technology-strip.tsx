@@ -1,52 +1,56 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { vendors } from "@/content/technology";
-import { Reveal } from "@/components/motion/reveal";
-import { Scene, SceneIntro } from "@/components/ui/scene";
+import { partnersSection } from "@/content/home";
+import { Scene } from "@/components/ui/scene";
 
 /**
- * The technology strip.
+ * The technology marquee.
  *
- * Every vendor here is one decodingIT's own material names against a solution;
- * the list is derived from `content/services.ts`, so it cannot drift from what
- * the site actually claims. The strip says "we work with this", which is what
- * the source says — it is not a partner or certification claim.
+ * decodingIT's own strip, rebuilt: seventeen vendors in their order, the
+ * track holding them twice over so the loop closes seamlessly at -50%. The
+ * second run is `aria-hidden`, so a screen reader hears seventeen vendors
+ * rather than thirty-four.
  *
- * Logo files are the client's to supply, because whether decodingIT may
- * display a given vendor's mark is a partnership question, not a design one.
- * Each slot checks for its file at build time and falls back to the vendor's
- * name set in mono — an empty slot should still say whose slot it is, and a
- * missing file should never leave a grey rectangle on the page.
+ * Logo files are the client's to supply, because whether decodingIT may show
+ * a given vendor's mark is a partnership question, not a design one. Each
+ * slot checks for its file at build time and otherwise sets the vendor's
+ * name — the live site's own pill in its non-logo state.
+ *
+ * Motion: a plain CSS translate, paused on hover and on focus, and stopped
+ * entirely under `prefers-reduced-motion`. Its speed is scaled by
+ * `--marquee-boost`, which the Lenis component writes from scroll velocity.
  */
 function hasLogo(file: string) {
   return existsSync(join(process.cwd(), "public", "logos", file));
 }
 
 export function TechnologyStrip({ tone = "paper" }: { tone?: "paper" | "paper-raised" }) {
-  return (
-    <Scene tone={tone} aria-labelledby="technology-title">
-      <div className="shell">
-        <SceneIntro
-          eyebrow="Technology"
-          id="technology-title"
-          title="The technology underneath."
-          lede="The platforms our solutions are built on. We are a value-added reseller, so the hardware and software are chosen for the estate rather than for the catalogue."
-        />
+  const run = vendors.map((vendor) => ({ ...vendor, present: hasLogo(vendor.logo) }));
 
-        <ul className="after-intro grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {vendors.map((vendor, i) => (
-            <Reveal as="li" key={vendor.name} delay={(i % 5) * 60}>
-              <div className="plate h-full">
-                {hasLogo(vendor.logo) ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- vendor marks are SVG of unknown intrinsic size
-                  <img src={`/logos/${vendor.logo}`} alt={vendor.name} loading="lazy" />
-                ) : (
-                  <span className="plate-name">{vendor.name}</span>
-                )}
-              </div>
-            </Reveal>
+  return (
+    <Scene tone={tone} aria-labelledby="partners-title" className="py-20!">
+      <h2 id="partners-title" className="shell title text-center text-[1.125rem]">
+        {partnersSection.title}
+      </h2>
+
+      <div className="marquee mt-10">
+        <div className="marquee-track">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="marquee-track" aria-hidden={copy === 1 || undefined}>
+              {run.map((vendor) => (
+                <div key={`${copy}-${vendor.name}`} className="marquee-item">
+                  {vendor.present ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- vendor marks are supplied at unknown intrinsic size
+                    <img src={`/logos/${vendor.logo}`} alt={vendor.name} loading="lazy" />
+                  ) : (
+                    <span className="marquee-name">{vendor.name}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </Scene>
   );

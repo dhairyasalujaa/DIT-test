@@ -101,8 +101,8 @@
 
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-    /* Anchored sections must clear the fixed header. */
+    /* No `scroll-behavior: smooth` — Lenis owns scrolling and requires it off.
+       It is restored under reduced motion, where Lenis never starts. */
     scroll-padding-top: calc(var(--header-h) + 1.5rem);
   }
 
@@ -144,6 +144,7 @@
   /* Anything that would be a "surprise" scroll jump is opted out. */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
+    /* Lenis is never instantiated here, so the page scrolls natively. */
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
@@ -224,15 +225,18 @@
   /* ---- Type scale -------------------------------------------------------- */
 
   /* Metadata voice: mono, small, wide. Labels, indices, counts, spec keys. */
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    line-height: 1;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+  /* A small functional caption — a form field label, a breadcrumb, a
+     footer column heading, a fact next to its value. Plain sans, sentence
+     case, no letter-spacing: deliberately NOT the mono/uppercase/tracked
+     kicker this replaced. That kicker sat next to every section heading on
+     the site as a small "subtitle" and was removed sitewide on the client's
+     instruction — this class exists only for copy that has a job (labelling
+     an input, naming a nav group), never as decoration beside a heading. */
+  .label {
+    font-size: 0.8125rem;
+    line-height: 1.3;
     color: var(--scene-fg-muted);
     font-weight: 500;
-    font-variant-numeric: tabular-nums;
   }
 
   .display {
@@ -471,7 +475,7 @@
 @layer utilities {
   .js [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, var(--reveal-shift, 1.25rem), 0);
+    transform: translate3d(0, var(--reveal-shift, 3rem), 0);
     transition:
       opacity 0.85s var(--ease-rise) var(--reveal-delay, 0ms),
       transform 0.85s var(--ease-rise) var(--reveal-delay, 0ms);
@@ -524,6 +528,8 @@
       clip-path: none !important;
     }
     .js [data-reveal="rule"] { scale: 1 1 !important; }
+    .rt-word { animation: none !important; transform: none !important; }
+    .marquee-track { animation: none !important; }
   }
 
   .text-balance { text-wrap: balance; }
@@ -543,7 +549,7 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     @keyframes reveal-rise {
-      from { opacity: 0; transform: translate3d(0, var(--reveal-shift, 1.25rem), 0); }
+      from { opacity: 0; transform: translate3d(0, var(--reveal-shift, 3rem), 0); }
       to   { opacity: 1; transform: none; }
     }
 
@@ -593,8 +599,8 @@
        against the page for its whole length. Strictly linear, because
        anything eased reads as the page lagging behind the scroll. */
     @keyframes facet-drift {
-      from { transform: translate3d(0, -4%, 0) rotate(-3deg); }
-      to   { transform: translate3d(0, 12%, 0) rotate(4deg); }
+      from { transform: translate3d(0, -9%, 0) rotate(-7deg) scale(1.02); }
+      to   { transform: translate3d(0, 22%, 0) rotate(9deg) scale(1.08); }
     }
 
     .drift {
@@ -603,10 +609,45 @@
       animation-range: cover 0% cover 100%;
     }
 
+    /* The upward text reveal. Each word owns its timeline, so a heading
+       resolves line by line as it rises through the viewport; `--w` offsets
+       words within a line so one line does not land as a single block.
+       The range is short and early: the line has to be still by the time it
+       is at a comfortable reading height. */
+    @keyframes rt-rise {
+      from { transform: translate3d(0, 110%, 0); }
+      to   { transform: translate3d(0, 0, 0); }
+    }
+
+    .rt-enter .rt-word {
+      animation-timeline: auto;
+    }
+
+    .rt-word {
+      animation: rt-rise both var(--ease-rise);
+      animation-timeline: view();
+      animation-range:
+        entry calc(4% + var(--w, 0) * 1.1%)
+        entry calc(88% + var(--w, 0) * 1.1%);
+    }
+
     /* Content shifting against a full-bleed band as it crosses. */
     @keyframes band-shift {
-      from { transform: translate3d(0, 2.5rem, 0); }
-      to   { transform: translate3d(0, -2.5rem, 0); }
+      from { transform: translate3d(0, 4.5rem, 0); }
+      to   { transform: translate3d(0, -4.5rem, 0); }
+    }
+
+    /* A slower counter-drift for artwork sitting behind a band, so ground and
+       content separate as the section crosses rather than moving as one. */
+    @keyframes art-drift {
+      from { transform: translate3d(0, -6%, 0) scale(1.05); }
+      to   { transform: translate3d(0, 10%, 0) scale(1.12); }
+    }
+
+    .art > * {
+      animation: art-drift both var(--ease-drift);
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
     }
 
     .band-shift {
@@ -639,6 +680,19 @@
   .js .enter {
     opacity: 0;
     animation: enter-up 0.8s var(--ease-rise) var(--enter-delay, 0ms) both;
+  }
+
+  /* The word reveal as a load choreography rather than a scroll one. Used
+     where the type is already on screen at first paint — a scroll timeline
+     there would resolve instantly and the entrance would never be seen. */
+  @keyframes rt-rise-load {
+    from { transform: translate3d(0, 110%, 0); }
+    to   { transform: translate3d(0, 0, 0); }
+  }
+
+  .js .rt-enter .rt-word {
+    animation: rt-rise-load 0.95s var(--ease-rise)
+      calc(var(--enter-delay, 0ms) + var(--w, 0) * 42ms) both;
   }
 
   .js .enter-resolve {
@@ -702,5 +756,162 @@
     transform: none;
     visibility: visible;
     transition-delay: 0s;
+  }
+}
+
+/* ==========================================================================
+   Upward text reveal.
+
+   Every word sits in its own clipping mask and rises out of it. The mask is
+   padded and pulled back by the same amount so descenders are not shaved off.
+
+   The scroll-driven rules live further down, inside the @supports block: each
+   word carries its own view() timeline, so words on different lines resolve at
+   different scroll positions and the line-by-line cascade falls out of the
+   geometry. `--w` adds a small offset within a line.
+   ========================================================================== */
+@layer components {
+  .rt {
+    /* The masks are inline-block, so the gaps between words have to come from
+       somewhere: word-spacing on the container restores them. */
+    word-spacing: 0.02em;
+  }
+
+  .rt-mask {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
+    vertical-align: bottom;
+  }
+
+  /* A real space after every word, so the line breaks and reads normally. */
+  .rt-mask::after {
+    content: " ";
+    white-space: pre;
+  }
+
+  .rt-word {
+    display: inline-block;
+    will-change: transform;
+  }
+}
+
+/* ==========================================================================
+   The partner marquee.
+
+   The track holds its pills twice over, the second copy aria-hidden, and
+   translates by exactly half its width — so the loop is seamless with no
+   JavaScript measuring anything.
+
+   `--marquee-boost` is written by the Lenis component from live scroll
+   velocity: scroll hard and the logos pull ahead, stop and they settle back.
+   It defaults to 1, so the strip is correct with no JavaScript at all.
+   ========================================================================== */
+@layer components {
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    /* Fade the strip into the page rather than cutting it at a hard edge. */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6rem,
+      #000 calc(100% - 6rem),
+      transparent
+    );
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .marquee-item {
+    display: flex;
+    height: 3rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    padding-inline: clamp(0.75rem, 1.5vw, 1.25rem);
+  }
+
+  .marquee-item img {
+    max-height: 2rem;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition:
+      filter var(--dur-hover) var(--ease-rise),
+      opacity var(--dur-hover) var(--ease-rise);
+  }
+
+  .marquee-item:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  /* Until a logo file lands, the vendor's name stands in its place — the live
+     site's own pill in its non-logo state, not a grey placeholder box. */
+  .marquee-name {
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--scene-fg-muted);
+    transition: color var(--dur-hover) var(--ease-rise);
+  }
+
+  .marquee-item:hover .marquee-name {
+    color: var(--scene-fg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes marquee-run {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+
+  .marquee-track {
+    animation: marquee-run 48s linear infinite;
+    animation-duration: calc(48s / var(--marquee-boost, 1));
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* ==========================================================================
+   Section artwork.
+
+   The live site scatters faceted shapes behind its hero, its dark band and
+   its closing panel. This is that language: soft, brand-coloured fields that
+   drift against the page as it scrolls. Purely decorative, so every one is
+   aria-hidden and none of them ever carries content.
+   ========================================================================== */
+@layer components {
+  .art {
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .art > * {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+
+  /* Content has to sit above the artwork without each section saying so. */
+  .art ~ * {
+    position: relative;
+    z-index: 1;
   }
 }

@@ -11,7 +11,7 @@ export interface NavItem {
 }
 
 export const primaryNav: NavItem[] = [
-  { label: "Solutions", href: "/services", hint: "Every layer of your IT, designed together" },
+  { label: "Solutions", href: "/solutions", hint: "Every layer of your IT, designed together" },
   { label: "Approach", href: "/approach", hint: "How an engagement actually runs" },
   { label: "Work", href: "/work", hint: "The shape of what we deliver" },
   { label: "About", href: "/about", hint: "Who we are and what we refuse to do" },
@@ -33,12 +33,12 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Solutions",
     items: [
-      { label: "Enterprise Networking", href: "/services/enterprise-networking" },
-      { label: "Technology Foundation", href: "/services/technology-foundation" },
-      { label: "Private Cloud & HCI", href: "/services/private-cloud-hci" },
-      { label: "Business Continuity", href: "/services/business-continuity" },
-      { label: "Modern Digital Workplace", href: "/services/modern-digital-workplace" },
-      { label: "Cyber Security Solutions", href: "/services/cyber-security-solutions" },
+      { label: "Enterprise Networking", href: "/solutions/enterprise-networking" },
+      { label: "Technology Foundation", href: "/solutions/technology-foundation" },
+      { label: "Private Cloud & HCI", href: "/solutions/private-cloud-hci" },
+      { label: "Business Continuity", href: "/solutions/business-continuity" },
+      { label: "Modern Digital Workplace", href: "/solutions/modern-digital-workplace" },
+      { label: "Cyber Security Solutions", href: "/solutions/cyber-security-solutions" },
     ],
   },
   {

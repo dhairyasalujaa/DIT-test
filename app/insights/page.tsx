@@ -30,7 +30,6 @@ export default function InsightsPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Insights"
         title="Things we end up explaining in meetings."
         crumbs={crumbs}
         lede="Practical technical writing from the engineers who do the work."
@@ -47,11 +46,8 @@ export default function InsightsPage() {
                     className="row row-pad group/a grid items-start gap-x-10 gap-y-4 md:grid-cols-12"
                   >
                     <div className="md:col-span-3">
-                      <p className="eyebrow">{article.topic}</p>
-                      <time
-                        dateTime={article.published}
-                        className="mt-3 block eyebrow"
-                      >
+                      <p className="label">{article.topic}</p>
+                      <time dateTime={article.published} className="label mt-3 block">
                         {formatDate(article.published)} · {article.readingMinutes} min
                       </time>
                     </div>
@@ -79,11 +75,11 @@ export default function InsightsPage() {
               been removed. It fills again the moment real entries are added to
               content/insights.ts.
             */
-            <div className="grid items-baseline gap-x-10 gap-y-8 border-t border-[var(--scene-line)] pt-12 md:grid-cols-12">
-              <Reveal className="md:col-span-3">
-                <p className="eyebrow">Nothing published here yet</p>
+            <div className="border-t border-[var(--scene-line)] pt-12">
+              <Reveal>
+                <h2 className="title">Nothing published here yet.</h2>
               </Reveal>
-              <div className="md:col-span-9 lg:col-span-8">
+              <div className="mt-6 max-w-(--measure-lede)">
                 <Reveal>
                   <p className="text-[1.1875rem] leading-relaxed">
                     Our engineers write about the things clients actually ask —

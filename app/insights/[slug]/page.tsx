@@ -63,7 +63,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <JsonLd data={graph(articleSchema(article), breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow={article.topic}
         title={article.title}
         crumbs={[crumbs[0], crumbs[1], { name: "Article", path: crumbs[2].path }]}
         lede={article.standfirst}
@@ -89,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               portrait of somebody who did not write it. */}
           <Reveal>
             <div className="mt-20 max-w-[64ch] border-t border-[var(--scene-line)] pt-8">
-              <p className="eyebrow">About this article</p>
+              <h2 className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">About this article</h2>
               <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                 Published by {site.legalName}, drawn from what our engineers
                 find in real environments. If something here does not match your
@@ -108,12 +107,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {related.length > 0 && (
             <Reveal>
               <div className="mt-14 max-w-[64ch]">
-                <p className="eyebrow">Related services</p>
+                <h2 className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Related services</h2>
                 <ul className="mt-5 flex flex-wrap gap-3">
                   {related.map((service) => (
                     <li key={service.slug}>
                       <Link
-                        href={`/services/${service.slug}`}
+                        href={`/solutions/${service.slug}`}
                         className="group/rs inline-flex items-center gap-2 rounded-[4px] border border-[var(--scene-line)] px-4 py-2 text-sm transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:border-[var(--scene-fg)]"
                       >
                         {service.name}
@@ -139,7 +138,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <hr className="rule border-t" />
           </Reveal>
           <Reveal delay={60}>
-            <h2 id="more-title" className="eyebrow mt-5">
+            <h2 id="more-title" className="title mt-5">
               Keep reading
             </h2>
           </Reveal>
@@ -156,8 +155,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   href={`/insights/${item.slug}`}
                   className="group/m flex h-full flex-col py-8"
                 >
-                  <p className="eyebrow">{item.topic}</p>
-                  <h3 className="mt-4 text-[1.25rem] leading-snug tracking-[-0.025em] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/m:text-[var(--scene-accent)]">
+                  <p className="label">{item.topic}</p>
+                  <h3 className="mt-3 text-[1.25rem] leading-snug tracking-[-0.025em] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/m:text-[var(--scene-accent)]">
                     {item.title}
                   </h3>
                   <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">

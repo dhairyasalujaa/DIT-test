@@ -1,6 +1,6 @@
 /**
- * Icons are inline SVG rather than an icon package: the site needs six of
- * them, and six paths cost less than a dependency.
+ * Icons are inline SVG rather than an icon package: the site needs a handful
+ * of them, and a handful of paths cost less than a dependency.
  *
  * All are decorative — they always sit next to a text label — so they are
  * hidden from assistive technology.
@@ -39,6 +39,14 @@ export function ChevronDown({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
       <path d="m4 6.5 4 4 4-4" />
+    </svg>
+  );
+}
+
+export function Shield({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M8 1.8 3 3.6v4c0 3 2.1 5.4 5 6.6 2.9-1.2 5-3.6 5-6.6v-4L8 1.8Z" />
     </svg>
   );
 }

@@ -82,7 +82,7 @@ export function serviceSchema(service: Service) {
     "@type": "Service",
     name: service.title,
     description: service.summary,
-    url: canonical(`/services/${service.slug}`),
+    url: canonical(`/solutions/${service.slug}`),
     serviceType: service.name,
     provider: { "@id": organisationId },
     areaServed: markets.map((m) => ({ "@type": "Country", name: m })),

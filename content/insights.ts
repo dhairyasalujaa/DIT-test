@@ -1,25 +1,18 @@
 import type { Article } from "@/types";
+import { liveSite } from "@/content/site";
 
 /**
- * Insights.
+ * Published articles.
  *
- * Intentionally empty.
+ * `articles` stays empty on purpose: this build has no article bodies, and
+ * writing them would mean publishing words under decodingIT's name that
+ * decodingIT did not write. The route and the renderer are ready for real
+ * entries; adding them here fills /insights and its detail pages.
  *
- * This file previously held four full-length articles — roughly 3,600 words on
- * managed-services contracts, backup and recovery, email authentication and
- * security baselines. They were written by Claude and published under
- * decodingIT's name, presenting authored opinions as the company's own
- * positions. That is a worse failure than an empty section, so they are gone.
- *
- * decodingIT does publish real technical writing (for example a comparison of
- * Azure Virtual Desktop, Citrix and Omnissa Horizon). Porting those here is a
- * copy-and-paste into the `articles` array below: add entries and /insights,
- * /insights/[slug], the home page preview, the sitemap and Article structured
- * data all populate from this one source.
- *
- * Because the section is empty, "Insights" has been removed from the primary
- * navigation and kept in the footer. Restore it in content/navigation.ts once
- * there are real articles here.
+ * `fieldNotes` below is different — those are decodingIT's real, published
+ * pieces, listed on their home page with their real titles, topics and
+ * reading times. They link to the live articles because the bodies live
+ * there, not here.
  */
 export const articles: Article[] = [];
 
@@ -27,6 +20,35 @@ export const sortedArticles = [...articles].sort(
   (a, b) => Date.parse(b.published) - Date.parse(a.published),
 );
 
-export function getArticle(slug: string): Article | undefined {
-  return articles.find((a) => a.slug === slug);
+export function getArticle(slug: string) {
+  return articles.find((article) => article.slug === slug);
 }
+
+export interface FieldNote {
+  title: string;
+  topic: string;
+  readingMinutes: number;
+  href: string;
+}
+
+/** The three pieces the live home page features, in its order. */
+export const fieldNotes: FieldNote[] = [
+  {
+    title: "Memory and hardware prices are surging — invest now or wait it out?",
+    topic: "Infrastructure",
+    readingMinutes: 4,
+    href: `${liveSite}/memory-and-hardware-prices-are-surging-should-companies-invest-now-or-wait-it-out`,
+  },
+  {
+    title: "The Real Cost of a Ransomware Attack on a Small Business",
+    topic: "Cybersecurity",
+    readingMinutes: 2,
+    href: `${liveSite}/real-cost-ransomware-attack-small-business`,
+  },
+  {
+    title: "10 Cybersecurity Habits Every Employee Should Follow",
+    topic: "Cybersecurity",
+    readingMinutes: 2,
+    href: `${liveSite}/10-cybersecurity-habits-every-employee-should-follow`,
+  },
+];

@@ -46,8 +46,6 @@ export function Scene({
 }
 
 interface SceneIntroProps {
-  /** Small mono label — the scene's index card. */
-  eyebrow: string;
   /** The scene's heading. Rendered as an h2 by default. */
   title: ReactNode;
   /** Supporting paragraph. */
@@ -60,25 +58,21 @@ interface SceneIntroProps {
 }
 
 /**
- * The standard opening of a scene: a hairline, an index label, a heading and
- * an optional lede.
+ * The standard opening of a scene: a hairline, a heading and an optional lede.
  *
- * There is exactly one of these, and every section uses it. The audit that
- * prompted this pass found three hand-rolled copies that had drifted apart —
- * different column spans, different gaps, different label tracking — which is
- * most of why the page read as assembled rather than designed.
+ * There is exactly one of these, and every section uses it. It used to carry
+ * a small mono kicker label beside the heading (Solutions, Technology, How we
+ * work…) — removed sitewide on the client's instruction: no small subtitles
+ * anywhere. The heading now opens the section directly, which is also why its
+ * per-line entrance (see `Reveal`'s `clip` variant) carries more weight than
+ * it used to.
  *
  * The grid is the site's only grid: a twelve-column field with a `gap-x-10`
- * gutter, a three-column label rail, and content on nine (eight at `lg`).
- * Every other twelve-column grid on the site matches it exactly, so a label
- * on one section sits on the same vertical as a label on the next.
- *
- * `items-baseline` is the optical correction: without it the mono label's
- * cap-height floats above the heading's, and the top of every section on
- * every page steps by a few pixels for no reason.
+ * gutter and content on nine columns (eight at `lg`), starting at column one.
+ * Every other twelve-column grid on the site matches it, so a heading on one
+ * section sits on the same vertical as a heading on the next.
  */
 export function SceneIntro({
-  eyebrow,
   title,
   lede,
   as: Heading = "h2",
@@ -91,23 +85,20 @@ export function SceneIntro({
       <Reveal variant="rule">
         <hr className="rule border-t" />
       </Reveal>
-      <div className="mt-6 grid items-baseline gap-x-10 gap-y-6 md:grid-cols-12">
-        <Reveal className="md:col-span-3" delay={60}>
-          <p className="eyebrow">{eyebrow}</p>
-        </Reveal>
+      <div className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-12">
         <div className="md:col-span-9 lg:col-span-8">
-          <Reveal delay={120}>
+          <Reveal variant="clip">
             <Heading id={id} className="display-sm">
               {title}
             </Heading>
           </Reveal>
           {lede && (
-            <Reveal delay={200}>
+            <Reveal delay={120}>
               <p className="lede mt-6">{lede}</p>
             </Reveal>
           )}
           {aside && (
-            <Reveal delay={260}>
+            <Reveal delay={180}>
               <div className="mt-9">{aside}</div>
             </Reveal>
           )}

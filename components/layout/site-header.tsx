@@ -203,12 +203,12 @@ export function SiteHeader() {
             onMouseLeave={() => setFlyout(false)}
           >
             <Link
-              href="/services"
-              aria-current={isActive("/services") ? "page" : undefined}
+              href="/solutions"
+              aria-current={isActive("/solutions") ? "page" : undefined}
               className={navLink}
             >
               Solutions
-              {indicator(isActive("/services"))}
+              {indicator(isActive("/solutions"))}
             </Link>
             <button
               ref={flyoutTriggerRef}
@@ -238,7 +238,7 @@ export function SiteHeader() {
                 {services.map((service) => (
                   <li key={service.slug}>
                     <Link
-                      href={`/services/${service.slug}`}
+                      href={`/solutions/${service.slug}`}
                       className="group/f block rounded-[3px] p-4 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-wash)]"
                     >
                       <span className="flex items-baseline gap-3">
@@ -256,7 +256,7 @@ export function SiteHeader() {
               </ul>
               <div className="mt-2 border-t border-hairline px-4 pt-3 pb-1">
                 <Link
-                  href="/services"
+                  href="/solutions"
                   className="group/all inline-flex items-center gap-2 text-[0.8125rem] text-[var(--scene-accent)]"
                 >
                   All solutions, compared
@@ -267,7 +267,7 @@ export function SiteHeader() {
           </div>
 
           {primaryNav
-            .filter((item) => item.href !== "/services")
+            .filter((item) => item.href !== "/solutions")
             .map((item) => (
               <Link
                 key={item.href}

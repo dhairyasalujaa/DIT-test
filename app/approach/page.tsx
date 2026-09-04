@@ -4,7 +4,6 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Scene, SceneIntro } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Action } from "@/components/ui/action";
-import { ServiceTiers } from "@/components/sections/service-tiers";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
@@ -28,7 +27,6 @@ export default function ApproachPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Approach"
         title="What working with us is actually like."
         crumbs={crumbs}
         lede="Most process diagrams are decoration. This one names what you physically receive at the end of every stage, because a stage that produces nothing you can hold is a stage you should not be paying for."
@@ -38,7 +36,6 @@ export default function ApproachPage() {
       <Scene tone="paper" aria-labelledby="stages-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="The engagement"
             id="stages-title"
             title="Four phases."
             lede="How an engagement runs, whether we are running your IT day to day or delivering a single project."
@@ -59,8 +56,7 @@ export default function ApproachPage() {
                 className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="eyebrow text-[var(--scene-accent)]">{stage.index}</p>
-                  <h2 className="title mt-4">{stage.name}</h2>
+                  <h2 className="title">{stage.name}</h2>
                   <p className="mt-3 text-[0.9375rem] text-[var(--scene-fg-muted)]">
                     {stage.summary}
                   </p>
@@ -72,8 +68,7 @@ export default function ApproachPage() {
 
                 {stage.output && (
                   <div className="md:col-span-3">
-                    <p className="eyebrow">You get</p>
-                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                    <p className="text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                       {stage.output}
                     </p>
                   </div>
@@ -88,7 +83,6 @@ export default function ApproachPage() {
       <Scene tone="ink" aria-labelledby="principles-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="How we work"
             id="principles-title"
             title="What makes the service different."
             lede="Four things decodingIT does differently, and the reasons clients give for staying."
@@ -98,8 +92,7 @@ export default function ApproachPage() {
             {principles.map((principle, i) => (
               <Reveal as="li" key={principle.title} delay={(i % 2) * 80}>
                 <div className="panel h-full">
-                  <p className="eyebrow">{String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="title mt-5 text-[1.25rem]">{principle.title}</h3>
+                  <h3 className="title text-[1.25rem]">{principle.title}</h3>
                   <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {principle.body}
                   </p>
@@ -119,7 +112,6 @@ export default function ApproachPage() {
       <Scene tone="paper-raised" aria-labelledby="shapes-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="Engagement types"
             id="shapes-title"
             title="Four shapes most work takes."
             lede="Not every project fits one of these, but most start as one of them — a managed service transition, an infrastructure build, a security programme, or a move to cloud and Microsoft 365."
@@ -131,8 +123,6 @@ export default function ApproachPage() {
           />
         </div>
       </Scene>
-
-      <ServiceTiers tone="paper" />
 
       <ClosingCta />
     </>

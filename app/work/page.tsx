@@ -44,7 +44,6 @@ export default function WorkPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Work"
         title="Delivered work, and how we engage."
         crumbs={crumbs}
         lede="We work for corporate, SME and government organisations across a range of verticals. Their infrastructure and security arrangements are not ours to publish, so this page sets out how we engage instead — and we are happy to put you in touch with clients who will talk."
@@ -53,7 +52,7 @@ export default function WorkPage() {
       {hasProjects ? (
         <Scene tone="paper" aria-labelledby="projects-title">
           <div className="shell">
-            <SceneIntro eyebrow="Selected work" id="projects-title" title="Published with client consent." />
+            <SceneIntro id="projects-title" title="Published with client consent." />
             <ul className="after-intro border-t border-[var(--scene-line)]">
               {projects.map((project, i) => (
                 <Reveal as="li" key={project.slug} delay={(i % 3) * 70}>
@@ -62,8 +61,8 @@ export default function WorkPage() {
                     className="row row-pad group/p grid items-start gap-x-10 gap-y-4 md:grid-cols-12"
                   >
                     <div className="md:col-span-3">
-                      <p className="eyebrow">{project.year}</p>
-                      <h2 className="title mt-4 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/p:text-[var(--scene-accent)]">
+                      <p className="label">{project.year}</p>
+                      <h2 className="title mt-3 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/p:text-[var(--scene-accent)]">
                         {project.client}
                       </h2>
                     </div>
@@ -73,7 +72,7 @@ export default function WorkPage() {
                         {project.problem}
                       </p>
                     </div>
-                    <p className="eyebrow md:col-span-3">{project.disciplines.join(" · ")}</p>
+                    <p className="label md:col-span-3">{project.disciplines.join(" · ")}</p>
                   </Link>
                 </Reveal>
               ))}
@@ -84,7 +83,7 @@ export default function WorkPage() {
         <Scene tone="paper" aria-labelledby="confidential-title">
           <div className="shell grid items-baseline gap-x-10 gap-y-8 md:grid-cols-12">
             <Reveal className="md:col-span-3">
-              <h2 id="confidential-title" className="eyebrow">
+              <h2 id="confidential-title" className="title">
                 On client confidentiality
               </h2>
             </Reveal>
@@ -123,7 +122,6 @@ export default function WorkPage() {
       <Scene tone="ink" aria-labelledby="shapes-title">
         <div className="shell">
           <SceneIntro
-            eyebrow="The shape of an engagement"
             id="shapes-title"
             title="How we engage."
             lede="decodingIT offers six ways to work together, from fixing what is in front of you today to running the whole estate or extending a team you already have. These are the two named models."
@@ -138,19 +136,16 @@ export default function WorkPage() {
                 className="spec-row row-pad md:grid-cols-12"
               >
                 <div className="md:col-span-3">
-                  <p className="eyebrow text-[var(--scene-accent)]">{shape.index}</p>
-                  <h3 className="title mt-4">{shape.title}</h3>
-                  <p className="eyebrow mt-4">{shape.disciplines.join(" · ")}</p>
+                  <h3 className="title">{shape.title}</h3>
+                  <p className="label mt-3">{shape.disciplines.join(" · ")}</p>
                 </div>
                 <div className="md:col-span-4">
-                  <p className="eyebrow">Usually triggered by</p>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                  <p className="text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {shape.trigger}
                   </p>
                 </div>
                 <div className="md:col-span-5">
-                  <p className="eyebrow">What it involves</p>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
+                  <p className="text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                     {shape.involves}
                   </p>
                 </div>

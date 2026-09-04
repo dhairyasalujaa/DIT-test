@@ -14,12 +14,12 @@ export const metadata: Metadata = pageMetadata({
   title: "Technology & IT Services",
   description:
     "Six practices — managed IT, cyber security, cloud, networking, infrastructure and Microsoft 365 — delivered across Oman, the UAE and India.",
-  path: "/services",
+  path: "/solutions",
 });
 
 const crumbs = [
   { name: "Home", path: "/" },
-  { name: "Services", path: "/services" },
+  { name: "Services", path: "/solutions" },
 ];
 
 export default function ServicesPage() {
@@ -28,7 +28,6 @@ export default function ServicesPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Solutions"
         title="Every layer of your IT, designed together."
         crumbs={crumbs}
         lede="Most problems live between layers — a network built for one thing, a backup that never met the workload. We design and run the whole stack, so the seams are ours to answer for."
@@ -40,12 +39,11 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <Reveal as="li" key={service.slug} delay={(i % 3) * 70}>
                 <Link
-                  href={`/services/${service.slug}`}
+                  href={`/solutions/${service.slug}`}
                   className="row row-pad group/row grid items-start gap-x-10 gap-y-6 md:grid-cols-12"
                 >
                   <div className="md:col-span-3">
-                    <p className="eyebrow">{service.index}</p>
-                    <h2 className="title mt-4 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/row:text-[var(--scene-accent)]">
+                    <h2 className="title transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/row:text-[var(--scene-accent)]">
                       {service.name}
                     </h2>
                   </div>
@@ -63,8 +61,7 @@ export default function ServicesPage() {
                   {/* The questions this practice exists to answer — the fastest
                       way for a visitor to recognise their own situation. */}
                   <div className="md:col-span-4">
-                    <p className="eyebrow">Answers</p>
-                    <ul className="mt-4 space-y-2">
+                    <ul className="space-y-2">
                       {service.answers.slice(0, 3).map((question) => (
                         <li
                           key={question}

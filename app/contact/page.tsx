@@ -28,7 +28,6 @@ export default function ContactPage() {
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
 
       <PageHeader
-        eyebrow="Contact"
         title="Tell us what is not working."
         crumbs={crumbs}
         lede="A description of the problem in your own words is enough to start. A real engineer will get back to you within four business hours — not an auto-responder, and not a salesperson."
@@ -44,7 +43,7 @@ export default function ContactPage() {
 
           <aside className="lg:col-span-4 lg:col-start-9">
             <Reveal>
-              <p className="eyebrow">Direct</p>
+              <h2 className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Direct</h2>
               <ul className="mt-6 space-y-4 text-[0.9375rem]">
                 <li className="flex items-center gap-3">
                   <Mail className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
@@ -57,14 +56,14 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={90}>
-              <p className="eyebrow mt-12">Offices</p>
+              <h2 className="mt-12 text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Offices</h2>
               <ul className="mt-6 space-y-8">
                 {locations.map((location) => (
                   <li key={location.id}>
-                    <h2 className="text-[1.0625rem] tracking-[-0.02em]">
+                    <h3 className="text-[1.0625rem] tracking-[-0.02em]">
                       {location.city}, {location.country}
-                    </h2>
-                    <p className="eyebrow mt-2">{location.role}</p>
+                    </h3>
+                    <p className="label mt-2">{location.role}</p>
                     <address className="mt-3 flex gap-3 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)] not-italic">
                       <Pin className="mt-1 size-4 shrink-0" />
                       <span>
@@ -87,7 +86,7 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <p className="eyebrow mt-12">Response</p>
+              <h2 className="mt-12 text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Response</h2>
               <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--scene-fg-muted)]">
                 {site.responsePromise}
               </p>
