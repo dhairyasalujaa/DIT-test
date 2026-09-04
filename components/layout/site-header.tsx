@@ -197,7 +197,7 @@ export function SiteHeader() {
       id={`mega-${entry.label}`}
       data-open={menu === entry.label}
       inert={menu !== entry.label}
-      className="flyout scene-paper absolute top-full left-1/2 z-50 w-[min(72rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[6px] border border-hairline p-3"
+      className="flyout scene-paper absolute top-full left-1/2 z-50 w-[min(72rem,calc(100vw-3rem))] -translate-x-1/2 rounded-none border border-hairline p-3"
     >
       <div
         className="grid gap-2"
@@ -206,7 +206,7 @@ export function SiteHeader() {
         }}
       >
         {entry.groups.map((group) => (
-          <div key={group.title} className="rounded-[4px] p-3">
+          <div key={group.title} className="rounded-none p-3">
             <p className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">{group.title}</p>
             <p className="mt-1 text-[0.8125rem] leading-snug text-[var(--scene-fg-muted)]">
               {group.summary}
@@ -217,7 +217,7 @@ export function SiteHeader() {
                   <Link
                     href={item.href}
                     {...externalProps(item.href)}
-                    className="group/f block rounded-[3px] p-3 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-wash)]"
+                    className="group/f block rounded-none p-3 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[var(--scene-wash)]"
                   >
                     <span className="block text-[0.9375rem] font-medium text-[var(--scene-fg)] transition-colors duration-[var(--dur-hover)] group-hover/f:text-[var(--scene-accent)]">
                       {item.label}
@@ -242,7 +242,7 @@ export function SiteHeader() {
             href={entry.promo.href}
             target="_blank"
             rel="noreferrer"
-            className="group/promo flex flex-col rounded-[4px] bg-[var(--scene-wash)] p-5 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[color-mix(in_oklab,var(--scene-accent)_10%,var(--scene-wash))]"
+            className="group/promo flex flex-col rounded-none bg-[var(--scene-wash)] p-5 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:bg-[color-mix(in_oklab,var(--scene-accent)_10%,var(--scene-wash))]"
           >
             <span className="label text-[var(--scene-accent)]">{entry.promo.kicker}</span>
             <span className="mt-2 block text-[1.0625rem] leading-snug font-semibold text-[var(--scene-fg)]">
@@ -348,7 +348,7 @@ export function SiteHeader() {
                   aria-expanded={menu === entry.label}
                   aria-controls={`mega-${entry.label}`}
                   onClick={() => setMenu((v) => (v === entry.label ? null : entry.label))}
-                  className="-ml-1 flex size-7 items-center justify-center rounded-[3px] text-[var(--scene-fg)]/70 transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
+                  className="-ml-1 flex size-7 items-center justify-center rounded-none text-[var(--scene-fg)]/70 transition-colors duration-[var(--dur-hover)] hover:text-[var(--scene-fg)]"
                 >
                   <span className="sr-only">
                     {menu === entry.label ? `Hide ${entry.label}` : `Show ${entry.label}`}
@@ -459,7 +459,7 @@ export function SiteHeader() {
                       target="_blank"
                       rel="noreferrer"
                       onClick={close}
-                      className="block rounded-[4px] border border-[var(--scene-line)] p-4"
+                      className="block rounded-none border border-[var(--scene-line)] p-4"
                     >
                       <span className="label text-[var(--scene-accent)]">{entry.promo.kicker}</span>
                       <span className="mt-1 block text-[0.9375rem] font-medium text-[var(--scene-fg)]">

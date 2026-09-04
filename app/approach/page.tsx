@@ -46,6 +46,7 @@ export default function ApproachPage() {
         <div className="shell">
           <SceneIntro
             id="commitments-title"
+            eyebrow="What we commit to"
             title="What you are actually buying."
             lede="Three things decodingIT states about how the service works, and holds itself to."
           />
@@ -69,6 +70,7 @@ export default function ApproachPage() {
         <div className="shell">
           <SceneIntro
             id="portal-title"
+            eyebrow="Visibility"
             title="You can see what we are doing."
             lede={portal.summary}
             aside={
@@ -84,6 +86,7 @@ export default function ApproachPage() {
         <div className="shell">
           <SceneIntro
             id="scope-title"
+            eyebrow="Scope"
             title="How much you hand over is your call."
             lede="Six ways to work with us — from fixing what is in front of you today to running the whole estate, or extending a team you already have."
             aside={

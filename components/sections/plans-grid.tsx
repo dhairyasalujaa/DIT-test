@@ -18,7 +18,7 @@ export function PlansGrid() {
   return (
     <Scene tone="paper" id="services" aria-labelledby="plans-title">
       <div className="shell">
-        <SceneIntro id="plans-title" title={plansSection.title} lede={plansSection.lede} />
+        <SceneIntro id="plans-title" eyebrow="Engagements" title={plansSection.title} lede={plansSection.lede} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan, i) => (

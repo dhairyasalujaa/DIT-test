@@ -16,7 +16,7 @@ export function ToolsGrid() {
   return (
     <Scene tone="paper-raised" id="tools" aria-labelledby="tools-title">
       <div className="shell">
-        <SceneIntro id="tools-title" title={toolsSection.title} lede={toolsSection.lede} />
+        <SceneIntro id="tools-title" eyebrow="Free tools" title={toolsSection.title} lede={toolsSection.lede} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool, i) => (

@@ -74,6 +74,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SceneIntro
             id="capabilities-title"
+            eyebrow="Capabilities"
             title="The parts of the service."
           />
 
@@ -125,6 +126,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SceneIntro
             id="stack-title"
+            eyebrow="Technology"
             title="What we work with."
             lede={service.stackNote}
           />
@@ -149,6 +151,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SceneIntro
             id="related-title"
+            eyebrow="Related"
             title="Usually bought alongside."
           />
 

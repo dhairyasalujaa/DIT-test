@@ -1,9 +1,18 @@
 import type { Metadata, Viewport } from "next";
-// Geist, self-hosted through next/font. Two faces only: the sans carries
-// everything a reader reads, the mono carries everything the site states about
-// itself — labels, indices, counts, spec values.
-import { GeistSans } from "geist/font/sans";
+// Inter Tight carries everything a reader reads. It is the compressed
+// grotesk the design brief specifies, and the compression is the point: at
+// display sizes it sets tighter and darker than a normal-width grotesk, which
+// is most of what makes a headline read as editorial rather than as UI.
+// Geist Mono stays for the bracketed eyebrows and numeric metadata.
+import { Inter_Tight } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-tight",
+  weight: ["300", "400", "500", "600"],
+});
 import "./globals.css";
 
 import { SiteHeader } from "@/components/layout/site-header";
@@ -60,10 +69,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       // `js` is set server-side so the scroll-entrance styles apply before
       // first paint — no flash of content appearing and then hiding. The
       // <noscript> block below hands everything straight back if JS never runs.
-      className={`js h-full ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`js h-full ${interTight.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
+        {/* The theme, applied before the first pixel is painted.
+
+            This has to be a blocking inline script in the head. Doing it in a
+            component's effect means the browser paints light, then React
+            mounts, then it flips — the flash that every themed site is judged
+            by. It reads the remembered choice, falls back to the operating
+            system's, and writes one attribute. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('dit-theme');" +
+              "if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}" +
+              "document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}})()",
+          }}
+        />
+
         {/* No JavaScript: hand the hidden state straight back — but only
             where the browser cannot run the scroll-driven path, which is pure
             CSS and works perfectly well without scripting. */}

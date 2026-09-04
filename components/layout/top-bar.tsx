@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { topBar } from "@/content/site";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Phone } from "@/components/icons";
 
 /**
@@ -45,6 +46,13 @@ export function TopBar() {
         >
           {topBar.portalLabel}
         </a>
+
+        <span aria-hidden className="h-3 w-px bg-white/15" />
+
+        {/* The theme switch lives here rather than in the header: the header
+            is a navigation surface, and this is a preference. It also keeps
+            the mega nav's three-column balance intact. */}
+        <ThemeToggle className="-mr-1.5" />
       </div>
     </div>
   );

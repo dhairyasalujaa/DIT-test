@@ -53,7 +53,7 @@ export default function AboutPage() {
       {/* Who this is for. */}
       <Scene tone="paper-raised" aria-labelledby="clients-title">
         <div className="shell">
-          <SceneIntro id="clients-title" title={whoWeServe.title} lede={whoWeServe.body} />
+          <SceneIntro id="clients-title" eyebrow="Who we serve" title={whoWeServe.title} lede={whoWeServe.body} />
 
           {/* Each card names the plan it describes. They used to carry the
               audience line alone — "IT teams needing on-demand L3 support."
@@ -85,7 +85,7 @@ export default function AboutPage() {
       {leadership.length > 0 && (
         <Scene tone="paper" aria-labelledby="leadership-title">
           <div className="shell">
-            <SceneIntro id="leadership-title" title="Who runs decodingIT." />
+            <SceneIntro id="leadership-title" eyebrow="Team" title="Who runs decodingIT." />
             <ul className="after-intro grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {leadership.map((person, i) => (
                 <Reveal as="li" key={person.name} delay={(i % 3) * 70}>
@@ -106,6 +106,7 @@ export default function AboutPage() {
         <div className="shell">
           <SceneIntro
             id="offices-title"
+            eyebrow="Where we are"
             title="Where we are."
             lede={`We serve ${marketsShort.join(", ")}.`}
           />

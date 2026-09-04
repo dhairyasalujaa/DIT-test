@@ -37,7 +37,14 @@
   --color-on-navy: #ffffff;
   --color-on-navy-muted: #a7bccd;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /* The call-to-action, as tokens rather than literals, because it inverts
+     between themes: brand-on-white in light, white-on-navy in dark. */
+  --color-cta-bg: var(--color-brand);
+  --color-cta-fg: #ffffff;
+  --color-cta-hover: #00447a;
+  --color-danger: #b3261e;
+
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 
   /* ---- Motion ------------------------------------------------------------
@@ -72,8 +79,60 @@
   --ease-drift: linear(0, 1);
   /* Kept because the hover language across the site is built on it. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* The design brief's three curves. `editorial` is the workhorse: quick
+     start, long soft landing, used for every reveal and every arrow. */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* The system is rectilinear. The brief's radius token is 0, and holding to
+     it is most of what separates an editorial surface from a SaaS card. The
+     exception is the pill, reserved for the highest-value control only. */
+  --radius: 0px;
 
   --spacing-scene: clamp(4rem, 7.5vw, 7.5rem);
+}
+
+/* ==========================================================================
+   Dark theme.
+
+   Everything downstream reads `--color-*`, and every scene is built from
+   those, so flipping this block flips the whole site — no `dark:` variants in
+   components, no second set of scene classes.
+
+   The palette is the logo's, not a generic dark mode: the canvas IS
+   decodingIT's navy #0b1a2b, and the ink band drops below it so the dark
+   sections still read as a separate ground rather than merging into one flat
+   field. The accent moves from #005598 to the logo's light blue #42afea,
+   because #005598 on navy is 1.6:1 — invisible.
+
+   Unlayered on purpose: `@theme` emits into Tailwind's theme layer, and an
+   unlayered declaration beats any layer at any specificity. That is the one
+   cascade rule this file depends on in two places.
+   ========================================================================== */
+[data-theme="dark"] {
+  --color-surface: #0b1a2b;
+  --color-surface-tint: #0f2135;
+  --color-surface-wash: #132a41;
+  --color-hairline: #263b53;
+
+  --color-heading: #e9f1f8;
+  --color-body: #9db2c5;
+
+  /* The contrast band goes deeper than the canvas rather than lighter, so the
+     page still opens and closes in its darkest state. */
+  --color-navy: #050d17;
+  --color-navy-raised: #0b1a2b;
+
+  --color-brand: #42afea;
+  --color-brand-link: #63bff0;
+  --color-brand-light: #8ad2f6;
+
+  --color-cta-bg: #ffffff;
+  --color-cta-fg: #0b1a2b;
+  --color-cta-hover: #42afea;
+  --color-danger: #ffb4ab;
+
+  color-scheme: dark;
 }
 
 @layer base {
@@ -101,13 +160,13 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
-    --scene-danger: #b3261e;
+    --scene-danger: var(--color-danger);
     --scene-bg: var(--color-surface);
     --scene-wash: var(--color-surface-wash);
     --scene-panel: var(--color-surface-tint);
-    --scene-cta-bg: var(--color-brand);
-    --scene-cta-fg: #ffffff;
-    --scene-cta-bg-hover: #00447a;
+    --scene-cta-bg: var(--color-cta-bg);
+    --scene-cta-fg: var(--color-cta-fg);
+    --scene-cta-bg-hover: var(--color-cta-hover);
     color-scheme: light;
   }
 
@@ -179,7 +238,7 @@
     --scene-fg-muted: var(--color-on-navy-muted);
     --scene-line: color-mix(in oklab, var(--color-on-navy) 18%, transparent);
     --scene-accent: var(--color-brand-light);
-    --scene-danger: #ffb4ab;
+    --scene-danger: var(--color-danger);
     --scene-wash: color-mix(in oklab, var(--color-on-navy) 7%, transparent);
     --scene-panel: var(--color-navy-raised);
     /* White fill with navy text: the light accent behind white text is only
@@ -197,12 +256,12 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
-    --scene-danger: #b3261e;
+    --scene-danger: var(--color-danger);
     --scene-wash: var(--color-surface-wash);
     --scene-panel: var(--color-surface-tint);
-    --scene-cta-bg: var(--color-brand);
-    --scene-cta-fg: #ffffff;
-    --scene-cta-bg-hover: #00447a;
+    --scene-cta-bg: var(--color-cta-bg);
+    --scene-cta-fg: var(--color-cta-fg);
+    --scene-cta-bg-hover: var(--color-cta-hover);
     background-color: var(--color-surface);
     color: var(--color-heading);
   }
@@ -214,12 +273,12 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
-    --scene-danger: #b3261e;
+    --scene-danger: var(--color-danger);
     --scene-wash: #e7f1fa;
     --scene-panel: var(--color-surface);
-    --scene-cta-bg: var(--color-brand);
-    --scene-cta-fg: #ffffff;
-    --scene-cta-bg-hover: #00447a;
+    --scene-cta-bg: var(--color-cta-bg);
+    --scene-cta-fg: var(--color-cta-fg);
+    --scene-cta-bg-hover: var(--color-cta-hover);
     background-color: var(--color-surface-tint);
     color: var(--color-heading);
   }
@@ -252,6 +311,46 @@
     line-height: 1.3;
     color: var(--scene-fg-muted);
     font-weight: 500;
+  }
+
+  /* The eyebrow, in brackets.
+
+     Removed from this site once, on the instruction that no small subtitles
+     appear anywhere; restored deliberately, in the design brief's form, on a
+     later instruction. The brackets are the whole difference: an unadorned
+     tracked capital reads as a category tag on a template, and the same words
+     inside brackets read as a printed marginal note. 11px, weight 500,
+     0.18em of tracking, and never a colour of its own. */
+  .eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    /* The muted token at full strength, not the heading colour dimmed.
+
+       The reference dims its eyebrows to roughly 55% and its own audit notes
+       flag that as unverified against contrast targets. Measured here at
+       11px it lands at 3.79:1 — under AA, and this is the smallest type on
+       the site, so it is the last place to be approximate. The muted token
+       reads as quiet and clears the bar in both themes. */
+    color: var(--scene-fg-muted);
+  }
+
+  .eyebrow::before { content: "[ "; }
+  .eyebrow::after { content: " ]"; }
+
+  /* The release half of a two-tone heading.
+
+     The brief's central typographic device: a headline opens in medium weight
+     and its second phrase drops to light and lower opacity. Hierarchy without
+     reaching for another colour or another face — which matters here, because
+     the accent blue is already doing work elsewhere. */
+  .release {
+    font-weight: 300;
+    color: color-mix(in oklab, var(--scene-fg) 45%, transparent);
   }
 
   .display {
@@ -355,7 +454,7 @@
     position: relative;
     background-color: var(--scene-panel);
     border: 1px solid var(--scene-line);
-    border-radius: 4px;
+    border-radius: var(--radius);
     padding: clamp(1.5rem, 2.2vw, 2rem);
     transition:
       border-color var(--dur-hover) var(--ease-rise),
@@ -368,7 +467,7 @@
     inset-inline: -1px;
     top: -1px;
     height: 2px;
-    border-radius: 4px 4px 0 0;
+    border-radius: 0;
     background-color: var(--scene-accent);
     transform: scaleX(0);
     transform-origin: left center;
@@ -397,7 +496,7 @@
     min-height: 5.5rem;
     padding: 1.25rem 1.5rem;
     border: 1px solid var(--scene-line);
-    border-radius: 4px;
+    border-radius: var(--radius);
     background-color: var(--scene-bg);
     transition:
       border-color var(--dur-hover) var(--ease-rise),
@@ -985,7 +1084,7 @@
     aspect-ratio: 20 / 9;
     width: calc(100% + clamp(1.5rem, 2.2vw, 2rem) * 2);
     overflow: hidden;
-    border-radius: 3px 3px 0 0;
+    border-radius: 0;
     /* The card's own hairline runs behind this; a second one under the art
        separates it from the copy without doubling up at the corners. */
     border-bottom: 1px solid var(--scene-line);

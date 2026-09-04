@@ -49,6 +49,10 @@ export function Scene({
 interface SceneIntroProps {
   /** The scene's heading. Plain text, so it can be split into words. */
   title: string;
+  /** The bracketed marginal note above the heading, e.g. "Solutions". */
+  eyebrow?: string;
+  /** The heading's second phrase, set light and dimmed — the two-tone device. */
+  release?: string;
   /** Supporting paragraph. */
   lede?: ReactNode;
   as?: "h1" | "h2";
@@ -59,14 +63,21 @@ interface SceneIntroProps {
 }
 
 /**
- * The standard opening of a scene: a hairline, a heading and an optional lede.
+ * The standard opening of a scene: a hairline, a bracketed eyebrow, a
+ * two-tone heading and an optional lede.
  *
- * There is exactly one of these, and every section uses it. It used to carry
- * a small mono kicker label beside the heading (Solutions, Technology, How we
- * work…) — removed sitewide on the client's instruction: no small subtitles
- * anywhere. The heading now opens the section directly, which is also why its
- * per-word entrance carries more weight than
- * it used to.
+ * There is exactly one of these, and every section uses it.
+ *
+ * The eyebrow has been through both positions in this project: kicker labels
+ * were stripped sitewide on the instruction that no small subtitles appear
+ * anywhere, then restored in the design brief's bracketed form on a later
+ * one. `[ Solutions ]` is doing a different job from `SOLUTIONS` — it reads
+ * as a marginal note rather than a category tag, which is why it survives the
+ * original objection.
+ *
+ * `release` is the brief's central typographic device: the heading opens in
+ * medium weight and its second phrase drops to light and dimmed, so hierarchy
+ * comes from weight rather than from adding a hue.
  *
  * The heading rises word by word out of its own masks, the same way every
  * heading on the home page does — one motion idea for the whole site rather
@@ -74,6 +85,8 @@ interface SceneIntroProps {
  */
 export function SceneIntro({
   title,
+  eyebrow,
+  release,
   lede,
   as: Heading = "h2",
   id,
@@ -87,7 +100,18 @@ export function SceneIntro({
       </Reveal>
       <div className="mt-8 max-w-(--measure-head)">
         <div>
-          <RevealText as={Heading} id={id} className="display-sm">
+          {eyebrow && (
+            <Reveal>
+              <p className="eyebrow mb-6">{eyebrow}</p>
+            </Reveal>
+          )}
+          <RevealText
+            as={Heading}
+            id={id}
+            className="display-sm"
+            after={release}
+            afterClassName="release"
+          >
             {title}
           </RevealText>
           {lede && (

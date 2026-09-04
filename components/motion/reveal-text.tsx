@@ -27,6 +27,8 @@ interface RevealTextProps {
   accent?: string;
   /** Words after the accent run. */
   after?: string;
+  /** Extra classes for the trailing run — used for the two-tone `.release`. */
+  afterClassName?: string;
   /** Delay before the first word, in words' worth of stagger. */
   offset?: number;
   id?: string;
@@ -53,6 +55,7 @@ export function RevealText({
   accent,
   accentClassName = "text-[var(--scene-accent)]",
   after,
+  afterClassName,
   offset = 0,
   id,
   style,
@@ -74,9 +77,15 @@ export function RevealText({
           <Word word={word} index={offset + lead.length + i} />
         </span>
       ))}
-      {tail.map((word, i) => (
-        <Word key={`t${i}`} word={word} index={offset + lead.length + mid.length + i} />
-      ))}
+      {tail.map((word, i) =>
+        afterClassName ? (
+          <span key={`t${i}`} className={afterClassName}>
+            <Word word={word} index={offset + lead.length + mid.length + i} />
+          </span>
+        ) : (
+          <Word key={`t${i}`} word={word} index={offset + lead.length + mid.length + i} />
+        ),
+      )}
     </Tag>
   );
 }

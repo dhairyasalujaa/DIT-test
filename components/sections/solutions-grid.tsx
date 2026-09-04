@@ -17,7 +17,12 @@ export function SolutionsGrid() {
   return (
     <Scene tone="paper-raised" id="solutions" aria-labelledby="solutions-title">
       <div className="shell">
-        <SceneIntro id="solutions-title" title={solutionsSection.title} lede={solutionsSection.lede} />
+        <SceneIntro
+          id="solutions-title"
+          eyebrow="Solutions"
+          title={solutionsSection.title}
+          lede={solutionsSection.lede}
+        />
 
         <ul className="after-intro grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (

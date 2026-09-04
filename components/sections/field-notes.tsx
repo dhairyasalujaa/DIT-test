@@ -16,7 +16,7 @@ export function FieldNotes() {
   return (
     <Scene tone="paper" id="insights" aria-labelledby="notes-title">
       <div className="shell">
-        <SceneIntro id="notes-title" title={insightsSection.title} />
+        <SceneIntro id="notes-title" eyebrow="Insights" title={insightsSection.title} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-3">
           {featuredNotes.map((note, i) => (

@@ -17,7 +17,7 @@ interface ActionProps {
 }
 
 const shared =
-  "group/action inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] px-6 text-sm font-semibold " +
+  "group/action inline-flex h-12 items-center justify-center gap-2.5 rounded-none px-6 text-sm font-semibold " +
   "transition-[background-color,color,border-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] " +
   "hover:-translate-y-0.5";
 
