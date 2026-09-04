@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Facets } from "@/components/hero/facets";
+import { enterDelay } from "@/lib/motion";
 
 export interface Crumb {
   name: string;
@@ -20,7 +21,6 @@ export interface Crumb {
  * no small subtitles anywhere. The breadcrumb trail is the one small-type
  * element left here, because it is navigation rather than decoration.
  */
-const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
 export function PageHeader({
   title,
@@ -48,7 +48,7 @@ export function PageHeader({
 
       <div className="shell relative">
         {crumbs && crumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="enter mb-10" style={enter(40)}>
+          <nav aria-label="Breadcrumb" className="enter mb-10" style={enterDelay(40)}>
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               {crumbs.map((crumb, i) => (
                 <li key={crumb.path} className="flex items-center gap-2">
@@ -72,12 +72,12 @@ export function PageHeader({
           </nav>
         )}
 
-        <h1 className="enter display" style={enter(160)}>
+        <h1 className="enter display" style={enterDelay(160)}>
           {title}
         </h1>
 
         {lede && (
-          <div className="enter lede mt-8" style={enter(360)}>
+          <div className="enter lede mt-8" style={enterDelay(360)}>
             {lede}
           </div>
         )}
@@ -85,7 +85,7 @@ export function PageHeader({
         {meta && meta.length > 0 && (
           <dl
             className="enter mt-16 grid gap-x-10 gap-y-6 border-t border-[var(--scene-line)] pt-6 sm:grid-cols-2 lg:grid-cols-4"
-            style={enter(480)}
+            style={enterDelay(480)}
           >
             {meta.map((item) => (
               <div key={item.label}>

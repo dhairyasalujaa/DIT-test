@@ -35,7 +35,8 @@ function SubmitButton() {
 const fieldClass =
   "mt-2 w-full border-b border-[var(--scene-line)] bg-transparent pb-3 text-[1.0625rem] " +
   "outline-none transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] placeholder:text-[var(--scene-fg-muted)]/70 " +
-  "focus:border-[var(--scene-accent)]";
+  "focus:border-[var(--scene-accent)] " +
+  "aria-[invalid=true]:border-b-2 aria-[invalid=true]:border-[var(--scene-danger)]";
 
 export function ContactForm() {
   const [state, formAction] = useActionState(submitEnquiry, initialState);
@@ -76,7 +77,7 @@ export function ContactForm() {
       {(state.status === "unconfigured" || (state.status === "error" && state.message)) && (
         <p
           role="alert"
-          className="mb-10 border-l-2 border-[var(--scene-accent)] pl-5 text-[0.9375rem] leading-relaxed"
+          className="mb-10 border-l-2 border-[var(--scene-danger)] pl-5 text-[0.9375rem] leading-relaxed"
         >
           {state.message}{" "}
           <a href={`mailto:${site.email}`} className="link-underline font-medium">
@@ -102,7 +103,7 @@ export function ContactForm() {
             className={fieldClass}
           />
           {state.errors?.name && (
-            <p id={`${uid}-name-error`} className="mt-2 text-[0.8125rem] text-[var(--scene-accent)]">
+            <p id={`${uid}-name-error`} className="mt-2 text-[0.8125rem] text-[var(--scene-danger)]">
               {state.errors.name}
             </p>
           )}
@@ -124,7 +125,7 @@ export function ContactForm() {
             className={fieldClass}
           />
           {state.errors?.email && (
-            <p id={`${uid}-email-error`} className="mt-2 text-[0.8125rem] text-[var(--scene-accent)]">
+            <p id={`${uid}-email-error`} className="mt-2 text-[0.8125rem] text-[var(--scene-danger)]">
               {state.errors.email}
             </p>
           )}
@@ -180,7 +181,7 @@ export function ContactForm() {
           {state.errors?.message && (
             <p
               id={`${uid}-message-error`}
-              className="mt-2 text-[0.8125rem] text-[var(--scene-accent)]"
+              className="mt-2 text-[0.8125rem] text-[var(--scene-danger)]"
             >
               {state.errors.message}
             </p>

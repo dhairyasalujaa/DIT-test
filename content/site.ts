@@ -86,7 +86,6 @@ export const locations: Location[] = [
     addressLines: ["258, Tower B, SpaceEdge Tower", "Sec 47, Sohna Road, Gurugram"],
     phone: "+91 8755507444",
     phoneHref: "+918755507444",
-    email: "sales@decodingit.in",
   },
 ];
 

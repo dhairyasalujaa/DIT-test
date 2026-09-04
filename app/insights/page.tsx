@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { sortedArticles } from "@/content/insights";
+import { fieldNotes } from "@/content/insights";
 import { PageHeader } from "@/components/layout/page-header";
 import { Scene } from "@/components/ui/scene";
 import { Reveal } from "@/components/motion/reveal";
@@ -8,14 +7,12 @@ import { ClosingCta } from "@/components/sections/closing-cta";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
-import { formatDate } from "@/lib/format";
-import { site } from "@/content/site";
-import { ArrowRight } from "@/components/icons";
+import { CardAffordance } from "@/components/ui/card-link";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Technology Insights",
+  title: "Insights",
   description:
-    "Practical notes on managed IT, backup and recovery, email authentication and security baselines — written for the person making the decision.",
+    "Practical notes on managed IT, hardware pricing, ransomware and everyday security habits — written by the engineers who do the work.",
   path: "/insights",
 });
 
@@ -24,6 +21,19 @@ const crumbs = [
   { name: "Insights", path: "/insights" },
 ];
 
+/**
+ * Insights.
+ *
+ * Every piece decodingIT has published, linking to the real article. The
+ * bodies live on decodingit.com; they were not written here and are not
+ * reproduced here.
+ *
+ * This page used to say "Nothing published here yet" above two paragraphs
+ * written in decodingIT's voice about articles being "moved across" — copy
+ * with no source, contradicted by the home page three sections below it,
+ * which links to three of these. The detail route under it built zero pages,
+ * because there were no bodies for it to render.
+ */
 export default function InsightsPage() {
   return (
     <>
@@ -37,79 +47,37 @@ export default function InsightsPage() {
 
       <Scene tone="paper">
         <div className="shell">
-          {sortedArticles.length > 0 ? (
-            <ul className="border-t border-[var(--scene-line)]">
-              {sortedArticles.map((article, i) => (
-                <Reveal as="li" key={article.slug} delay={(i % 3) * 70}>
-                  <Link
-                    href={`/insights/${article.slug}`}
-                    className="row row-pad group/a grid items-start gap-x-10 gap-y-4 md:grid-cols-12"
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {fieldNotes.map((note, i) => (
+              <Reveal as="li" key={note.href} delay={(i % 3) * 80}>
+                <a
+                  href={note.href}
+                  className="panel group/card flex h-full flex-col"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {/* Topic and reading time only where decodingIT publishes
+                      them. The two pieces listed in their menu carry a title
+                      and nothing else, so these cards show a title and
+                      nothing else. */}
+                  {note.topic && (
+                    <p className="label">
+                      {note.topic}
+                      {note.readingMinutes ? ` · ${note.readingMinutes} min` : ""}
+                    </p>
+                  )}
+                  <h2
+                    className={`panel-title flex-1 text-[1.125rem] leading-snug tracking-[-0.02em] ${
+                      note.topic ? "mt-4" : ""
+                    }`}
                   >
-                    <div className="md:col-span-3">
-                      <p className="label">{article.topic}</p>
-                      <time dateTime={article.published} className="label mt-3 block">
-                        {formatDate(article.published)} · {article.readingMinutes} min
-                      </time>
-                    </div>
-
-                    <div className="md:col-span-9 lg:col-span-8">
-                      <h2 className="title transition-colors duration-[var(--dur-hover)] ease-[var(--ease-rise)] group-hover/a:text-[var(--scene-accent)]">
-                        {article.title}
-                      </h2>
-                      <p className="mt-4 max-w-(--measure-lede) text-[1rem] leading-relaxed text-[var(--scene-fg-muted)]">
-                        {article.standfirst}
-                      </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--scene-fg)]">
-                        Read
-                        <ArrowRight className="size-3.5 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/a:translate-x-1" />
-                      </span>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </ul>
-          ) : (
-            /*
-              Honest empty state. This section previously held four articles
-              written by Claude and published under decodingIT's name; they have
-              been removed. It fills again the moment real entries are added to
-              content/insights.ts.
-            */
-            <div className="border-t border-[var(--scene-line)] pt-12">
-              <Reveal>
-                <h2 className="title">Nothing published here yet.</h2>
+                    {note.title}
+                  </h2>
+                  <CardAffordance label="Read" external className="mt-6" />
+                </a>
               </Reveal>
-              <div className="mt-6 max-w-(--measure-lede)">
-                <Reveal>
-                  <p className="text-[1.1875rem] leading-relaxed">
-                    Our engineers write about the things clients actually ask —
-                    choosing between virtual desktop platforms, what a managed
-                    service agreement should cover, how to test a restore rather
-                    than assume one.
-                  </p>
-                </Reveal>
-                <Reveal delay={90}>
-                  <p className="mt-8 text-[1.1875rem] leading-relaxed">
-                    Those pieces are being moved across to this site. In the
-                    meantime, if there is something you would like a straight
-                    answer on, ask us directly — you will get an engineer rather
-                    than a brochure.
-                  </p>
-                </Reveal>
-                <Reveal delay={160}>
-                  <p className="mt-10">
-                    <a
-                      href={`mailto:${site.email}`}
-                      className="group/ref inline-flex items-center gap-2.5 text-sm font-medium"
-                    >
-                      Ask us a technical question
-                      <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/ref:translate-x-1" />
-                    </a>
-                  </p>
-                </Reveal>
-              </div>
-            </div>
-          )}
+            ))}
+          </ul>
         </div>
       </Scene>
 

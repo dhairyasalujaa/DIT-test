@@ -91,6 +91,7 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
+    --scene-danger: #b3261e;
     --scene-bg: var(--color-surface);
     --scene-wash: var(--color-surface-wash);
     --scene-panel: var(--color-surface-tint);
@@ -168,6 +169,7 @@
     --scene-fg-muted: var(--color-on-navy-muted);
     --scene-line: color-mix(in oklab, var(--color-on-navy) 18%, transparent);
     --scene-accent: var(--color-brand-light);
+    --scene-danger: #ffb4ab;
     --scene-wash: color-mix(in oklab, var(--color-on-navy) 7%, transparent);
     --scene-panel: var(--color-navy-raised);
     /* White fill with navy text: the light accent behind white text is only
@@ -185,6 +187,7 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
+    --scene-danger: #b3261e;
     --scene-wash: var(--color-surface-wash);
     --scene-panel: var(--color-surface-tint);
     --scene-cta-bg: var(--color-brand);
@@ -201,6 +204,7 @@
     --scene-fg-muted: var(--color-body);
     --scene-line: var(--color-hairline);
     --scene-accent: var(--color-brand);
+    --scene-danger: #b3261e;
     --scene-wash: #e7f1fa;
     --scene-panel: var(--color-surface);
     --scene-cta-bg: var(--color-brand);

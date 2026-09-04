@@ -237,7 +237,7 @@ export const primaryNav: NavEntry[] = [
 ];
 
 /** Flattened for the mobile panel, which has no room for a mega menu. */
-export const mobileNav: NavItem[] = primaryNav;
+export const mobileNav: NavEntry[] = primaryNav;
 
 /**
  * The footer's four columns, as the live site groups them.

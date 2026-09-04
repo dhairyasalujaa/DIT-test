@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/content/site";
 import { services } from "@/content/services";
-import { articles } from "@/content/insights";
 
 /**
  * Sitemap.
  *
  * Lists exactly the canonical, indexable pages — no parameterised duplicates
- * and no routes that do not exist. Article URLs appear only once real entries
- * are added to content/insights.ts.
+ * and no routes that do not exist. decodingIT's articles are published on
+ * decodingit.com and are not routes here, so they are not listed: a sitemap
+ * names the pages this deployment serves.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -32,13 +32,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${siteUrl}/insights/${article.slug}`,
-    lastModified: new Date(article.updated ?? article.published),
-    changeFrequency: "yearly",
-    priority: 0.6,
-  }));
-
-
-  return [...staticRoutes, ...serviceRoutes, ...articleRoutes];
+  return [...staticRoutes, ...serviceRoutes];
 }

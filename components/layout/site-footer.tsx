@@ -138,6 +138,10 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[0.8125rem] text-[var(--scene-fg-muted)]">
+            {/* Evaluated at build time, because every route here is static.
+                It is correct on the day the site ships and goes stale only
+                if the site is never rebuilt — which is the right trade for
+                not shipping a client component to print one number. */}
             © {new Date().getFullYear()}{" "}
             <Link href="/" className="link-underline hover:text-[var(--scene-fg)]">
               {site.legalName}

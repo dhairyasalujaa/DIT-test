@@ -1,4 +1,4 @@
-import { fieldNotes } from "@/content/insights";
+import { featuredNotes } from "@/content/insights";
 import { insightsSection } from "@/content/home";
 import { Reveal } from "@/components/motion/reveal";
 import { Scene, SceneIntro } from "@/components/ui/scene";
@@ -18,7 +18,7 @@ export function FieldNotes() {
         <SceneIntro id="notes-title" title={insightsSection.title} />
 
         <ul className="after-intro grid gap-4 md:grid-cols-3">
-          {fieldNotes.map((note, i) => (
+          {featuredNotes.map((note, i) => (
             <Reveal as="li" key={note.href} delay={i * 80}>
               <a
                 href={note.href}

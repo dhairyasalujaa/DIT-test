@@ -21,3 +21,12 @@ export const isExternal = (href: string) =>
 /** The props an external link needs, or nothing at all for an internal one. */
 export const externalProps = (href: string) =>
   href.startsWith("http") ? ({ target: "_blank", rel: "noreferrer" } as const) : {};
+
+/**
+ * The host a link leaves for, for the screen-reader-only note on off-site
+ * links. Derived rather than hard-coded: this used to announce
+ * "decodingit.com" for every http destination, which was a guess that
+ * happened to be right only because every such link points there today.
+ */
+export const externalHost = (href: string) =>
+  href.startsWith("http") ? href.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0] : "";

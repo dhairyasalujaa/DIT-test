@@ -47,33 +47,6 @@ export interface ProcessStage {
   detail: string;
 }
 
-export interface Article {
-  slug: Slug;
-  title: string;
-  /** Page <title> when it should differ from the article title. */
-  metaTitle: string;
-  metaDescription: string;
-  /** Standfirst shown under the headline. */
-  standfirst: string;
-  /** ISO date. */
-  published: string;
-  updated?: string;
-  topic: string;
-  readingMinutes: number;
-  /** Rendered as the article body. */
-  body: ArticleBlock[];
-  /** Service slugs this article should link out to. */
-  related: Slug[];
-}
-
-export type ArticleBlock =
-  | { kind: "p"; text: string }
-  | { kind: "h2"; text: string }
-  | { kind: "h3"; text: string }
-  | { kind: "list"; items: string[] }
-  | { kind: "checklist"; title: string; items: string[] }
-  | { kind: "quote"; text: string };
-
 /** An office decodingIT publishes a postal address for. */
 export interface Location {
   id: string;
@@ -82,6 +55,4 @@ export interface Location {
   addressLines: string[];
   phone: string;
   phoneHref: string;
-  /** Where this office publishes a different address to the primary one. */
-  email?: string;
 }

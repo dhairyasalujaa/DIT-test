@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { ArtField, Facets } from "@/components/hero/facets";
 import { ArrowRight, Shield } from "@/components/icons";
+import { Action } from "@/components/ui/action";
+import { enterDelay } from "@/lib/motion";
 import { heroActions, heroSlides } from "@/content/home";
 import { RevealText } from "@/components/motion/reveal-text";
 import { heroTagRow, site } from "@/content/site";
@@ -18,8 +19,6 @@ import { heroTagRow, site } from "@/content/site";
  * choreography rather than a scroll one: it is on screen at first paint, so a
  * scroll timeline would resolve instantly and nobody would see it.
  */
-const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
-
 export function Hero() {
   const [lead, ...rest] = heroSlides;
 
@@ -33,7 +32,7 @@ export function Hero() {
       <Facets className="drift pointer-events-none absolute -top-16 -right-32 w-[22rem] opacity-[0.055] sm:-top-24 sm:-right-32 sm:w-[34rem] sm:opacity-[0.09] lg:w-[44rem]" />
 
       <div className="shell relative">
-        <p className="enter label" style={enter(60)}>
+        <p className="enter label" style={enterDelay(60)}>
           {site.tagline}
         </p>
 
@@ -41,20 +40,20 @@ export function Hero() {
           as="h1"
           id="hero-title"
           className="display rt-enter mt-6"
-          style={enter(140)}
+          style={enterDelay(140)}
           accent={lead.accent}
           after={lead.after}
         >
           {lead.before}
         </RevealText>
 
-        <p className="enter lede mt-8" style={enter(560)}>
+        <p className="enter lede mt-8" style={enterDelay(560)}>
           {lead.sub}
         </p>
 
         <ul
           className="enter mt-10 flex flex-wrap items-center gap-x-4 gap-y-3"
-          style={enter(660)}
+          style={enterDelay(660)}
         >
           {heroTagRow.map((tag, i) => (
             <li key={tag} className="flex items-center gap-4">
@@ -70,23 +69,19 @@ export function Hero() {
           ))}
         </ul>
 
-        <div className="enter mt-11 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4" style={enter(740)}>
-          <Link
-            href="/contact"
-            className="group/h inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] bg-[var(--scene-cta-bg)] px-6 text-sm font-semibold text-[var(--scene-cta-fg)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-cta-bg-hover)]"
-          >
+        <div
+          className="enter mt-11 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
+          style={enterDelay(740)}
+        >
+          <Action href="/contact" block>
             {heroActions.primary}
-            <ArrowRight className="size-4 transition-transform duration-[var(--dur-sweep)] ease-[var(--ease-out-expo)] group-hover/h:translate-x-1" />
-          </Link>
-          <Link
-            href={heroActions.secondary.href}
-            className="inline-flex h-12 items-center justify-center rounded-[4px] border border-[var(--scene-accent)] px-6 text-sm font-semibold text-[var(--scene-accent)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] hover:-translate-y-0.5 hover:bg-[var(--scene-accent)] hover:text-white"
-          >
+          </Action>
+          <Action href={heroActions.secondary.href} variant="secondary" block>
             {heroActions.secondary.label}
-          </Link>
+          </Action>
         </div>
 
-        <p className="enter mt-8" style={enter(820)}>
+        <p className="enter mt-8" style={enterDelay(820)}>
           <a
             href={heroActions.check.href}
             target="_blank"
@@ -102,7 +97,7 @@ export function Hero() {
         {/* The four statements the live hero rotates to. Offered as a list
             rather than swapped in on a timer: the reader chooses when to read
             them, and a screen reader is not interrupted mid-sentence. */}
-        <ul className="enter mt-16 grid gap-x-10 gap-y-6 border-t border-[var(--scene-line)] pt-8 sm:grid-cols-2" style={enter(900)}>
+        <ul className="enter mt-16 grid gap-x-10 gap-y-6 border-t border-[var(--scene-line)] pt-8 sm:grid-cols-2" style={enterDelay(900)}>
           {rest.map((slide) => (
             <li key={slide.accent} className="text-[0.9375rem] leading-relaxed">
               <span className="font-medium text-[var(--scene-fg)]">

@@ -1,6 +1,6 @@
 import { locations, markets, site, siteUrl, socials } from "@/content/site";
 import { leadership } from "@/content/about";
-import type { Article, Service } from "@/types";
+import type { Service } from "@/types";
 import { canonical } from "@/lib/seo";
 
 /**
@@ -98,25 +98,6 @@ export function serviceSchema(service: Service) {
         },
       })),
     },
-  };
-}
-
-export function articleSchema(article: Article) {
-  const url = canonical(`/insights/${article.slug}`);
-  return {
-    "@type": "Article",
-    headline: article.title,
-    description: article.metaDescription,
-    url,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    datePublished: article.published,
-    dateModified: article.updated ?? article.published,
-    // Published under the company name; we do not attribute writing to a
-    // named individual without their sign-off.
-    author: { "@id": organisationId },
-    publisher: { "@id": organisationId },
-    inLanguage: "en",
-    articleSection: article.topic,
   };
 }
 

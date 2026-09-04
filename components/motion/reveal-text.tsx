@@ -57,22 +57,26 @@ export function RevealText({
   id,
   style,
 }: RevealTextProps) {
-  let n = offset;
-  const lead = words(children).map((word) => <Word key={`l${n}`} word={word} index={n++} />);
-  const mid = accent
-    ? words(accent).map((word) => (
-        <span key={`a${n}`} className={accentClassName}>
-          <Word word={word} index={n++} />
-        </span>
-      ))
-    : null;
-  const tail = after ? words(after).map((word) => <Word key={`t${n}`} word={word} index={n++} />) : null;
+  // Indices are derived from the three runs' lengths rather than incremented
+  // during render. A counter mutated inside JSX depends on the order React
+  // evaluates props in, which is not something to build a stagger on.
+  const lead = words(children);
+  const mid = accent ? words(accent) : [];
+  const tail = after ? words(after) : [];
 
   return (
     <Tag id={id} className={`rt ${className}`} style={style}>
-      {lead}
-      {mid}
-      {tail}
+      {lead.map((word, i) => (
+        <Word key={`l${i}`} word={word} index={offset + i} />
+      ))}
+      {mid.map((word, i) => (
+        <span key={`a${i}`} className={accentClassName}>
+          <Word word={word} index={offset + lead.length + i} />
+        </span>
+      ))}
+      {tail.map((word, i) => (
+        <Word key={`t${i}`} word={word} index={offset + lead.length + mid.length + i} />
+      ))}
     </Tag>
   );
 }

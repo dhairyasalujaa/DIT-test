@@ -44,15 +44,15 @@ export default function ContactPage() {
           <aside className="lg:col-span-4 lg:col-start-9">
             <Reveal>
               <h2 className="text-[0.9375rem] font-semibold text-[var(--scene-fg)]">Direct</h2>
-              <ul className="mt-6 space-y-4 text-[0.9375rem]">
-                <li className="flex items-center gap-3">
-                  <Mail className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
-                  <a href={`mailto:${site.email}`} className="link-underline">
-                    {site.email}
-                  </a>
-                </li>
-
-              </ul>
+              {/* One address, so a list would announce "list, 1 item" for no
+                  reason. This was a two-item list until the second address
+                  came out with the unsourced claims. */}
+              <p className="mt-6 flex items-center gap-3 text-[0.9375rem]">
+                <Mail className="size-4 shrink-0 text-[var(--scene-fg-muted)]" />
+                <a href={`mailto:${site.email}`} className="link-underline">
+                  {site.email}
+                </a>
+              </p>
             </Reveal>
 
             <Reveal delay={90}>

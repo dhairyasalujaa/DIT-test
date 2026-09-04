@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
+import { externalHost, externalProps, isExternal } from "@/lib/motion";
 
-type Variant = "primary" | "secondary";
+type Variant = "primary" | "secondary" | "on-dark";
 
 interface ActionProps {
   href: string;
@@ -10,38 +11,50 @@ interface ActionProps {
   variant?: Variant;
   /** Rendered after the label; defaults to a right arrow. */
   icon?: "right" | "up-right" | "none";
+  /** Fills the width of its container — used where buttons stack on a phone. */
+  block?: boolean;
   className?: string;
 }
 
 const shared =
-  "group/action inline-flex items-center gap-2.5 rounded-[4px] text-sm font-semibold " +
-  "transition-[background-color,color,border-color] duration-[var(--dur-hover)] ease-[var(--ease-rise)]";
+  "group/action inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] px-6 text-sm font-semibold " +
+  "transition-[background-color,color,border-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-rise)] " +
+  "hover:-translate-y-0.5";
 
 const variants: Record<Variant, string> = {
-  // Fills with the scene's own foreground, so the button inverts correctly on
+  // Fills with the scene's own CTA colour, so the button inverts correctly on
   // ink and on paper without either being special-cased.
   primary:
-    "h-11 px-6 bg-[var(--scene-cta-bg)] text-[var(--scene-cta-fg)] hover:bg-[var(--scene-cta-bg-hover)] " +
+    "bg-[var(--scene-cta-bg)] text-[var(--scene-cta-fg)] hover:bg-[var(--scene-cta-bg-hover)] " +
     "focus-visible:bg-[var(--scene-accent)]",
   secondary:
-    "h-11 px-6 border border-[var(--scene-accent)] text-[var(--scene-accent)] " +
+    "border border-[var(--scene-accent)] text-[var(--scene-accent)] " +
     "hover:bg-[var(--scene-accent)] hover:text-white",
+  // A ghost button on a dark band, where the accent is too low-contrast to
+  // outline with.
+  "on-dark":
+    "border border-[var(--scene-fg)]/35 text-[var(--scene-fg)] " +
+    "hover:border-[var(--scene-fg)] hover:bg-[var(--scene-fg)] hover:text-[var(--color-navy)]",
 };
 
 /**
- * The site's single call-to-action element.
+ * The site's call-to-action.
  *
- * The arrow shifts a few pixels on hover — a small directional cue that the
- * link goes somewhere, rather than decoration for its own sake.
+ * There is one of these, at one height. Three places used to hand-roll the
+ * same filled button at `h-12` while this component sat almost unused at
+ * `h-11`, so the site had two button heights depending on which file you
+ * were in.
  */
 export function Action({
   href,
   children,
   variant = "primary",
   icon = "right",
+  block = false,
   className = "",
 }: ActionProps) {
-  const external = href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
+  const external = isExternal(href);
+  const host = externalHost(href);
   const Icon = icon === "up-right" ? ArrowUpRight : ArrowRight;
   const content = (
     <>
@@ -56,18 +69,15 @@ export function Action({
           }
         />
       )}
+      {host && <span className="sr-only">(opens on {host})</span>}
     </>
   );
 
-  const classes = `${shared} ${variants[variant]} ${className}`;
+  const classes = `${shared} ${variants[variant]} ${block ? "w-full sm:w-auto" : ""} ${className}`;
 
   if (external) {
     return (
-      <a
-        href={href}
-        className={classes}
-        {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-      >
+      <a href={href} className={classes} {...externalProps(href)}>
         {content}
       </a>
     );
