@@ -1,15 +1,24 @@
 <!--
   The favicon.
 
-  decodingIT's mark is a stacked, faceted triangle in three blues — the same
-  shape `components/hero/facets.tsx` draws across the site. This is that
-  motif at 32px, on the brand navy. It replaced an icon left over from an
-  earlier palette that used three colours the site no longer contains
-  anywhere.
+  The same faceted shield-and-play mark as `Logomark` in
+  components/layout/wordmark.tsx, at 32px on the brand navy — see that file
+  for the sourcing note on why this is a reconstruction rather than a trace
+  of the client's actual artwork.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="6" fill="#0b1a2b"/>
-  <polygon points="14,7 26,16 14,25" fill="#42afea" opacity="0.45"/>
-  <polygon points="9.5,8.5 20,16 9.5,23.5" fill="#007acd" opacity="0.7"/>
-  <polygon points="5.5,10 13.5,16 5.5,22" fill="#42afea"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <rect width="100" height="100" rx="18" fill="#0b1a2b"/>
+  <defs>
+    <mask id="icon-cut">
+      <rect x="0" y="0" width="100" height="100" fill="#fff"/>
+      <polygon points="42,34 42,66 70,50" fill="#000"/>
+    </mask>
+  </defs>
+  <g mask="url(#icon-cut)">
+    <polygon points="18,26 66,14 50,50" fill="#0b1a2b"/>
+    <polygon points="66,14 90,50 50,50" fill="#007acd"/>
+    <polygon points="90,50 64,86 50,50" fill="#007acd"/>
+    <polygon points="64,86 18,74 50,50" fill="#42afea"/>
+    <polygon points="18,74 18,26 50,50" fill="#42afea"/>
+  </g>
 </svg>
